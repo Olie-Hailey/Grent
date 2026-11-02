@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Phone {
+  id          String   @id @default(cuid())
+  model       String
+  category    String   @default("Smartphone") // Laptop | Smartphone | Tablet | Aksesoris
+  storage     String
+  color       String
+  dailyPrice  Int
+  weeklyPrice Int?
+  monthlyPrice Int?
+  stock       Int      @default(1)
+  description String
+  imageUrl    String?
+  imageEmoji  String   @default("📱")
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  rentals     Rental[]
+}
+
+model Rental {
+  id              String       @id @default(cuid())
+  phoneId         String
+  phone           Phone        @relation(fields: [phoneId], references: [id])
+  customerName    String
+  customerPhone   String
+  customerEmail   String
+  startDate       DateTime
+  endDate         DateTime
+  rentalPackage   String       @default("HARIAN") // HARIAN | MINGGUAN | BULANAN
+  deliveryMethod  String       @default("PICKUP") // PICKUP | DELIVERY
+  deliveryAddress String?
+  paymentMethod   String       @default("CASH") // QRIS | CASH
+  paymentStatus   String       @default("UNPAID") // UNPAID | PAID
+  expiresAt       DateTime?
+  totalPrice      Int
+  status          RentalStatus @default(PENDING)
+  notes           String?
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+}
+
+enum RentalStatus {
+  PENDING
+  APPROVED
+  ACTIVE
+  COMPLETED
+  CANCELLED
+}

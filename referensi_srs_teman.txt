@@ -1,0 +1,1382 @@
+SPESIFIKASI KEBUTUHAN 
+
+PERANGKAT LUNAK (SRS)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Disusun oleh:
+
+
+
+CAMELIA SALSABIL ADHA  RISQINA
+
+10124268
+
+DHANU DHARMAWAN WIBISONO
+
+10124332
+
+FABIAN WIBISONO
+
+GILANG KSATRIA KUSUMAH
+
+RAFLY ARRASYID
+
+10124400
+
+10124525
+
+11124131
+
+
+
+
+
+FAKULTAS ILMU KOMPUTER DAN TEKNOLOGI INFORMASI UNIVERSITAS GUNADARMA
+
+DEPOK
+
+         2026
+
+DAFTAR ISI
+
+BAB I PENDAHULUAN	4
+
+1.1	Tujuan	4
+
+1.2	Konvensi Dokumen	4
+
+1.3	Ruang Lingkup Proyek	4
+
+1.4	Referensi	4
+
+1.5	Metode dan Sintesis Pengumpulan Kebutuhan	5
+
+BAB II GAMBARAN UMUM	7
+
+2.1	Perspektif Produk	7
+
+2.2	Kelompok Pengguna dan Karakteristiknya	7
+
+2.3	Lingkungan Operasional	8
+
+2.4	Batasan Desain dan Implementasi	8
+
+2.5	Asumsi dan Ketergantungan	8
+
+BAB III FITUR SISTEM	10
+
+3.1 Akses Informasi dan Pengguna	10
+
+3.2 Pengelolaan Acara dan Tipe Tiket	12
+
+3.3 Pemesanan dan Pembayaran	14
+
+3.4 Tiket, Kehadiran, dan Sertifikat	16
+
+3.5 Bantuan, Status, dan Administrasi	18
+
+BAB IV KEBUTUHAN DATA	21
+
+4.1	Model Data Logis	21
+
+4.2	Kamus Data	22
+
+4.3	Laporan	27
+
+4.4	Perolehan, Integritas, Penyimpanan, dan Penghapusan	27
+
+BAB V ANTARMUKA EKSTERNAL	28
+
+5.1	Antarmuka Pengguna	28
+
+5.2	Antarmuka Perangkat Lunak	28
+
+5.3	Antarmuka Perangkat Keras	28
+
+5.4	Antarmuka Komunikasi	28
+
+BAB VI ATRIBUT KUALITAS	29
+
+6.1	Kemudahan Penggunaan	29
+
+6.2	Kinerja	29
+
+6.3	Keamanan	29
+
+6.4	Ketersediaan dan Keandalan	31
+
+6.5	Keselamatan dan Kekokohan	31
+
+BAB VII INTERNASIONALISASI DAN LOKALISASI	32
+
+BAB VIII KEBUTUHAN LAINNYA	33
+
+8.1	Batasan Implementasi Tahap Prototipe	33
+
+8.2	Saran Pengembangan Lanjutan	33
+
+LAMPIRAN A GLOSARIUM	34
+
+LAMPIRAN B MODEL ANALISIS	35
+
+LAMPIRAN C KEPUTUSAN YANG MEMERLUKAN KONFIRMASI	36
+
+
+
+
+
+BAB I PENDAHULUAN
+
+Tujuan
+
+Dokumen ini menetapkan kebutuhan perangkat lunak EventKu, platform web pemesanan tiket seminar, webinar, dan workshop. Pembacanya: tim pengembang sebagai acuan membangun, dosen pembimbing dan penguji sebagai penilai kelengkapan analisis, serta tim penguji sebagai penyusun skenario uji.
+
+Konvensi Dokumen
+
+Kebutuhan fungsional berkode REQ-F-xx, kebutuhan data REQ-D-xx, kebutuhan kualitas REQ-Q-xx. Nomor bersifat tetap. Setiap fitur pada Bab III dibuka dengan uraian singkat, prioritas, dan aksi pengguna beserta respons sistem, lalu daftar kebutuhannya. Kebutuhan normatif ditulis dengan pola 'Sistem harus ...'. Catatan yang diawali 'Catatan Implementasi' menggambarkan perilaku kode saat ini dan bukan kebutuhan. Hal yang belum diputuskan ditandai TBD dan dikumpulkan di Lampiran C.
+
+Wajib: sistem tidak diterima tanpanya.
+
+Penting: menunjang operasional harian, boleh tunda satu iterasi.
+
+Pendukung: pelengkap, dikerjakan bila waktu tersedia.
+
+Ruang Lingkup Proyek
+
+EventKu adalah aplikasi web responsif lewat peramban, tanpa aplikasi mobile native. Cakupannya: katalog acara, akun tiga peran, pengajuan organizer, manajemen acara dan tipe tiket, pemesanan, pembayaran QRIS sandbox, tiket digital ber-QR, check-in, sertifikat kehadiran, dashboard, dan chat bantuan.
+
+Batasan sejak awal: pembayaran memakai Midtrans mode sandbox, yaitu lingkungan simulasi resmi Midtrans yang tidak memindahkan uang sungguhan; tersedia chat bantuan (perancangannya di Bab III); sertifikat dicetak ke PDF lewat peramban; dan demo berjalan pada satu replika Railway dengan fasilitas trial dan volume persisten /data 500 MB.
+
+Di luar lingkup tahap ini: otomasi absensi rapat online (masih rencana), aplikasi mobile, email/push notifikasi, dan pembayaran uang sungguhan.
+
+Referensi
+
+Karl Wiegers dan Seilevel, Software Requirements Specification Template, struktur acuan dokumen ini.
+
+Dokumentasi Laravel 10.x (laravel.com/docs/10.x).
+
+Dokumentasi Midtrans Core API QRIS dan simulator sandbox resmi.
+
+Dokumentasi Tailwind CSS v3 dan Alpine.js.
+
+Dokumentasi Railway (volume persisten, scheduler, FrankenPHP).
+
+Metode dan Sintesis Pengumpulan Kebutuhan
+
+Kebutuhan dalam dokumen ini disusun dari analisis skenario pendaftaran dan permasalahan yang menjadi dasar pengembangan EventKu. Empat instrumen berikut adalah rencana untuk memvalidasi kebutuhan. Pelaksanaan dan hasil metode ini belum terdokumentasi dalam bahan yang tersedia, sehingga dokumen ini tidak memuat temuan, tanggal, responden, maupun kutipan hasil.
+
+Wawancara
+
+Wawancara (rencana): ditujukan untuk menggali pengalaman panitia seminar kampus dan pengelola komunitas dalam mengelola pendaftaran. Pelaksanaan dan hasil metode ini belum terdokumentasi dalam bahan yang tersedia. Panduan pertanyaan yang disiapkan:
+
+Bagaimana alur pendaftaran peserta dari pengumuman sampai hari-H?
+
+Hambatan apa yang paling sering muncul saat pembayaran dan rekap?
+
+Catatan apa yang wajib ada agar peserta, pembayaran, dan kehadiran sinkron?
+
+Asumsi awal (belum divalidasi, bukan temuan wawancara): pendaftaran lewat chat diasumsikan mudah tenggelam di antara pesan lain dan sulit direkap, dan rekap manual di spreadsheet diasumsikan mudah tidak cocok dengan sisa kuota. Kebutuhan yang diturunkan dari asumsi tersebut: diperlukan satu tempat terpusat untuk menerbitkan acara dan memantau pesanan secara berkala, serta perhitungan kuota dan total harga yang dilakukan server secara otomatis.
+
+Kuesioner
+
+Kuesioner (rencana): ditujukan untuk memetakan kesulitan mahasiswa yang pernah mengikuti acara kampus, mencakup pengalaman mendaftar dan membayar, bukti kehadiran yang dibutuhkan, dan informasi yang perlu terlihat sebelum membeli tiket. Instrumen ini adalah rencana; kuesioner lengkap tidak dicantumkan dalam dokumen ini. Pelaksanaan dan hasil metode ini belum terdokumentasi dalam bahan yang tersedia.
+
+Asumsi awal (belum divalidasi): status pembayaran yang belum jelas diasumsikan membuat peserta menanyakan ulang ke panitia. Kebutuhan yang diturunkan: diperlukan pembayaran QR yang status lunasnya terkonfirmasi otomatis dan tampil pada akun peserta.
+
+Observasi
+
+Observasi (rencana): ditujukan untuk mencermati alur pelaksanaan satu seminar luring, dengan mencatat urutan langkah serta titik yang menimbulkan antrean. Pelaksanaan dan hasil metode ini belum terdokumentasi dalam bahan yang tersedia. Asumsi awal (belum divalidasi): pencatatan kehadiran manual di pintu masuk diasumsikan memperlambat peserta dan rawan selisih hitung. Kebutuhan yang diturunkan: diperlukan check-in lewat pemindaian kode QR tiket oleh organizer pemilik acara.
+
+FGD
+
+Diskusi kelompok terarah (rencana): ditujukan untuk menyepakati kebutuhan dari sudut pandang tiga peran (peserta, organizer, admin), mencakup alur pesan, bayar, tiket, batas jumlah tiket per pesanan, dan perlakuan bukti manual sebagai jalur lama (legacy). Pelaksanaan dan hasil metode ini belum terdokumentasi dalam bahan yang tersedia.
+
+Kebutuhan yang diturunkan dari skenario: jumlah tiket dibatasi 1-5 per pesanan (per transaksi, bukan batas kumulatif per akun; satu akun dapat membuat beberapa pesanan masing-masing 1-5 tiket selama kuota tersedia), sertifikat diterbitkan dalam format A4 dengan QR verifikasi publik yang dapat dibuka siapa pun tanpa login, dan nama pada sertifikat diambil dari data akun sehingga tidak diketik ulang saat penerbitan (nama akun yang salah sejak pendaftaran tetap tercetak salah).
+
+
+
+BAB II GAMBARAN UMUM
+
+Perspektif Produk
+
+EventKu adalah produk mandiri yang baru dibangun. Pihak eksternal: peramban pengguna, Midtrans Core API sandbox (pembuatan dan verifikasi QRIS), dan infrastruktur Railway (hosting, volume berkas, penjadwal). Data operasional tersimpan di basis data SQLite milik aplikasi.
+
+Alur utama sistem: organizer menerbitkan acara dan tipe tiket, peserta memesan dan membayar, sistem menerbitkan tiket, organizer mencatat kehadiran, peserta yang hadir mengunduh sertifikat. Admin tidak berada di jalur transaksi, karena tugasnya menjaga peran pengguna, pengajuan organizer, dan antrean bantuan.
+
+Kelompok Pengguna dan Karakteristiknya
+
+Tabel 2.1 Kelompok Pengguna
+
+
+
+Kelompok
+
+Karakteristik dan frekuensi pakai
+
+Peserta
+
+Mahasiswa dan masyarakat umum, terbiasa memakai peramban ponsel. Pakai insidental: mencari acara, memesan 1-5 tiket, membayar lewat QR, mengunduh tiket dan sertifikat.
+
+Organizer
+
+Panitia kampus/komunitas. Pakai intensif menjelang acara: membuat acara, mengatur kuota dan harga, memantau pesanan, memindai tiket saat check-in.
+
+Administrator
+
+1-2 orang tim. Pakai harian selama masa pendaftaran: menyetujui pengajuan organizer, mengelola peran, membalas dan menutup topik bantuan.
+
+Pengunjung tamu
+
+Belum login. Hanya melihat katalog, detail acara, dan halaman verifikasi sertifikat publik lewat QR.
+
+
+
+Lingkungan Operasional
+
+Tabel 2.2 Lingkungan Operasional
+
+
+
+Aspek
+
+Keterangan
+
+Server demo
+
+Railway, runtime FrankenPHP, satu replika, volume persisten
+
+/data 500 MB, scheduler untuk rekonsiliasi.
+
+Backend
+
+Laravel 10.50.3, PHP 8.3, autentikasi Breeze, Eloquent, penjadwal Laravel.
+
+Frontend
+
+Blade + Tailwind CSS 3 + Alpine.js, dibundel Vite, tema terang/gelap tersimpan di peramban.
+
+Basis data
+
+SQLite satu berkas di volume persisten, migrasi skema lewat Artisan.
+
+Klien
+
+Peramban modern di ponsel dan desktop, kamera opsional untuk memindai QR check-in.
+
+Pembayaran
+
+Midtrans Core API mode sandbox lewat HTTPS, dengan webhook callback dan rekonsiliasi terjadwal tiap lima menit.
+
+Batas keamanan kerangka dan pembatasan data demo dijelaskan pada Batasan Implementasi Tahap Prototipe (8.1).
+
+Batasan Desain dan Implementasi
+
+Basis data wajib SQLite, tanpa server basis data terpisah.
+
+Pembayaran hanya QRIS sandbox, sehingga kode tidak memproses dana sungguhan.
+
+Chat bantuan memakai polling HTTP tanpa koneksi persisten (WebSocket); interval dan mekanismenya dijelaskan pada fitur Helpdesk (3.5.1).
+
+Sertifikat A4 landscape, dicetak ke PDF lewat peramban.
+
+Tiket sekali pakai dan hanya berlaku sebelum waktu selesai acara.
+
+Seluruh rahasia (server key Midtrans, APP_KEY) hanya lewat variabel lingkungan server.
+
+Asumsi dan Ketergantungan
+
+Midtrans sandbox dan simulatornya tetap dapat diakses selama demo.
+
+
+
+Kelangsungan demo bergantung pada ketersediaan hosting; batasannya dijelaskan pada Batasan Implementasi Tahap Prototipe (8.1).
+
+Pengguna memiliki koneksi internet dan peramban modern dengan JavaScript aktif.
+
+Organizer memasukkan data kehadiran dengan benar, karena sistem mencegah tiket ganda tetapi tidak mengoreksi kesalahan pencatatan manual di pintu masuk.
+
+Zona waktu tampilan WIB (Asia/Jakarta), dengan penyimpanan memakai UTC.
+
+
+
+BAB III FITUR SISTEM
+
+Bab ini menguraikan 12 fitur sistem dengan pola yang sama: deskripsi dan prioritas, aksi pengguna dan respons sistem, lalu kebutuhan fungsional normatif. Penomoran kebutuhan fungsional (REQ-F) dipertahankan berurutan.
+
+3.1 Akses Informasi dan Pengguna
+
+3.1.1 Katalog Event
+
+Deskripsi dan prioritas: Beranda menampilkan acara berstatus terbit lengkap dengan pencarian teks, filter kategori, dan pengurutan jadwal. Halaman detail memuat jadwal, lokasi, poster, pembicara, sponsor, dan sisa kuota tiap tipe tiket. Prioritas: Wajib.
+
+Aksi pengguna dan respons sistem: Pengunjung membuka beranda, mengetik kata kunci, atau memilih kategori; sistem menampilkan daftar acara terbit yang cocok beserta harga termurah. Pada halaman detail, sistem menampilkan sisa kuota per tipe tiket. Bila tidak ada hasil yang cocok, sistem menampilkan daftar kosong dengan keterangan.
+
+REQ-F-01 (Wajib): Sistem harus menampilkan daftar acara berstatus terbit beserta kategori, jadwal, lokasi, dan harga termurah.
+
+REQ-F-02 (Wajib): Sistem harus menyediakan pencarian judul/deskripsi, filter kategori, dan pengurutan berdasarkan jadwal.
+
+REQ-F-03 (Penting): Sistem harus menampilkan sisa kuota per tipe tiket pada halaman detail, dihitung dari kuota dikurangi reservasi aktif dan tiket terjual.
+
+3.1.2 Akun dan Peran
+
+Deskripsi dan prioritas: Pendaftaran dan login memakai Laravel Breeze dengan tiga peran: peserta, organizer, admin. Akun diperlukan untuk memesan tiket dan mengunduh sertifikat, tetapi tidak diperlukan untuk melihat katalog atau memverifikasi sertifikat publik; menjadi organizer memerlukan pengajuan yang disetujui admin. Pemeriksaan kepemilikan melengkapi pemeriksaan peran. Prioritas: Wajib.
+
+Aksi pengguna dan respons sistem: Pengguna baru mengisi formulir pendaftaran; sistem memvalidasi email unik dan kata sandi minimal 8 karakter lalu membuat akun berperan peserta. Pengguna yang sudah terdaftar masuk lewat halaman login; sistem memeriksa kredensial dan membuka dashboard sesuai perannya. Bila email sudah terdaftar atau kata sandi kurang dari 8 karakter, sistem menolak dengan pesan per kolom. Bila pengguna mengakses halaman atau data yang bukan haknya, sistem menolak tanpa menampilkan data tersebut. Bila kredensial login tidak cocok, sistem menolak autentikasi dengan pesan kesalahan umum dan membatasi percobaan berulang.
+
+REQ-F-04 (Wajib): Sistem harus mendaftarkan pengguna baru dengan validasi email unik dan kata sandi minimal 8 karakter.
+
+REQ-F-05 (Wajib): Sistem harus membatasi setiap halaman dan aksi sesuai peran; pelanggaran akses ditolak tanpa membocorkan data.
+
+
+
+REQ-F-06 (Wajib): Sistem harus memeriksa kepemilikan pada setiap akses pesanan, tiket, dan sertifikat privat (milik akun), sehingga penolakan tidak menampilkan data milik orang lain; halaman verifikasi sertifikat publik diatur terpisah pada REQ-F-25.
+
+3.1.3 Pengajuan Organizer
+
+Deskripsi dan prioritas: Formulir pengajuan mencakup kolom alasan dan kontak yang bersifat opsional untuk memudahkan pendaftaran awal organizer. Setiap pengguna hanya memiliki satu baris pengajuan (user_id unik). Prioritas: Wajib.
+
+Aksi pengguna dan respons sistem: Peserta mengisi formulir pengajuan dan mengirimnya; sistem mencatat pengajuan berstatus diajukan. Admin menyetujui atau menolak; peran pengguna berubah menjadi organizer hanya saat disetujui. Kirim ulang ditolak bila pengajuan masih menunggu atau sudah disetujui.
+
+REQ-F-07 (Wajib): Sistem harus mencatat pengajuan organizer (alasan, kontak, status diajukan) dan menolak kirim ulang bila pengajuan sudah berstatus diajukan atau disetujui.
+
+Catatan Implementasi: kode saat ini menyimpan satu baris pengajuan per pengguna; pengajuan yang ditolak dapat diajukan ulang dan baris yang sama diperbarui kembali ke status diajukan (updateOrCreate), tanpa masa tunggu atau batas jumlah pengajuan ulang. Kebijakan ini belum disahkan sebagai keputusan bisnis; lihat Lampiran C (TBD-04).
+
+REQ-F-08 (Wajib): Sistem harus mengubah peran pengguna menjadi organizer hanya saat admin menyetujui pengajuan; penolakan tidak mengubah peran.
+
+3.2 Pengelolaan Acara dan Tipe Tiket
+
+3.2.1 Data Acara
+
+Deskripsi dan prioritas: Organizer membuat acara sebagai draf, melengkapi detail (judul, tanggal_mulai, tanggal_selesai, tipe online/offline), lalu menerbitkannya. Katalog hanya menampilkan acara berstatus terbit. Prioritas: Wajib.
+
+Aksi pengguna dan respons sistem: Organizer mengisi satu formulir acara termasuk pilihan status draf/terbit lalu menyimpan; sistem memvalidasi judul, deskripsi, kategori, tipe online/offline, lokasi, tanggal_mulai, dan tanggal_selesai yang harus setelah tanggal_mulai, lalu kembali ke daftar acara. Bila validasi gagal, sistem kembali ke formulir dengan pesan galat dan isian lama. Bila peminta bukan pemilik, sistem menolak dengan 403.
+
+REQ-F-09 (Wajib): Sistem harus menyediakan bagi organizer kemampuan membuat, mengubah, dan menerbitkan acara miliknya sendiri.
+
+Catatan Implementasi: penghapusan acara yang ada saat ini bersifat hard delete berantai (seluruh tipe tiket, pesanan, dan tiket di bawahnya ikut terhapus tanpa pemeriksaan riwayat pesanan); perilaku ini merupakan fakta implementasi dan belum disahkan normatif. Usulan penahan penghapusan acara yang telah memiliki pesanan berstatus USULAN BELUM DISETUJUI; lihat Lampiran C (TBD-02).
+
+3.2.2 Tipe Tiket
+
+Deskripsi dan prioritas: Organizer menambahkan tipe tiket pada acaranya dengan nama, harga, dan kuota. Penghapusan tipe tiket dilindungi bila sudah memiliki pesanan. Prioritas: Wajib.
+
+Aksi pengguna dan respons sistem: Organizer mengisi nama, harga, dan kuota tipe tiket lalu menyimpan; sistem memvalidasi harga tidak kurang dari 0 dan kuota minimal 1. Bila organizer menghapus tipe tiket yang sudah memiliki pesanan, sistem menolak dengan pesan bahwa tipe tiket tidak dapat dihapus. Bila nama kosong atau melebihi 100 karakter, harga kurang dari 0, atau kuota kurang dari 1, sistem menolak dengan pesan per kolom; bila peminta bukan pemilik acara, sistem menolak dengan 403.
+
+
+
+REQ-F-10 (Wajib): Sistem harus mengelola tipe tiket (nama, harga tidak kurang dari 0, kuota minimal 1) per acara dan menolak kuota minus.
+
+REQ-F-11 (Wajib): Sistem harus menolak penghapusan tipe tiket yang sudah memiliki pesanan.
+
+3.3 Pemesanan dan Pembayaran
+
+3.3.1 Pemesanan
+
+Deskripsi dan prioritas: Satu pesanan berisi satu tipe tiket dengan jumlah 1-5 dan hanya dapat dibuat pengguna yang sudah masuk. Total dihitung di server. Kuota ditahan (reservasi) selama pesanan menunggu dan dibatasi payment_expires_at. Kunci checkout_key (nullable UUID unik) mencegah pesanan ganda dari kirim ulang. Prioritas: Wajib.
+
+Aksi pengguna dan respons sistem: Peserta yang sudah masuk memilih tipe tiket dan jumlah 1-5 lalu mengirim pesanan; sistem memvalidasi jumlah dan ketersediaan kuota di server, menghitung total, menahan kuota, dan menyimpan batas bayar (bawaan 15 menit). Bila kuota tidak cukup, sistem menolak pesanan dengan pesan. Bila total 0, sistem langsung melunasi pesanan dan menerbitkan tiket. Klik ulang atau refresh dengan checkout_key yang sama tidak membuat pesanan ganda.
+
+REQ-F-12 (Wajib): Sistem harus memvalidasi jumlah 1-5 dan ketersediaan kuota di sisi server sebelum membuat pesanan.
+
+REQ-F-13 (Wajib): Sistem harus menghitung total (harga x jumlah) di server dan menahan kuota selama pesanan menunggu. Batas bayar tersimpan di payment_expires_at (default 15 menit). Pesanan yang belum pernah dikirim ke gateway dan lewat batas dibatalkan (payment_status expire) sehingga kuotanya lepas, sedangkan pesanan yang sudah dikirim ke gateway ditahan sampai ada konfirmasi resmi dari penyedia pembayaran.
+
+REQ-F-14 (Wajib): Sistem harus melunasi pesanan total 0 secara langsung dan menerbitkan tiketnya tanpa gateway.
+
+REQ-F-15 (Penting): Sistem harus memakai kunci idempotensi checkout (checkout_key) sehingga klik ulang atau refresh tidak membuat pesanan ganda. Idempotensi berarti permintaan yang sama diproses sekali meskipun dikirim berulang.
+
+3.3.2 Pembayaran QRIS Sandbox
+
+Deskripsi dan prioritas: Pesanan berbayar dibuatkan kode QR dari Midtrans Core API sandbox beserta batas waktu bayar. Status lunas hanya diakui dari konfirmasi resmi dari penyedia pembayaran. Prioritas: Wajib.
+
+Aksi pengguna dan respons sistem: Peserta melanjutkan checkout pesanan berbayar; sistem meminta QR ke Midtrans sandbox dan menampilkannya beserta batas waktu bayar. Sistem mengubah status hanya setelah menerima konfirmasi resmi dari penyedia pembayaran lewat salah satu jalur berikut: webhook, yaitu panggilan balik Midtrans ke sistem saat status bayar berubah, yang hanya diproses bila tanda tangannya valid (signature, status, identitas pesanan, dan nominal diperiksa); atau rekonsiliasi terjadwal tiap lima menit. Settlement yang terkonfirmasi resmi menerbitkan tiket tepat satu kali. Timeout atau gangguan jaringan yang ambigu membuat pesanan tetap menunggu dengan kuota tertahan sampai provider memastikan expire, deny, atau cancel. Settlement lunas yang datang setelah pesanan batal hanya menandai settlement_review, tanpa tiket otomatis. Sumber pembayaran lain: pesanan tiket gratis (total 0) dilunasi sistem secara langsung dan tiketnya diterbitkan tanpa gateway; pesanan yang belum pernah dikirim ke gateway dan melampaui batas bayar dibatalkan secara lokal; jalur unggah bukti manual hanya untuk pesanan lama (legacy) dan dilindungi dari pesanan gateway. Jalur manual legacy untuk pesanan lama (bukan gateway): organizer pemilik acara meninjau pesanan berstatus menunggu, lalu menyetujui (status menjadi lunas dan tiket diterbitkan) atau menolak (status menjadi batal, tanpa pengembalian dana riil); pesanan gateway tidak dapat disetujui atau ditolak manual (ditolak dengan 403).
+
+
+
+REQ-F-16 (Wajib): Sistem harus meminta QR resmi ke Midtrans sandbox dan menampilkannya beserta batas waktu bayar.
+
+REQ-F-17 (Wajib): Sistem harus memeriksa signature, status, identitas pesanan, dan nominal pada setiap webhook sebelum mengubah status.
+
+REQ-F-18 (Wajib): Sistem harus menjalankan rekonsiliasi terjadwal tiap 5 menit yang memeriksa pesanan QRIS berstatus menunggu yang memiliki identitas transaksi gateway (gateway_order_id tidak null) untuk menanyakan ulang statusnya ke penyedia, serta membatalkan pesanan lokal yang belum pernah dikirim ke gateway (gateway_order_id null, payment_status created) dan telah melampaui batas bayar (payment_expires_at <= now()).
+
+Catatan Implementasi: rekonsiliasi terjadwal berjalan tiap 5 menit. Untuk pesanan gateway (payment_method midtrans_qris, status menunggu, gateway_order_id tidak null) sistem menanyakan status ke penyedia dalam kelompok (batch) berdasarkan updated_at, dengan batas bawaan 50 pesanan per proses (rentang 1-200), sehingga tidak seluruh pesanan diperiksa dalam satu proses. Untuk pesanan lokal yang belum pernah dikirim ke gateway (payment_method midtrans_qris, status menunggu, gateway_order_id null, payment_status created, payment_expires_at <= now()) sistem membatalkan secara lokal (status batal, payment_status expire). Angka batas batch adalah fakta kode, bukan target kualitas baru.
+
+REQ-F-19 (Wajib): Sistem harus menerbitkan tiket secara transaksional tepat satu kali saat status lunas.
+
+REQ-F-20 (Penting): Sistem harus membatasi jalur bukti manual hanya untuk pesanan legacy; pesanan QRIS baru tidak dapat dilunasi lewat unggahan.
+
+Catatan Implementasi: settlement_review disimpan pada kolom orders.payment_status, sedangkan orders.status tetap batal; waktu settlement dari penyedia dicatat bila dapat diverifikasi, dan tiket tidak diterbitkan otomatis. Saat ini belum ada antarmuka maupun peran yang ditugaskan menyelesaikan settlement_review; peserta diarahkan menghubungi pengelola lewat Bantuan. Penanggung jawab dan mekanisme penyelesaiannya belum diputuskan; lihat Lampiran C (TBD-06).
+
+3.4 Tiket, Kehadiran, dan Sertifikat
+
+3.4.1 Tiket dan Check-in
+
+Deskripsi dan prioritas: Setiap tiket berkode unik dan ber-QR. Hanya organizer pemilik acara yang dapat melakukan check-in (pemeriksaan organizer_id bersifat ketat; admin tidak dapat melewatinya), lewat pindaian kamera atau pengetikan kode. Satu tiket hanya dapat dipakai satu kali sebelum tanggal_selesai acara, dan waktu hadir tersimpan di waktu_checkin. Kedaluwarsa dihitung dari tanggal selesai acara, tidak disimpan sebagai kolom. Untuk acara online, tautan atau kanal pertemuan ditulis organizer pada kolom lokasi (label formulir: 'Lokasi Fisik atau Link Meeting Virtual') dan tampil pada detail acara publik; kehadiran tetap dicatat manual lewat pemindaian QR atau kode oleh organizer. Prioritas: Wajib.
+
+Aksi pengguna dan respons sistem: Organizer membuka halaman check-in, memindai QR tiket peserta dengan kamera, atau mengetik kodenya; sistem memeriksa pemindai adalah pemilik acara, memeriksa tiket belum terpakai dan belum kedaluwarsa, lalu menandai tiket terpakai beserta waktu hadir. Bila pemindai bukan pemilik acara, sistem menolak dengan galat 'Kode tiket tidak ditemukan'. Bila tiket belum lunas, sudah terpakai, atau kedaluwarsa, sistem menolak dengan pesan masing-masing tanpa mengubah status bayar. Bila kamera gagal, kode dapat diketik manual. Check-in sebelum acara mulai diizinkan karena batasnya hanya waktu selesai.
+
+REQ-F-21 (Wajib): Sistem harus menerbitkan satu kode unik per tiket lunas dan menampilkannya sebagai QR.
+
+REQ-F-22 (Wajib): Sistem harus membatasi check-in hanya oleh organizer pemilik acara, satu kali per tiket, sebelum waktu selesai acara.
+
+REQ-F-23 (Wajib): Sistem harus menolak pemakaian ulang tiket dan tiket kedaluwarsa tanpa mengubah status pembayaran.
+
+
+
+Catatan Implementasi: status hadir direpresentasikan status tiket terpakai, dan waktu_checkin diisi bersamaan dengan perubahan status tersebut; sertifikat memeriksa status terpakai. Tidak ada status 'selesai' pada acara; selesai dihitung dari tanggal_selesai. Kebijakan identitas peserta per tiket belum diputuskan (Lampiran C, TBD-01), dan cara organizer mengumpulkan kode tiket peserta pada acara online belum ditetapkan (Lampiran C, TBD-03).
+
+3.4.2 Sertifikat
+
+Deskripsi dan prioritas: Sertifikat A4 landscape tersedia bagi pemilik tiket yang tercatat hadir. QR pada sertifikat membuka halaman verifikasi publik tanpa login yang menampilkan status keabsahan, nama peserta, judul acara, dan tanggal mulai acara. Halaman privat pemilik menampilkan data pemilik beserta tiket yang dipakai. Prioritas: Wajib.
+
+Aksi pengguna dan respons sistem: Pemilik tiket membuka halaman sertifikat dari akunnya; sistem memeriksa kepemilikan akun dan status hadir tiket, lalu menampilkan sertifikat A4 landscape yang dapat dicetak ke PDF lewat peramban. Dua penolakan privat dibedakan: bila pengguna membuka sertifikat milik akun lain, sistem menolak dengan 403 tanpa menampilkan data; bila pemilik membuka sertifikat untuk tiket yang belum tercatat hadir, sistem juga menolak dengan 403. Verifikasi publik memiliki dua kasus terpisah: bila kode tidak dikenal sama sekali, sistem menolak dengan halaman tidak ditemukan (404) tanpa data apa pun; bila kode dikenal tetapi tiket belum check-in, halaman verifikasi menampilkan status 'BELUM VALID' beserta nama pembeli, judul acara, dan tanggal acara, sedangkan bila sudah check-in statusnya sah.
+
+REQ-F-24 (Wajib): Sistem harus menerbitkan sertifikat hanya untuk tiket yang tercatat hadir (saat ini status terpakai); definisi resmi kehadiran yang menggabungkan status dan waktu_checkin masih menunggu keputusan (Lampiran C, TBD-05).
+
+REQ-F-25 (Wajib): Sistem harus memuat QR verifikasi publik pada setiap sertifikat, dan halaman publik hanya menampilkan status keabsahan, nama peserta, judul acara, dan tanggal mulai acara.
+
+REQ-F-26 (Penting): Tata letak sertifikat ditargetkan menampung nama peserta hingga 60 karakter tanpa teks terpotong (target, belum diuji lolos).
+
+Catatan Implementasi: nama pada sertifikat diambil dari akun pembeli, dan seluruh tiket dalam satu pesanan memakai nama akun yang sama; hanya akun pembeli yang dapat mengunduh sertifikatnya. Kebijakan identitas peserta per tiket belum diputuskan; lihat Lampiran C (TBD-01).
+
+3.5 Bantuan, Status, dan Administrasi
+
+3.5.1 Helpdesk
+
+Deskripsi dan prioritas: Pengguna yang login membuka topik bantuan dan berkirim pesan dengan admin. Widget memakai polling, yaitu permintaan HTTPS berkala tiap delapan detik dengan parameter since_id sehingga hanya pesan baru yang diambil, tanpa koneksi persisten. Admin melihat seluruh topik, membalas, dan menutup topik yang selesai. Balasan yang belum dibaca dikenali dari read_at yang masih null. Prioritas: Wajib.
+
+Aksi pengguna dan respons sistem: Pengguna membuka topik dari widget bantuan dan mengirim pesan; sistem menyimpan pesan dan menampilkannya di kedua sisi. Widget memperbarui daftar pesan tiap 8 detik. Admin membalas atau menutup topik; topik yang ditutup berstatus ditutup. Bila topik kosong atau melebihi 255 karakter, atau isi pesan kosong atau melebihi 2000 karakter, sistem menolak dengan pesan per kolom; pengguna hanya melihat dan mengirim pada topik miliknya.
+
+REQ-F-27 (Wajib): Sistem harus menyediakan bagi pengguna kemampuan membuka topik, mengirim pesan, dan membaca balasan admin.
+
+REQ-F-28 (Wajib): Sistem harus menyediakan bagi admin kemampuan melihat seluruh topik, membalas, dan menutup topik.
+
+
+
+REQ-F-29 (Penting): Sistem harus mengambil pesan bantuan baru tiap 8 detik memakai parameter since_id dan menandai balasan yang belum dibaca.
+
+3.5.2 Penanda Baca dan Status Pengajuan
+
+Deskripsi dan prioritas: Tidak ada tabel notifikasi fisik dan tidak ada email/push. Balasan bantuan yang belum dibaca dikenali dari pesan dengan read_at null. Hasil pengajuan organizer tampil pada dropdown/area status di dashboard dan ditandai terbaca lewat organizer_requests.seen_at. Prioritas: Wajib untuk penanda baca, Penting untuk status pengajuan.
+
+Aksi pengguna dan respons sistem: Pengguna membuka dropdown status di dashboard; hasil pengajuan organizer (disetujui/ditolak) tampil dan ditandai terbaca lewat organizer_requests.seen_at.
+
+REQ-F-30 (Wajib): Sistem harus menampilkan penanda balasan bantuan yang read_at-nya masih null.
+
+REQ-F-31 (Penting): Sistem harus menampilkan hasil pengajuan organizer (disetujui/ditolak) pada dropdown status dan menandainya terbaca lewat seen_at.
+
+3.5.3 Admin dan Dashboard
+
+Deskripsi dan prioritas: Admin mengelola peran pengguna, meninjau pengajuan organizer, dan menangani helpdesk. Dashboard menyajikan angka ringkasan sesuai peran: pesanan, tiket terjual, dan pendapatan per acara untuk organizer; total pengguna, acara, pesanan, dan topik bantuan terbuka untuk admin. Admin tidak memiliki wewenang check-in maupun menerbitkan tiket atau sertifikat. Prioritas: Wajib.
+
+Aksi pengguna dan respons sistem: Admin membuka halaman pengelolaan pengguna; sistem menampilkan daftar pengguna dan menyimpan perubahan peran. Admin membuka halaman pengajuan organizer; sistem menampilkan daftar pengajuan beserta statusnya untuk ditinjau. Admin membuka dashboard; sistem menampilkan total pengguna, acara, pesanan, dan topik bantuan terbuka. Organizer membuka dashboard; sistem menampilkan jumlah pesanan, tiket terjual, dan pendapatan per acara miliknya. Bila nilai peran tidak termasuk peserta/organizer/admin, sistem menolak dengan pesan validasi; sistem juga menolak perubahan peran akun sendiri dan pencabutan admin terakhir. Aksi administrasi hanya dapat dilakukan pengguna berperan admin.
+
+REQ-F-32 (Wajib): Sistem harus menyediakan bagi admin kemampuan mengubah peran pengguna dan meninjau seluruh pengajuan organizer.
+
+REQ-F-33 (Wajib): Sistem harus menampilkan pada dashboard organizer jumlah pesanan, tiket terjual, dan pendapatan per acara miliknya.
+
+REQ-F-34 (Penting): Sistem harus menampilkan pada dashboard admin total pengguna, acara, pesanan, dan topik bantuan terbuka.
+
+BAB IV KEBUTUHAN DATA
+
+Model Data Logis
+
+Sistem menggunakan delapan tabel utama: users, events, ticket_types, orders, tickets, organizer_requests, help_tickets, help_messages. Rantai transaksi utama: users ke orders ke ticket_types ke events, dengan tickets sebagai anak orders.
+
+Sembilan relasi kunci asing menghubungkan kedelapan tabel: users 1-N events (organizer_id); users 1-N orders (user_id); users 1-N help_tickets (user_id); users 1-N help_messages (user_id); events 1-N ticket_types (event_id); ticket_types 1-N orders (ticket_type_id); orders 1-N tickets (order_id); dan help_tickets 1-N help_messages (ticket_id). Untuk organizer_requests, satu pengguna dapat memiliki nol atau satu pengajuan (user_id unik); setiap pengajuan merujuk tepat satu pengguna.
+
+Seluruh kolom kunci asing pada delapan tabel utama bersifat wajib terisi (tidak nullable), sehingga setiap baris anak merujuk tepat satu baris induk; detail tipe dan batasan tiap kolom tercantum pada Kamus Data.
+
+
+
+Gambar 4.1 Diagram hubungan entitas (ERD) basis data EventKu
+
+REQ-D-01 (Wajib): Setiap order wajib merujuk pengguna, tipe tiket, jumlah, total, dan status; checkout_key boleh null tetapi unik bila terisi.
+
+REQ-D-02 (Wajib): Setiap tiket wajib berkode unik dan merujuk ke satu order.
+
+REQ-D-03 (Wajib): Waktu pembuatan, batas bayar, dan konfirmasi lunas disimpan sebagai kolom berbeda dan penyimpanan memakai UTC.
+
+Kamus Data
+
+Kamus data menggunakan tipe logis migrasi Laravel. Pada SQLite, INTEGER UNSIGNED terpetakan ke afinitas INTEGER tanpa tanda native, ENUM terpetakan ke TEXT dengan batasan nilai teks yang dijaga aplikasi, VARCHAR dan UUID ke TEXT, serta DATETIME dan TIMESTAMP ke teks tanggal-waktu, sementara kolom bertanda FK merujuk primary key tabel induknya.
+
+Kamus ini mencakup kolom bisnis utama. Kolom Null "ya" berarti boleh kosong. Setiap tabel juga memiliki created_at dan updated_at berupa TIMESTAMP nullable yang tidak diulang dalam tabel berikut. Batas validasi formulir dibedakan dari tipe penyimpanan.
+
+Tabel 4.1 users
+
+
+
+Kolom
+
+Tipe
+
+Null
+
+Constraint
+
+id
+
+BIGINT UNSIGNED
+
+tidak
+
+PK
+
+name
+
+VARCHAR(255)
+
+tidak
+
+--
+
+email
+
+VARCHAR(255)
+
+tidak
+
+unik
+
+password
+
+VARCHAR(255)
+
+tidak
+
+berisi hash kata sandi
+
+role
+
+VARCHAR(255)
+
+tidak
+
+default peserta, isinya peserta/organizer/admin
+
+Tabel 4.2 events
+
+
+
+Kolom
+
+Tipe
+
+Null
+
+Constraint
+
+id
+
+BIGINT UNSIGNED
+
+tidak
+
+PK
+
+organizer_id
+
+FK users
+
+tidak
+
+pemilik acara
+
+judul
+
+VARCHAR(255)
+
+tidak
+
+required di formulir
+
+deskripsi
+
+TEXT
+
+tidak
+
+uraian acara
+
+kategori
+
+VARCHAR(255)
+
+tidak
+
+kategori acara
+
+lokasi
+
+VARCHAR(255)
+
+tidak
+
+lokasi atau informasi pelaksanaan
+
+poster
+
+VARCHAR(255)
+
+ya
+
+lokasi berkas poster
+
+pembicara
+
+VARCHAR(255)
+
+ya
+
+nama pembicara
+
+peran_pembicara
+
+VARCHAR(255)
+
+ya
+
+peran pembicara
+
+foto_pembicara
+
+VARCHAR(255)
+
+ya
+
+lokasi berkas foto
+
+logo_sponsor
+
+VARCHAR(255)
+
+ya
+
+lokasi berkas logo
+
+tanggal_mulai
+
+DATETIME
+
+tidak
+
+required di formulir
+
+tanggal_selesai
+
+DATETIME
+
+tidak
+
+required, setelah tanggal_mulai
+
+status
+
+ENUM
+
+tidak
+
+draft/terbit
+
+tipe
+
+ENUM
+
+tidak
+
+online/offline
+
+Tabel 4.3 ticket_types
+
+
+
+Kolom
+
+Tipe
+
+Null
+
+Constraint
+
+id
+
+BIGINT UNSIGNED
+
+tidak
+
+PK
+
+event_id
+
+FK events
+
+tidak
+
+acara induk
+
+nama
+
+VARCHAR(255)
+
+tidak
+
+--
+
+harga
+
+INTEGER UNSIGNED
+
+tidak
+
+0 atau lebih, 0 = gratis
+
+kuota
+
+INTEGER UNSIGNED
+
+tidak
+
+minimal 1, hapus ditolak bila sudah ada pesanan
+
+
+
+Tabel 4.4 orders
+
+
+
+Kolom
+
+Tipe
+
+Null
+
+Constraint
+
+id
+
+BIGINT UNSIGNED
+
+tidak
+
+PK
+
+user_id
+
+FK users
+
+tidak
+
+pemesan
+
+ticket_type_id
+
+FK ticket_types
+
+tidak
+
+tipe yang dipesan
+
+jumlah
+
+INTEGER UNSIGNED
+
+tidak
+
+1-5
+
+total
+
+INTEGER UNSIGNED
+
+tidak
+
+dihitung server
+
+status
+
+ENUM
+
+tidak
+
+menunggu/lunas/batal
+
+checkout_key
+
+UUID
+
+ya
+
+unik bila terisi
+
+bukti_bayar
+
+VARCHAR(255)
+
+ya
+
+lokasi bukti pembayaran manual lama
+
+payment_method
+
+VARCHAR(32)
+
+tidak
+
+default manual
+
+gateway_order_id
+
+VARCHAR(255)
+
+ya
+
+unik bila terisi, identitas pesanan gateway
+
+qr_string
+
+TEXT
+
+ya
+
+data QR pembayaran dari gateway
+
+payment_qr_url
+
+TEXT
+
+ya
+
+alamat QR pembayaran dari gateway
+
+gateway_transaction_id
+
+VARCHAR(255)
+
+ya
+
+identitas transaksi gateway
+
+payment_status
+
+VARCHAR(32)
+
+ya
+
+status gateway, terpisah dari status
+
+payment_expires_at
+
+TIMESTAMP
+
+ya
+
+default 15 menit dari konfigurasi
+
+paid_at
+
+TIMESTAMP
+
+ya
+
+Waktu pembayaran; dapat kosong pada pesanan lama dan dapat terisi saat settlement terlambat meskipun status pesanan batal.
+
+
+
+Tabel 4.5 tickets
+
+
+
+Kolom
+
+Tipe
+
+Null
+
+Constraint
+
+id
+
+BIGINT UNSIGNED
+
+tidak
+
+PK
+
+order_id
+
+FK orders
+
+tidak
+
+pesanan induk
+
+kode
+
+VARCHAR(255)
+
+tidak
+
+unik
+
+status
+
+ENUM
+
+tidak
+
+aktif/terpakai
+
+waktu_checkin
+
+DATETIME
+
+ya
+
+null hingga check-in
+
+Kedaluwarsa tiket dihitung dari tanggal_selesai acara, tidak disimpan.
+
+Tabel 4.6 organizer_requests
+
+
+
+Kolom
+
+Tipe
+
+Null
+
+Constraint
+
+id
+
+BIGINT UNSIGNED
+
+tidak
+
+PK
+
+user_id
+
+FK users
+
+tidak
+
+unik (satu baris per pengguna)
+
+alasan
+
+TEXT
+
+ya
+
+opsional, formulir membatasi 1000 karakter
+
+kontak
+
+VARCHAR(255)
+
+ya
+
+opsional di formulir
+
+status
+
+ENUM
+
+tidak
+
+diajukan/disetujui/ditolak
+
+seen_at
+
+DATETIME
+
+ya
+
+ditulis saat hasil ditampilkan
+
+Tabel 4.7 help_tickets
+
+
+
+Kolom
+
+Tipe
+
+Null
+
+Constraint
+
+id
+
+BIGINT UNSIGNED
+
+tidak
+
+PK
+
+user_id
+
+FK users
+
+tidak
+
+pembuka topik
+
+topik
+
+VARCHAR(255)
+
+tidak
+
+--
+
+status
+
+ENUM
+
+tidak
+
+terbuka/ditutup
+
+
+
+Tabel 4.8 help_messages
+
+
+
+Kolom
+
+Tipe
+
+Null
+
+Constraint
+
+id
+
+BIGINT UNSIGNED
+
+tidak
+
+PK
+
+ticket_id
+
+FK help_tickets
+
+tidak
+
+topik induk
+
+user_id
+
+FK users
+
+tidak
+
+pengirim
+
+isi
+
+TEXT
+
+tidak
+
+--
+
+read_at
+
+DATETIME
+
+ya
+
+null = belum dibaca
+
+
+
+Laporan
+
+Organizer memperoleh rekap pesanan dan pendapatan per acara, sedangkan admin memperoleh rekap pengguna, acara, pesanan, dan topik bantuan. Laporan tampil di layar dan dapat dicetak lewat peramban, dan ekspor berkas terpisah bukan kebutuhan wajib tahap ini.
+
+Perolehan, Integritas, Penyimpanan, dan Penghapusan
+
+Data dibuat lewat formulir tervalidasi dan webhook terverifikasi. Perubahan status pembayaran ke penyedia hanya berlaku untuk pesanan QRIS yang sudah memiliki transaksi gateway; pesanan tiket gratis dilunasi sistem secara langsung, pesanan lokal yang belum dikirim ke gateway dibatalkan secara lokal saat melampaui batas bayar, dan jalur manual legacy diverifikasi organizer. Integritas dijaga kunci asing, transaksi basis data, dan penerbitan tiket yang idempoten. Prosedur pencadangan yang direncanakan (belum terverifikasi): salin berkas SQLite secara konsisten saat aplikasi tidak menulis, sebelum perubahan berisiko.
+
+Retensi data operasional dan salinan cadangan, frekuensi dan lokasi pencadangan, prosedur pemulihan, serta prosedur penghapusan berkala (termasuk berkas arsip, berkas sementara dan cache, serta salinan residu yang mungkin tersisa setelah penghapusan) belum ditetapkan (TBD); saat ini tidak ada jadwal pencadangan otomatis maupun batas retensi yang disepakati. Tidak ada durasi, otomatisasi, maupun dasar hukum yang ditetapkan pada tahap ini. Lihat Lampiran C (TBD-07 dan TBD-08).
+
+Perilaku hapus yang berlaku saat ini: hapus event dan hapus akun bersifat hard delete berantai (cascade). Sistem belum menyediakan penonaktifan akun sebagai pengganti hapus, jejak audit pelaku-waktu, maupun penahan hapus event yang telah memiliki pesanan; penahan tersebut masih berstatus usulan (Lampiran C, TBD-02).
+
+
+
+BAB V ANTARMUKA EKSTERNAL
+
+Antarmuka Pengguna
+
+Seluruh interaksi berjalan di peramban lewat halaman responsif yang nyaman mulai lebar 360 piksel. Tersedia tema terang dan gelap, dan pilihan tersimpan di peramban. Pesan kesalahan berbahasa Indonesia dan menyebut tindakan perbaikan, bukan kode teknis.
+
+REQ-Q-01 (Penting): Halaman utama dan checkout tetap terbaca di kedua tema dan tidak melebar melampaui layar ponsel 360 px.
+
+Antarmuka Perangkat Lunak
+
+Midtrans Core API sandbox diakses lewat HTTPS untuk membuat QR, menanyakan status, dan menerima webhook. Basis data SQLite diakses eksklusif oleh aplikasi Laravel. Tanpa konfigurasi Midtrans yang valid, fitur bayar menampilkan pesan kesalahan yang jelas, bukan QR palsu.
+
+Antarmuka Perangkat Keras
+
+Server demo berupa kontainer Railway (FrankenPHP) dengan volume /data 500 MB. Di sisi pengguna tidak ada perangkat khusus, dan kamera dipakai opsional untuk memindai QR check-in dengan input kode manual sebagai cadangan.
+
+Antarmuka Komunikasi
+
+Semua lalu lintas memakai HTTPS. Webhook Midtrans masuk ke endpoint callback publik dan diverifikasi tanda tangannya sebelum diproses. Widget bantuan memakai polling HTTPS sebagaimana dijelaskan pada fitur Helpdesk (3.5.1), tanpa WebSocket dan tanpa koneksi socket persisten.
+
+
+
+BAB VI ATRIBUT KUALITAS
+
+Kemudahan Penggunaan
+
+Alur katalog-detail-checkout memakai label Indonesia yang lugas, dan setiap kegagalan menjelaskan langkah berikutnya. Rencana pemeriksaan: lima pengguna baru yang belum pernah memakai EventKu diminta menyelesaikan pemesanan sampai tiket terbit dalam satu sesi uji terpandu per pengguna, tanpa pelatihan formal; hasil yang diamati adalah penyelesaian tiap peserta beserta titik kegagalannya. Kebijakan bantuan penguji selama sesi (boleh atau tidak, dan bagaimana dicatat) belum ditetapkan (TBD, Lampiran C butir TBD-09). Perangkat, jaringan, kondisi cache, dan cara pengukuran belum ditetapkan; belum ada hasil uji yang dicatat.
+
+Rencana pemeriksaan REQ-Q-01: membuka beranda dan checkout pada lebar 360 px dengan kedua tema; memeriksa tidak ada overflow dan teks tetap terbaca.
+
+Kinerja
+
+Target katalog adalah waktu tampil kurang dari 3 detik untuk 100 acara pada koneksi 10 Mbps. Target halaman detail adalah waktu tampil kurang dari 3 detik; kondisi jaringan dan metode pengukurannya masih TBD. Rencana pemeriksaan: memuat halaman katalog dan detail lalu mengukur waktu tampilnya. Kondisi pengukuran (alat ukur, kondisi cache, perangkat, dan jumlah pengguna bersamaan) belum ditetapkan (TBD, Lampiran C butir TBD-09); belum ada hasil pengukuran, dan uji beban formal adalah pekerjaan lanjutan, bukan klaim kesiapan.
+
+REQ-Q-02 (Penting): Polling bantuan memakai interval 8 detik dan hanya mengambil pesan yang lebih baru.
+
+Rencana pemeriksaan REQ-Q-02: menginspeksi jadwal permintaan widget (interval 8 detik) dan memastikan hanya pesan yang lebih baru (since_id) yang diambil.
+
+REQ-Q-03 (Pendukung): Katalog 100 acara ditargetkan tampil di bawah 3 detik pada koneksi 10 Mbps.
+
+Keamanan
+
+Autentikasi Breeze dan token CSRF pada setiap formulir menjadi lapis dasar. Webhook memverifikasi signature dan nominal, dan callback yang tidak cocok ditolak dan dicatat. Rahasia hanya hidup di variabel lingkungan server. Throttle yang berlaku: payments.start 10/menit dan status 20/menit, sedangkan endpoint checkout dan callback tidak di-throttle.
+
+REQ-Q-04 (Wajib): Webhook tanpa signature valid ditolak dan dicatat tanpa mengubah status pesanan.
+
+REQ-Q-05 (Wajib): Endpoint mulai-bayar dibatasi 10 permintaan/menit dan endpoint status-bayar 20 permintaan/menit.
+
+Rencana pemeriksaan REQ-Q-04: mengirim webhook dengan tanda tangan tidak valid; memeriksa permintaan ditolak dan dicatat tanpa mengubah status pesanan.
+
+Rencana pemeriksaan REQ-Q-05: mengirim permintaan melebihi batas 10/menit (mulai-bayar) dan 20/menit (status-bayar); memeriksa permintaan berikutnya ditolak.
+
+
+
+Ketersediaan dan Keandalan
+
+Kriteria tahap demo: layanan diupayakan aktif selama periode penilaian, tanpa jaminan SLA. Satu replika berarti pemeliharaan Railway menghentikan layanan sementara, dan kredit trial yang habis menghentikan demo. Tidak ada klaim uptime.
+
+Keselamatan dan Kekokohan
+
+Kegagalan jaringan saat membayar tidak dianggap pembatalan: pesanan tetap menunggu dengan kuota tertahan sampai provider memastikan status terminal atau rekonsiliasi memastikannya. Konfirmasi ulang operasi berisiko belum diterapkan seragam pada tahap ini (di luar lingkup).
+
+
+
+BAB VII INTERNASIONALISASI DAN LOKALISASI
+
+Bahasa antarmuka Bahasa Indonesia, dan istilah teknis (checkout, webhook, QR) dipertahankan agar selaras dengan dokumentasi Midtrans dan Laravel. Waktu yang dilihat pengguna berlabel WIB, dengan penyimpanan memakai UTC. Nilai uang format Rupiah (Rp1.500.000) dengan pemisah ribuan titik, tanpa desimal.
+
+BAB VIII KEBUTUHAN LAINNYA
+
+Setiap pembayaran menampilkan penanda "simulasi sandbox, bukan uang sungguhan" di dekat QR. Layanan Railway digunakan untuk hosting, sedangkan Midtrans memproses transaksi sandbox. Informasi verifikasi sertifikat publik terbatas pada status keabsahan, nama peserta, judul acara, dan tanggal mulai acara.
+
+Batasan Implementasi Tahap Prototipe
+
+Kerangka Laravel 10 tidak lagi menerima pembaruan keamanan per 2026; menjalankan kerangka yang tidak didukung berisiko karena nama dan email pengguna adalah data pribadi. Data demo dibatasi pada data sintetis atau uji, bukan data peserta sebenarnya, dan penerapan dengan data pengguna nyata memerlukan pembaruan framework serta peninjauan keamanan dan privasi; pembaruan tersebut di luar lingkup tahap ini dan belum dikerjakan. Penghapusan event dan akun bersifat berantai dan langsung menghapus riwayat terkait, tanpa penahan atau mekanisme pemulihan. Basis data SQLite satu berkas dan paket trial Railway membatasi kapasitas serta ketersediaan layanan: demo dapat terhenti ketika kredit trial habis atau pemeliharaan Railway berlangsung, dan bila trial berakhir opsinya menghentikan demo, berjalan lokal, atau menyediakan anggaran hosting berbayar.
+
+Saran Pengembangan Lanjutan
+
+Melakukan upgrade Laravel ke versi yang masih didukung serta peninjauan keamanan dan privasi sebelum sistem dipakai pengguna nyata.
+
+Menambahkan penahan (guard) penghapusan event dan akun yang telah memiliki riwayat transaksi, disertai pengarsipan data, pencadangan yang konsisten, dan pengujian pemulihan secara berkala.
+
+Menguji beban sistem dan merencanakan migrasi ke basis data server serta anggaran hosting berbayar bila pengguna meningkat.
+
+
+
+LAMPIRAN A GLOSARIUM
+
+
+
+Tabel A.1 Glosarium
+
+
+
+Istilah
+
+Arti dalam EventKu
+
+Check-in
+
+Pencatatan kehadiran tiket oleh organizer pemilik acara, satu kali per tiket, dan tersimpan sebagai waktu_checkin.
+
+Organizer
+
+Pengguna berperan menerbitkan acara dan mengelola tiketnya.
+
+Pesanan (order)
+
+Permintaan 1-5 tiket atas satu tipe tiket, berstatus menunggu, lunas, atau batal.
+
+QRIS
+
+Metode bayar QR standar Indonesia, di sini lewat Midtrans sandbox.
+
+Rekonsiliasi
+
+Pengecekan ulang status pesanan ke API Midtrans oleh scheduler tiap 5 menit.
+
+Sandbox
+
+Lingkungan simulasi Midtrans yang tidak memindahkan uang sungguhan.
+
+Webhook
+
+Panggilan balik Midtrans ke sistem saat status bayar berubah.
+
+Reservasi kuota
+
+Penahanan stok selama pesanan menunggu. Pesanan yang belum dikirim ke gateway dan lewat batas dibatalkan sehingga kuotanya lepas, sedangkan yang sudah dikirim ditahan sampai status yang dikonfirmasi resmi penyedia pembayaran.
+
+Sertifikat
+
+Bukti kehadiran A4 landscape dengan QR verifikasi publik.
+
+Helpdesk
+
+Chat bantuan berbasis polling 8 detik antara pengguna dan admin.
+
+Settlement review
+
+Penanda pesanan batal yang menerima settlement lunas terlambat tanpa tiket otomatis.
+
+
+
+LAMPIRAN B MODEL ANALISIS
+
+Model visual tahap analisis disimpan sebagai dokumen terpisah: flowchart As-Is memotret model proses manual sebelum sistem ada, flowchart To-Be memetakan alur setelah EventKu dipakai, dan diagram use case merangkum aktor beserta use case-nya. Uraian naratif proses bisnis tersedia dalam dokumen ..\Proses_Bisnis_EventKu.pdf, yaitu pada folder induk dari folder dokumen ini. Diagram dan naratif dibaca bersama SRS ini, dan bila berbeda maka ketentuan Bab III SRS yang berlaku.
+
+LAMPIRAN C KEPUTUSAN YANG MEMERLUKAN KONFIRMASI
+
+Lampiran ini memuat pertanyaan bisnis yang ditemukan saat revisi dan belum diputuskan. Tidak ada butir di bawah yang menjadi kebutuhan; setiap butir menunggu keputusan pemilik produk dan/atau dosen pembimbing. Status semua butir: TBD (belum diputuskan).
+
+
+
+ID
+
+Masalah
+
+Pilihan
+
+Rekomendasi (USULAN BELUM DISETUJUI) dan Alasan
+
+Dampak (REQ/Data)
+
+TBD-01
+
+Pesanan 1-5 tiket mencetak nama akun pembeli pada seluruh sertifikat; tidak ada kolom nama per tiket.
+
+(A) Pertahankan nama pembeli untuk semua tiket. (B) Tambah nama peserta per tiket saat pemesanan. (C) Izinkan klaim tiket oleh akun peserta lain.
+
+Pilihan (B). Sertifikat seminar memerlukan nama peserta riil, bukan nama pemesan rombongan. Perubahan kolom/model apa pun bersifat kondisional dan belum diterapkan.
+
+tickets (kemungkinan kolom nama peserta, belum ada), REQ-F-12, REQ-F-24, REQ-F-25
+
+TBD-02
+
+Penghapusan acara saat ini cascade keras yang memusnahkan riwayat pesanan lunas dan tiket terbit.
+
+(A) Pertahankan cascade hard delete. (B) Tolak hapus acara bila sudah ada pesanan. (C) Soft delete / status pembatalan acara.
+
+Pilihan (B). Melindungi hak peserta yang sudah membayar dan menjaga riwayat transaksi keuangan.
+
+events (guard penghapusan), REQ-F-09, REQ-D-01
+
+TBD-03
+
+Tautan webinar ditulis pada kolom lokasi dan tampil bebas pada halaman publik sebelum peserta membeli tiket; tidak ada pencatatan kehadiran otomatis.
+
+(A) Pertahankan lokasi publik untuk fisik dan virtual. (B) Lindungi tautan webinar, hanya tampil untuk peserta berbayar, dengan kehadiran tetap dicatat manual. (C) Kirim tautan lewat email setelah lunas.
+
+Pilihan (B). Mencegah kebocoran akses webinar berbayar kepada publik non-peserta; kehadiran tetap dicatat manual.
+
+events (perlindungan tautan, tanpa kolom baru sebelum disetujui), REQ-F-01, REQ-F-09, REQ-F-19
+
+TBD-04
+
+Pengajuan organizer yang ditolak dapat langsung diajukan ulang tanpa batas dan tanpa riwayat penolakan.
+
+(A) Pertahankan pengajuan ulang setelah perbaikan tanpa batas. (B) Tambah kontrol peninjauan (mis. pencatatan keputusan) tanpa entitas audit baru. (C) Batasi jumlah pengajuan ulang.
+
+Pilihan (A)/(B). Menjaga kesempatan perbaikan tanpa menambah entitas audit baru; tidak ada masa tunggu rekaan.
+
+organizer_requests, REQ-F-07, REQ-F-08
+
+TBD-05
+
+Definisi resmi 'hadir': cukup status terpakai, atau wajib konjungtif status terpakai DAN waktu_checkin terisi.
+
+(A) Cukup status terpakai (sesuai kode saat ini). (B) Konjungtif status terpakai AND waktu_checkin tidak null.
+
+Pilihan (B). Memastikan ada rekaman waktu check-in yang sah untuk keperluan integritas audit kehadiran; definisi resmi belum ditetapkan.
+
+tickets.status, tickets.waktu_checkin, REQ-F-22, REQ-F-24
+
+TBD-06
+
+settlement_review timbul saat pembayaran gateway sukses pada pesanan batal, tetapi tidak ada alur penyelesaian di aplikasi.
+
+(A) Arahkan manual ke bantuan. (B) Tetapkan peran penanggung jawab dan pencatatan hasil penyelesaian oleh keputusan di masa depan. (C) Otomatisasi tertentu.
+
+Pilihan (B). Memberikan wewenang yang jelas untuk menyelesaikan sengketa; penyelesaian hanya mencatat hasil sandbox, tanpa refund otomatis/uang sungguhan dan tanpa force-approve yang menimbulkan oversell.
+
+orders.payment_status, REQ-F-18, REQ-F-32
+
+TBD-07
+
+Kebijakan retensi dan penghapusan data operasional, salinan cadangan, cache, arsip, dan salinan residu belum diatur.
+
+(A) Simpan tanpa pembersihan berkala. (B) Tetapkan periode retensi dan prosedur penghapusan berkala. (C) Anonimkan data pribadi setelah acara berakhir.
+
+Pilihan (B). Menertibkan retensi data pribadi; periode konkret belum ditetapkan dan tidak ada janji dasar hukum tertentu.
+
+Semua tabel transaksi, REQ-D-01..03, Bab IV 4.4
+
+TBD-08
+
+Prosedur pencadangan dan pemulihan basis data SQLite belum memiliki jadwal dan lokasi teruji.
+
+(A) Mengandalkan volume persisten hosting semata. (B) Backup berkala otomatis dengan retensi tertentu. (C) Backup manual berkala sebelum deploy.
+
+Pilihan (B)/(C). Menjamin ketersediaan data; frekuensi, lokasi, retensi, dan prosedur pemulihan belum ditetapkan dan tidak ada ketergantungan penyedia tertentu.
+
+Lingkungan Operasional, §4.4 dan §6.4
+
+TBD-09
+
+Parameter uji kualitas belum baku: perangkat, peramban, kondisi cache, beban, titik pengukuran, serta batas waktu dan kebijakan bantuan untuk uji 5 pengguna.
+
+(A) Pertahankan target tanpa metodologi baku. (B) Tetapkan parameter uji yang spesifik dan terukur.
+
+Pilihan (B). Menjadikan target terukur dan dapat direplikasi; nilai konkret (perangkat, cache, titik ukur, batas waktu, kebijakan bantuan) belum ditetapkan.
+
+REQ-Q-01…05; §6.1–6.3
+
+Butir TBD di atas bukan kebutuhan dan tidak boleh dijadikan dasar pengujian sebelum disahkan.
+

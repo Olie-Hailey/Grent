@@ -1,0 +1,214 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 1100" width="1440" height="1100" fill="none">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap');
+      text { font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    </style>
+    <filter id="shadow-modal" x="-10%" y="-5%" width="120%" height="115%" filterUnits="objectBoundingBox">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#0f172a" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+
+  <!-- Dark Backdrop Preview -->
+  <rect width="1440" height="1100" fill="#0F172A" fill-opacity="0.75"/>
+
+  <!-- ================= MODAL KIRI: FORMULIR PEMESANAN & PANDUAN CASH ================= -->
+  <g transform="translate(100, 80)" filter="url(#shadow-modal)">
+    <rect width="580" height="940" rx="20" fill="#FFFFFF"/>
+
+    <!-- Header Modal -->
+    <rect x="0" y="0" width="580" height="74" rx="20" fill="#F8FAFC"/>
+    <rect x="0" y="54" width="580" height="20" fill="#F8FAFC"/>
+    <line x1="0" y1="74" x2="580" y2="74" stroke="#E2E8F0" stroke-width="1"/>
+
+    <rect x="24" y="16" width="95" height="20" rx="4" fill="#D1FAE5"/>
+    <text x="71" y="30" fill="#065F46" font-size="10" font-weight="700" text-anchor="middle">LANGKAH 1 DARI 3</text>
+    <text x="24" y="56" fill="#0F172A" font-size="18" font-weight="800">Formulir Pemesanan Gadget</text>
+
+    <!-- Close button -->
+    <circle cx="546" cy="37" r="14" fill="#FFFFFF" stroke="#E2E8F0"/>
+    <text x="546" y="42" fill="#64748B" font-size="16" font-weight="600" text-anchor="middle">&times;</text>
+
+    <!-- Gadget Info Card -->
+    <g transform="translate(24, 94)">
+      <rect width="532" height="70" rx="12" fill="#F1F5F9" stroke="#E2E8F0"/>
+      <text x="16" y="24" fill="#64748B" font-size="10" font-weight="700">UNIT PILIHAN:</text>
+      <text x="16" y="46" fill="#0F172A" font-size="15" font-weight="800">MacBook Pro M3 (2024)</text>
+      <text x="16" y="60" fill="#64748B" font-size="11">512GB SSD · 16GB RAM · Space Gray</text>
+
+      <text x="516" y="32" fill="#64748B" font-size="10" text-anchor="end">TARIF SEWA:</text>
+      <text x="516" y="52" fill="#059669" font-size="16" font-weight="800" text-anchor="end">Rp 220.000 <tspan font-size="10" fill="#64748B">/hari</tspan></text>
+    </g>
+
+    <!-- Tanggal Sewa Inputs -->
+    <g transform="translate(24, 184)">
+      <text x="0" y="0" fill="#334155" font-size="12" font-weight="600">Tanggal Mulai Sewa</text>
+      <rect x="0" y="8" width="256" height="42" rx="8" fill="#FFFFFF" stroke="#CBD5E1"/>
+      <text x="14" y="34" fill="#0F172A" font-size="13" font-weight="600">27 / 10 / 2026</text>
+
+      <text x="276" y="0" fill="#334155" font-size="12" font-weight="600">Tanggal Selesai Sewa</text>
+      <rect x="276" y="8" width="256" height="42" rx="8" fill="#FFFFFF" stroke="#CBD5E1"/>
+      <text x="290" y="34" fill="#0F172A" font-size="13" font-weight="600">30 / 10 / 2026</text>
+    </g>
+
+    <!-- Metode Pembayaran: Radio Pills -->
+    <g transform="translate(24, 260)">
+      <text x="0" y="0" fill="#334155" font-size="12" font-weight="700">Pilihan Metode Pembayaran:</text>
+
+      <!-- Option 1: QRIS -->
+      <g transform="translate(0, 10)">
+        <rect width="256" height="74" rx="12" fill="#FFFFFF" stroke="#E2E8F0"/>
+        <circle cx="20" cy="24" r="7" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+        <text x="36" y="27" fill="#0F172A" font-size="13" font-weight="700">QRIS (Otomatis)</text>
+        <text x="16" y="48" fill="#64748B" font-size="10">Kedaluwarsa 24 jam realtime.</text>
+        <text x="16" y="60" fill="#64748B" font-size="10">Invoice instan untuk ambil unit.</text>
+      </g>
+
+      <!-- Option 2: Cash (Active Selected) -->
+      <g transform="translate(276, 10)">
+        <rect width="256" height="74" rx="12" fill="#ECFDF5" stroke="#059669" stroke-width="2"/>
+        <circle cx="20" cy="24" r="7" fill="#059669"/>
+        <circle cx="20" cy="24" r="3" fill="#FFFFFF"/>
+        <text x="36" y="27" fill="#065F46" font-size="13" font-weight="800">Cash (Tunai di Toko)</text>
+        <text x="16" y="48" fill="#047857" font-size="10">Bayar tunai kepada petugas</text>
+        <text x="16" y="60" fill="#047857" font-size="10">saat serah terima di toko.</text>
+      </g>
+    </g>
+
+    <!-- Panduan Pembayaran Cash / Guide Book (Sesuai Permintaan User) -->
+    <g transform="translate(24, 370)">
+      <rect width="532" height="230" rx="14" fill="#FFFBEB" stroke="#FDE68A" stroke-width="1.5"/>
+      <text x="18" y="28" fill="#92400E" font-size="12" font-weight="800">Panduan Pembayaran Cash (Tunai di Toko):</text>
+
+      <text x="18" y="56" fill="#78350F" font-size="11" font-weight="700">1. Pelanggan Melakukan Pemesanan</text>
+      <text x="34" y="74" fill="#92400E" font-size="11">Pelanggan memilih gadget, tanggal, durasi, dan metode cash.</text>
+
+      <text x="18" y="102" fill="#78350F" font-size="11" font-weight="700">2. Pesanan Menunggu Konfirmasi</text>
+      <text x="34" y="120" fill="#92400E" font-size="11">Sistem menyimpan pesanan: Menunggu Pembayaran / Konfirmasi Admin.</text>
+
+      <text x="18" y="148" fill="#78350F" font-size="11" font-weight="700">3. Pelanggan Membayar Langsung di Toko</text>
+      <text x="34" y="166" fill="#92400E" font-size="11">Saat mengambil gadget di cabang rental, pelanggan membayar tunai ke petugas.</text>
+
+      <text x="18" y="194" fill="#78350F" font-size="11" font-weight="700">4. Admin Mengonfirmasi Pembayaran di Sistem</text>
+      <text x="34" y="212" fill="#92400E" font-size="11">Admin mengonfirmasi di sistem -&gt; Status menjadi Lunas &amp; gadget diserahkan.</text>
+    </g>
+
+    <!-- Total Price Breakdown -->
+    <g transform="translate(24, 620)">
+      <rect width="532" height="84" rx="14" fill="#0F172A"/>
+      <text x="20" y="32" fill="#94A3B8" font-size="11">Durasi Sewa: <tspan fill="#FFFFFF" font-weight="700">3 Hari Sewa</tspan></text>
+      <text x="20" y="56" fill="#64748B" font-size="11">Perhitungan: Tarif Harian (Rp 220.000) &times; 3 Hari</text>
+
+      <text x="512" y="32" fill="#94A3B8" font-size="11" text-anchor="end">TOTAL TAGIHAN:</text>
+      <text x="512" y="62" fill="#34D399" font-size="24" font-weight="900" text-anchor="end">Rp 660.000</text>
+    </g>
+
+    <!-- Action Buttons -->
+    <g transform="translate(24, 724)">
+      <rect x="0" y="0" width="120" height="44" rx="10" fill="#FFFFFF" stroke="#CBD5E1"/>
+      <text x="60" y="27" fill="#64748B" font-size="13" font-weight="600" text-anchor="middle">Batal</text>
+
+      <rect x="135" y="0" width="397" height="44" rx="10" fill="#059669"/>
+      <text x="333" y="27" fill="#FFFFFF" font-size="13" font-weight="700" text-anchor="middle">Lanjut ke Syarat &amp; Kebijakan Denda &rarr;</text>
+    </g>
+  </g>
+
+  <!-- ================= MODAL KANAN: SYARAT, KETENTUAN & DENDA (S&K) ================= -->
+  <g transform="translate(740, 80)" filter="url(#shadow-modal)">
+    <rect width="600" height="940" rx="20" fill="#FFFFFF"/>
+
+    <!-- Header Modal S&K -->
+    <rect x="0" y="0" width="600" height="74" rx="20" fill="#F8FAFC"/>
+    <rect x="0" y="54" width="600" height="20" fill="#F8FAFC"/>
+    <line x1="0" y1="74" x2="600" y2="74" stroke="#E2E8F0" stroke-width="1"/>
+
+    <rect x="24" y="16" width="160" height="20" rx="4" fill="#D1FAE5"/>
+    <text x="104" y="30" fill="#065F46" font-size="10" font-weight="700" text-anchor="middle">PERSETUJUAN WAJIB SEWA</text>
+    <text x="24" y="56" fill="#0F172A" font-size="18" font-weight="800">Syarat, Ketentuan &amp; Kebijakan Denda</text>
+
+    <!-- Close button -->
+    <circle cx="566" cy="37" r="14" fill="#FFFFFF" stroke="#E2E8F0"/>
+    <text x="566" y="42" fill="#64748B" font-size="16" font-weight="600" text-anchor="middle">&times;</text>
+
+    <!-- Warning Alert Box -->
+    <g transform="translate(24, 94)">
+      <rect width="552" height="60" rx="10" fill="#FFFBEB" stroke="#FDE68A"/>
+      <text x="16" y="26" font-size="15">⚠️</text>
+      <text x="38" y="26" fill="#92400E" font-size="12" font-weight="700">Pemberitahuan Kepatuhan Penyewa:</text>
+      <text x="16" y="46" fill="#B45309" font-size="11">Pelanggan wajib menjaga integritas unit dan menyetujui sanksi denda jika terjadi pelanggaran.</text>
+    </g>
+
+    <!-- Section 1: Ketentuan Peminjaman -->
+    <g transform="translate(24, 174)">
+      <text x="0" y="0" fill="#0F172A" font-size="14" font-weight="800">📌 1. Ketentuan Peminjaman Gadget</text>
+      <text x="0" y="22" fill="#475569" font-size="11">• Penyewa wajib memiliki akun Google terdaftar dan melengkapi foto e-KTP.</text>
+      <text x="0" y="40" fill="#475569" font-size="11">• Unit hanya untuk penggunaan wajar (tugas kuliah, riset, kerja komersial resmi).</text>
+      <text x="0" y="58" fill="#475569" font-size="11">• Dilarang membongkar baut mesin, modifikasi firmware (root/jailbreak), atau tukar suku cadang.</text>
+      <text x="0" y="76" fill="#475569" font-size="11">• Dilarang menyewakan kembali (sublease) kepada pihak lain tanpa izin tertulis Grent.</text>
+    </g>
+
+    <!-- Section 2: Kebijakan Denda Pelanggaran (Tabel) -->
+    <g transform="translate(24, 276)">
+      <text x="0" y="0" fill="#0F172A" font-size="14" font-weight="800">⚖️ 2. Kebijakan Denda Pelanggaran</text>
+
+      <!-- Table Header -->
+      <rect x="0" y="12" width="552" height="30" rx="6" fill="#F1F5F9"/>
+      <text x="16" y="32" fill="#475569" font-size="11" font-weight="700">Jenis Pelanggaran</text>
+      <text x="536" y="32" fill="#475569" font-size="11" font-weight="700" text-anchor="end">Sanksi / Tarif Denda</text>
+
+      <!-- Row 1 -->
+      <line x1="0" y1="74" x2="552" y2="74" stroke="#F1F5F9"/>
+      <text x="16" y="64" fill="#0F172A" font-size="11">Keterlambatan Pengembalian (Late Return)</text>
+      <text x="536" y="64" fill="#D97706" font-size="11" font-weight="700" text-anchor="end">Rp 50.000 / hari keterlambatan</text>
+
+      <!-- Row 2 -->
+      <line x1="0" y1="108" x2="552" y2="108" stroke="#F1F5F9"/>
+      <text x="16" y="98" fill="#0F172A" font-size="11">Baret Fisik / Goresan Kasar Akibat Kelalaian</text>
+      <text x="536" y="98" fill="#0F172A" font-size="11" font-weight="700" text-anchor="end">Rp 150.000 - Rp 300.000</text>
+
+      <!-- Row 3 -->
+      <line x1="0" y1="142" x2="552" y2="142" stroke="#F1F5F9"/>
+      <text x="16" y="132" fill="#0F172A" font-size="11">Kerusakan Layar Pecah / Kerusakan Komponen</text>
+      <text x="536" y="132" fill="#E11D48" font-size="11" font-weight="700" text-anchor="end">Biaya Resmi Service Center</text>
+
+      <!-- Row 4 -->
+      <line x1="0" y1="176" x2="552" y2="176" stroke="#F1F5F9"/>
+      <text x="16" y="166" fill="#0F172A" font-size="11">Kehilangan Charger / Kabel Bawaan Asli</text>
+      <text x="536" y="166" fill="#0F172A" font-size="11" font-weight="700" text-anchor="end">Rp 250.000 - Rp 500.000 / item</text>
+
+      <!-- Row 5 -->
+      <line x1="0" y1="210" x2="552" y2="210" stroke="#F1F5F9"/>
+      <text x="16" y="200" fill="#0F172A" font-size="11">Kehilangan Unit Total</text>
+      <text x="536" y="200" fill="#E11D48" font-size="11" font-weight="700" text-anchor="end">Ganti Unit Setara / 100% Harga Pasar</text>
+    </g>
+
+    <!-- KYC Profil Preview Box -->
+    <g transform="translate(24, 510)">
+      <rect width="552" height="110" rx="12" fill="#F8FAFC" stroke="#E2E8F0"/>
+      <text x="16" y="24" fill="#0F172A" font-size="12" font-weight="700">Verifikasi Profil e-KTP Pemohon:</text>
+      <rect x="420" y="12" width="116" height="20" rx="10" fill="#D1FAE5"/>
+      <text x="478" y="26" fill="#065F46" font-size="10" font-weight="700" text-anchor="middle">e-KTP Terverifikasi</text>
+
+      <text x="16" y="52" fill="#64748B" font-size="11">Nama Lengkap: <tspan fill="#0F172A" font-weight="600">Budi Santoso</tspan></text>
+      <text x="16" y="70" fill="#64748B" font-size="11">NIK: <tspan fill="#0F172A" font-weight="600">3276012304950001</tspan> · No. WhatsApp: <tspan fill="#0F172A" font-weight="600">0812-9876-5432</tspan></text>
+      <text x="16" y="88" fill="#64748B" font-size="11">Alamat: <tspan fill="#0F172A" font-weight="600">Jl. Margonda Raya No. 12, Kota Depok</tspan></text>
+    </g>
+
+    <!-- Persetujuan Checkbox (Checked) -->
+    <g transform="translate(24, 646)">
+      <rect width="20" height="20" rx="5" fill="#059669"/>
+      <path d="M5 10L8 13L15 6" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+      <text x="32" y="14" fill="#0F172A" font-size="11" font-weight="700">Saya telah membaca, memahami, dan menyetujui seluruh Syarat, Ketentuan,</text>
+      <text x="32" y="30" fill="#0F172A" font-size="11" font-weight="700">serta Kebijakan Denda peminjaman yang berlaku di Grent Gadget Rental.</text>
+    </g>
+
+    <!-- Tombol Konfirmasi S&K -->
+    <g transform="translate(24, 724)">
+      <rect x="0" y="0" width="140" height="44" rx="10" fill="#FFFFFF" stroke="#CBD5E1"/>
+      <text x="70" y="27" fill="#64748B" font-size="13" font-weight="600" text-anchor="middle">Periksa Ulang</text>
+
+      <rect x="155" y="0" width="397" height="44" rx="10" fill="#059669"/>
+      <text x="353" y="27" fill="#FFFFFF" font-size="13" font-weight="700" text-anchor="middle">Saya Setuju &amp; Terbitkan Invoice &rarr;</text>
+    </g>
+  </g>
+</svg>

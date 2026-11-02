@@ -1,0 +1,223 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 1150" width="1440" height="1150" fill="none">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap');
+      text { font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    </style>
+    <filter id="shadow-sm" x="-5%" y="-5%" width="110%" height="115%" filterUnits="objectBoundingBox">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#0f172a" flood-opacity="0.06"/>
+    </filter>
+    <filter id="shadow-md" x="-10%" y="-5%" width="120%" height="120%" filterUnits="objectBoundingBox">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.08"/>
+    </filter>
+    <linearGradient id="hero-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F1F5F9"/>
+      <stop offset="100%" stop-color="#F8FAFC"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="1440" height="1150" fill="#F8FAFC"/>
+
+  <!-- ================= NAVBAR ================= -->
+  <rect width="1440" height="76" fill="#FFFFFF" filter="url(#shadow-sm)"/>
+  <line x1="0" y1="76" x2="1440" y2="76" stroke="#E2E8F0" stroke-width="1"/>
+
+  <!-- Logo Grent -->
+  <g transform="translate(140, 18)">
+    <rect width="40" height="40" rx="12" fill="#0F172A"/>
+    <text x="20" y="27" fill="#34D399" font-size="20" font-weight="900" text-anchor="middle">G</text>
+    <text x="50" y="28" fill="#0F172A" font-size="22" font-weight="900" letter-spacing="-0.5">Grent</text>
+    <rect x="116" y="10" width="54" height="22" rx="6" fill="#D1FAE5"/>
+    <text x="143" y="25" fill="#065F46" font-size="11" font-weight="700" text-anchor="middle">Gadget</text>
+  </g>
+
+  <!-- Nav Links -->
+  <g transform="translate(520, 44)" font-size="14" font-weight="600" fill="#475569">
+    <text x="0" y="0" fill="#059669">Katalog Gadget</text>
+    <text x="130" y="0">Solusi Fleksibel</text>
+    <text x="260" y="0">Ketentuan &amp; Denda</text>
+    <text x="410" y="0">Data Diri (KTP)</text>
+  </g>
+
+  <!-- Customer Profile Badge -->
+  <g transform="translate(1120, 18)">
+    <rect width="180" height="40" rx="20" fill="#F1F5F9" stroke="#E2E8F0"/>
+    <circle cx="20" cy="20" r="14" fill="#059669"/>
+    <text x="20" y="24" fill="#FFFFFF" font-size="12" font-weight="800" text-anchor="middle">B</text>
+    <text x="42" y="18" fill="#0F172A" font-size="12" font-weight="700">Budi Santoso</text>
+    <text x="42" y="30" fill="#059669" font-size="10" font-weight="600">KYC Terverifikasi</text>
+  </g>
+
+  <!-- ================= HERO SECTION ================= -->
+  <rect x="0" y="77" width="1440" height="280" fill="url(#hero-grad)"/>
+  <line x1="0" y1="357" x2="1440" y2="357" stroke="#E2E8F0" stroke-width="1"/>
+
+  <!-- Badge Pill -->
+  <g transform="translate(720, 125)">
+    <rect x="-140" y="0" width="280" height="26" rx="13" fill="#D1FAE5"/>
+    <text x="0" y="17" fill="#065F46" font-size="11" font-weight="700" text-anchor="middle">Rental Laptop, Smartphone &amp; Tablet Terlengkap</text>
+  </g>
+
+  <!-- Hero Headings -->
+  <text x="720" y="190" fill="#0F172A" font-size="34" font-weight="800" text-anchor="middle" letter-spacing="-0.8">
+    Sewa Gadget Resmi, Praktis, &amp; Siap Pakai Untuk Segala Kebutuhan
+  </text>
+  <text x="720" y="224" fill="#64748B" font-size="15" font-weight="400" text-anchor="middle">
+    Dukung produktivitas tugas kuliah, pekerjaan kantor, riset, atau event penting tanpa perlu beli baru. Tarif harian, mingguan, dan bulanan terjangkau.
+  </text>
+
+  <!-- Hero Buttons -->
+  <g transform="translate(720, 260)">
+    <rect x="-170" y="0" width="160" height="42" rx="12" fill="#059669" filter="url(#shadow-sm)"/>
+    <text x="-90" y="26" fill="#FFFFFF" font-size="13" font-weight="700" text-anchor="middle">Lihat Katalog Gadget</text>
+
+    <rect x="10" y="0" width="170" height="42" rx="12" fill="#FFFFFF" stroke="#CBD5E1"/>
+    <text x="95" y="26" fill="#334155" font-size="13" font-weight="600" text-anchor="middle">Ketentuan &amp; Denda Sewa</text>
+  </g>
+
+  <!-- ================= SOLUSI FLEKSIBEL SECTION ================= -->
+  <g transform="translate(140, 390)">
+    <text x="580" y="20" fill="#0F172A" font-size="20" font-weight="800" text-anchor="middle">Solusi Fleksibel Dari Grent</text>
+    <text x="580" y="42" fill="#64748B" font-size="13" font-weight="400" text-anchor="middle">Kemudahan penyewaan unit dirancang khusus untuk kenyamanan pelanggan</text>
+
+    <!-- Card 1 -->
+    <g transform="translate(0, 65)">
+      <rect width="365" height="130" rx="16" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow-sm)"/>
+      <text x="24" y="42" font-size="22">📅</text>
+      <text x="24" y="74" fill="#0F172A" font-size="14" font-weight="700">Durasi Sewa Sesuai Kebutuhan</text>
+      <text x="24" y="96" fill="#64748B" font-size="11" font-weight="400">Pilihan paket sewa harian, mingguan (diskon 15%),</text>
+      <text x="24" y="112" fill="#64748B" font-size="11" font-weight="400">atau bulanan (diskon 35%) untuk masa pakai lama.</text>
+    </g>
+
+    <!-- Card 2 -->
+    <g transform="translate(395, 65)">
+      <rect width="365" height="130" rx="16" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow-sm)"/>
+      <text x="24" y="42" font-size="22">⚡</text>
+      <text x="24" y="74" fill="#0F172A" font-size="14" font-weight="700">Serah Terima &amp; Ambil Cepat</text>
+      <text x="24" y="96" fill="#64748B" font-size="11" font-weight="400">Unit siap diambil langsung di toko atau diantar ke</text>
+      <text x="24" y="112" fill="#64748B" font-size="11" font-weight="400">lokasi dengan invoice digital &amp; e-KTP terverifikasi.</text>
+    </g>
+
+    <!-- Card 3 -->
+    <g transform="translate(790, 65)">
+      <rect width="370" height="130" rx="16" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow-sm)"/>
+      <text x="24" y="42" font-size="22">🛡️</text>
+      <text x="24" y="74" fill="#0F172A" font-size="14" font-weight="700">Jaminan Unit Bersih &amp; Bergaransi</text>
+      <text x="24" y="96" fill="#64748B" font-size="11" font-weight="400">Quality Control ketat, baterai sehat, OS bersih,</text>
+      <text x="24" y="112" fill="#64748B" font-size="11" font-weight="400">siap pakai, serta proteksi garansi tukar unit.</text>
+    </g>
+  </g>
+
+  <!-- ================= KATALOG SECTION ================= -->
+  <g transform="translate(140, 630)">
+    <!-- Header & Single Listbox Filter -->
+    <text x="0" y="24" fill="#0F172A" font-size="22" font-weight="800">Katalog Gadget Siap Sewa</text>
+    <text x="0" y="44" fill="#64748B" font-size="12">Pilih unit gadget untuk melihat spesifikasi dan kalkulasi biaya sewa</text>
+
+    <!-- Filter Listbox -->
+    <g transform="translate(930, 8)">
+      <text x="-10" y="22" fill="#475569" font-size="12" font-weight="600" text-anchor="end">Filter Kategori:</text>
+      <rect width="230" height="36" rx="10" fill="#FFFFFF" stroke="#CBD5E1"/>
+      <text x="14" y="23" fill="#0F172A" font-size="12" font-weight="600">Semua Gadget (All)</text>
+      <path d="M205 15L210 20L215 15" stroke="#64748B" stroke-width="2" stroke-linecap="round"/>
+    </g>
+
+    <!-- 4 GADGET CARDS -->
+    <!-- Gadget 1: MacBook Pro M3 -->
+    <g transform="translate(0, 70)" filter="url(#shadow-sm)">
+      <rect width="270" height="380" rx="16" fill="#FFFFFF" stroke="#E2E8F0"/>
+      <rect width="270" height="170" rx="16" fill="#F1F5F9"/>
+      <rect x="14" y="14" width="55" height="20" rx="6" fill="#FFFFFF"/>
+      <text x="41" y="28" fill="#475569" font-size="10" font-weight="700" text-anchor="middle">LAPTOP</text>
+      <rect x="180" y="14" width="76" height="20" rx="10" fill="#D1FAE5"/>
+      <text x="218" y="28" fill="#065F46" font-size="10" font-weight="700" text-anchor="middle">Stok: 3 Unit</text>
+
+      <circle cx="135" cy="95" r="40" fill="#E2E8F0"/>
+      <text x="135" y="100" fill="#64748B" font-size="12" font-weight="700" text-anchor="middle">MacBook</text>
+
+      <text x="16" y="205" fill="#0F172A" font-size="15" font-weight="800">MacBook Pro M3 (2024)</text>
+      <text x="16" y="224" fill="#64748B" font-size="11">512GB SSD · 16GB · Space Gray</text>
+
+      <line x1="16" y1="245" x2="254" y2="245" stroke="#F1F5F9" stroke-width="1"/>
+      <text x="16" y="268" fill="#94A3B8" font-size="11">Tarif Sewa:</text>
+      <text x="16" y="292" fill="#0F172A" font-size="18" font-weight="900">Rp 220.000</text>
+      <text x="115" y="292" fill="#64748B" font-size="11">/hari</text>
+
+      <rect x="16" y="318" width="238" height="40" rx="10" fill="#059669"/>
+      <text x="135" y="343" fill="#FFFFFF" font-size="12" font-weight="700" text-anchor="middle">Sewa Sekarang</text>
+    </g>
+
+    <!-- Gadget 2: iPhone 15 Pro Max -->
+    <g transform="translate(295, 70)" filter="url(#shadow-sm)">
+      <rect width="270" height="380" rx="16" fill="#FFFFFF" stroke="#E2E8F0"/>
+      <rect width="270" height="170" rx="16" fill="#F1F5F9"/>
+      <rect x="14" y="14" width="85" height="20" rx="6" fill="#FFFFFF"/>
+      <text x="56" y="28" fill="#475569" font-size="10" font-weight="700" text-anchor="middle">SMARTPHONE</text>
+      <rect x="180" y="14" width="76" height="20" rx="10" fill="#D1FAE5"/>
+      <text x="218" y="28" fill="#065F46" font-size="10" font-weight="700" text-anchor="middle">Stok: 5 Unit</text>
+
+      <circle cx="135" cy="95" r="40" fill="#E2E8F0"/>
+      <text x="135" y="100" fill="#64748B" font-size="12" font-weight="700" text-anchor="middle">iPhone</text>
+
+      <text x="16" y="205" fill="#0F172A" font-size="15" font-weight="800">iPhone 15 Pro Max</text>
+      <text x="16" y="224" fill="#64748B" font-size="11">256GB · Natural Titanium</text>
+
+      <line x1="16" y1="245" x2="254" y2="245" stroke="#F1F5F9" stroke-width="1"/>
+      <text x="16" y="268" fill="#94A3B8" font-size="11">Tarif Sewa:</text>
+      <text x="16" y="292" fill="#0F172A" font-size="18" font-weight="900">Rp 190.000</text>
+      <text x="115" y="292" fill="#64748B" font-size="11">/hari</text>
+
+      <rect x="16" y="318" width="238" height="40" rx="10" fill="#059669"/>
+      <text x="135" y="343" fill="#FFFFFF" font-size="12" font-weight="700" text-anchor="middle">Sewa Sekarang</text>
+    </g>
+
+    <!-- Gadget 3: iPad Pro 11" M2 -->
+    <g transform="translate(590, 70)" filter="url(#shadow-sm)">
+      <rect width="270" height="380" rx="16" fill="#FFFFFF" stroke="#E2E8F0"/>
+      <rect width="270" height="170" rx="16" fill="#F1F5F9"/>
+      <rect x="14" y="14" width="55" height="20" rx="6" fill="#FFFFFF"/>
+      <text x="41" y="28" fill="#475569" font-size="10" font-weight="700" text-anchor="middle">TABLET</text>
+      <rect x="180" y="14" width="76" height="20" rx="10" fill="#D1FAE5"/>
+      <text x="218" y="28" fill="#065F46" font-size="10" font-weight="700" text-anchor="middle">Stok: 2 Unit</text>
+
+      <circle cx="135" cy="95" r="40" fill="#E2E8F0"/>
+      <text x="135" y="100" fill="#64748B" font-size="12" font-weight="700" text-anchor="middle">iPad Pro</text>
+
+      <text x="16" y="205" fill="#0F172A" font-size="15" font-weight="800">iPad Pro 11" M2 Chip</text>
+      <text x="16" y="224" fill="#64748B" font-size="11">128GB Wi-Fi · Space Gray</text>
+
+      <line x1="16" y1="245" x2="254" y2="245" stroke="#F1F5F9" stroke-width="1"/>
+      <text x="16" y="268" fill="#94A3B8" font-size="11">Tarif Sewa:</text>
+      <text x="16" y="292" fill="#0F172A" font-size="18" font-weight="900">Rp 135.000</text>
+      <text x="115" y="292" fill="#64748B" font-size="11">/hari</text>
+
+      <rect x="16" y="318" width="238" height="40" rx="10" fill="#059669"/>
+      <text x="135" y="343" fill="#FFFFFF" font-size="12" font-weight="700" text-anchor="middle">Sewa Sekarang</text>
+    </g>
+
+    <!-- Gadget 4: ROG Zephyrus G14 -->
+    <g transform="translate(885, 70)" filter="url(#shadow-sm)">
+      <rect width="275" height="380" rx="16" fill="#FFFFFF" stroke="#E2E8F0"/>
+      <rect width="275" height="170" rx="16" fill="#F1F5F9"/>
+      <rect x="14" y="14" width="55" height="20" rx="6" fill="#FFFFFF"/>
+      <text x="41" y="28" fill="#475569" font-size="10" font-weight="700" text-anchor="middle">LAPTOP</text>
+      <rect x="185" y="14" width="76" height="20" rx="10" fill="#D1FAE5"/>
+      <text x="223" y="28" fill="#065F46" font-size="10" font-weight="700" text-anchor="middle">Stok: 2 Unit</text>
+
+      <circle cx="137" cy="95" r="40" fill="#E2E8F0"/>
+      <text x="137" y="100" fill="#64748B" font-size="12" font-weight="700" text-anchor="middle">ASUS ROG</text>
+
+      <text x="16" y="205" fill="#0F172A" font-size="15" font-weight="800">ASUS ROG Zephyrus G14</text>
+      <text x="16" y="224" fill="#64748B" font-size="11">Ryzen 9 · RTX 4060 · 1TB</text>
+
+      <line x1="16" y1="245" x2="259" y2="245" stroke="#F1F5F9" stroke-width="1"/>
+      <text x="16" y="268" fill="#94A3B8" font-size="11">Tarif Sewa:</text>
+      <text x="16" y="292" fill="#0F172A" font-size="18" font-weight="900">Rp 240.000</text>
+      <text x="115" y="292" fill="#64748B" font-size="11">/hari</text>
+
+      <rect x="16" y="318" width="243" height="40" rx="10" fill="#059669"/>
+      <text x="137" y="343" fill="#FFFFFF" font-size="12" font-weight="700" text-anchor="middle">Sewa Sekarang</text>
+    </g>
+  </g>
+</svg>

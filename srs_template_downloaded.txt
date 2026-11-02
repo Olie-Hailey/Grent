@@ -1,0 +1,283 @@
+﻿Spesifikasi Kebutuhan Perangkat Lunak
+untuk
+<Nama Proyek>
+Versi 1.0 disetujui
+Disusun oleh <nama penyusun>
+<nama organisasi>
+<tanggal dibuat>
+Contoh: SIBEASISWA – Sistem Informasi Pengajuan Beasiswa Mahasiswa
+Versi 1.0 disetujui · Disusun oleh Tim Pengembang SIBEASISWA · Bagian Kemahasiswaan · 12 Oktober 2026
+Cara memakai template ini: teks miring di dalam tanda < > adalah petunjuk pengisian, sedangkan teks abu-abu adalah contoh (memakai contoh proyek SIBEASISWA). Ganti keduanya dengan isi proyek Anda, lalu hapus petunjuk dan contohnya.
+Daftar Isi
+Daftar Isi        ii
+Riwayat Revisi        ii
+1.        Pendahuluan        2
+1.1        Tujuan        2
+1.2        Konvensi Dokumen        2
+1.3        Ruang Lingkup Proyek        2
+1.4        Referensi        2
+2.        Gambaran Umum        2
+2.1        Perspektif Produk        2
+2.2        Kelompok Pengguna dan Karakteristiknya        2
+2.3        Lingkungan Operasional        2
+2.4        Batasan Desain dan Implementasi        2
+2.5        Asumsi dan Ketergantungan        2
+3.        Fitur Sistem        2
+3.1        Fitur Sistem 1        2
+3.2        Fitur Sistem 2 (dan seterusnya)        2
+4.        Kebutuhan Data        2
+4.1        Model Data Logis        2
+4.2        Kamus Data        2
+4.3        Laporan        2
+4.4        Perolehan, Integritas, Penyimpanan, dan Penghapusan Data        2
+5.        Kebutuhan Antarmuka Eksternal        2
+5.1        Antarmuka Pengguna        2
+5.2        Antarmuka Perangkat Lunak        2
+5.3        Antarmuka Perangkat Keras        2
+5.4        Antarmuka Komunikasi        2
+6.        Atribut Kualitas        2
+6.1        Kemudahan Penggunaan (Usability)        2
+6.2        Kinerja (Performance)        2
+6.3        Keamanan (Security)        2
+6.4        Keselamatan (Safety)        2
+6.5        [Atribut lain yang relevan]        2
+7.        Kebutuhan Internasionalisasi dan Lokalisasi        2
+8.        Kebutuhan Lainnya        2
+Lampiran A: Glosarium        2
+Lampiran B: Model Analisis        2
+
+
+
+
+Riwayat Revisi
+Nama
+	Tanggal
+	Alasan Perubahan
+	Versi
+	Tim Pengembang
+	12-10-2026
+	Draf awal dokumen
+	0.1
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+1. Pendahuluan
+<Bagian ini memberi gambaran singkat agar pembaca paham isi dokumen SRS ini dan cara membacanya.>
+Contoh: Dokumen ini menjelaskan kebutuhan sistem SIBEASISWA, yaitu aplikasi untuk mengelola pengajuan beasiswa mahasiswa secara online. Bab 1 berisi pengantar, Bab 2 gambaran umum sistem, Bab 3 daftar fitur, lalu bab-bab berikutnya membahas data, antarmuka, dan kualitas sistem.
+   1. Tujuan 
+<Sebutkan nama produk/aplikasi yang kebutuhannya dibahas di dokumen ini, termasuk nomor versi atau rilisnya. Jelaskan juga siapa saja yang akan membaca dokumen ini, misalnya programmer, manajer proyek, tim pemasaran, pengguna, penguji (tester), dan penulis dokumentasi.>
+Contoh: Dokumen ini menjelaskan kebutuhan perangkat lunak SIBEASISWA versi 1.0. Pembaca dokumen ini adalah:
+1. Tim programmer – sebagai acuan saat membangun sistem.
+2. Manajer proyek – untuk memantau ruang lingkup dan jadwal.
+3. Staf Bagian Kemahasiswaan – untuk memastikan kebutuhan mereka sudah tercakup.
+4. Tim penguji – sebagai dasar menyusun skenario pengujian.
+   2. Konvensi Dokumen
+<Jelaskan aturan penulisan yang dipakai di dokumen ini, misalnya arti huruf tebal, huruf miring, warna, atau tanda khusus. Jika setiap kebutuhan diberi kode unik, jelaskan format kodenya di sini supaya orang lain bisa menambah kebutuhan baru dengan format yang sama.>
+Contoh: Setiap kebutuhan fungsional diberi kode FR-[nomor urut], misalnya FR-01. Kebutuhan non-fungsional diberi kode NFR-[nomor urut], misalnya NFR-01. Istilah asing ditulis miring. Prioritas setiap fitur ditulis Tinggi, Sedang, atau Rendah.
+   3. Ruang Lingkup Proyek
+<Jelaskan secara singkat perangkat lunak apa yang akan dibuat dan apa gunanya. Kaitkan dengan tujuan pengguna atau tujuan bisnis organisasi. Jika sudah ada dokumen visi dan ruang lingkup tersendiri, cukup rujuk dokumen itu, jangan salin ulang isinya. Jika SRS ini hanya untuk satu tahap rilis dari produk yang terus dikembangkan, tuliskan ruang lingkup khusus untuk rilis tersebut. Anda juga bisa merangkum fitur atau fungsi utama yang ada di rilis ini.>
+Contoh: SIBEASISWA adalah aplikasi web yang menggantikan proses pengajuan beasiswa yang selama ini masih memakai berkas kertas. Tujuannya: mempercepat proses seleksi, mencegah berkas hilang, dan memudahkan pembuatan laporan. Rilis 1.0 mencakup:
+1. Login mahasiswa dan admin.
+2. Pengisian formulir dan unggah berkas persyaratan.
+3. Verifikasi berkas oleh admin.
+4. Pengumuman hasil seleksi.
+5. Laporan rekap penerima beasiswa.
+   4. Referensi
+<Tuliskan dokumen atau sumber lain yang dirujuk oleh SRS ini, sertakan tautannya jika lokasinya tetap. Misalnya: panduan gaya tampilan, kontrak, standar, spesifikasi sistem, spesifikasi antarmuka, atau SRS dari produk lain yang terkait. Cantumkan informasi yang cukup agar pembaca bisa menemukannya: judul, penulis, nomor versi, tanggal, dan lokasi penyimpanan atau URL.>
+Contoh:
+1. Peraturan Rektor tentang Pemberian Beasiswa Mahasiswa, No. XX Tahun 2026, Biro Kemahasiswaan.
+2. Dokumen Visi dan Ruang Lingkup SIBEASISWA, versi 1.0, Tim Pengembang, 1 September 2026, folder proyek bersama.
+3. Panduan Tampilan Aplikasi Kampus (UI Style Guide), versi 2.1, Unit TI, https://contoh.ac.id/panduan-ui.
+2. Gambaran Umum
+<Bagian ini memberi gambaran besar tentang produk: di lingkungan apa produk akan dipakai, siapa saja penggunanya, serta batasan, asumsi, dan ketergantungan yang sudah diketahui.>
+Contoh: Bagian ini menjelaskan posisi SIBEASISWA di antara sistem kampus lainnya, siapa saja penggunanya, di mana sistem dijalankan, serta hal-hal yang membatasi pengembangannya.
+   5. Perspektif Produk
+<Jelaskan latar belakang dan asal-usul produk. Apakah produk ini anggota baru dari rangkaian produk yang sudah ada, versi lanjutan dari sistem lama, pengganti aplikasi yang sudah ada, atau produk yang benar-benar baru? Jika produk ini hanya salah satu bagian dari sistem yang lebih besar, jelaskan hubungannya dan sebutkan penghubung (antarmuka) utama di antara keduanya. Sebaiknya sertakan gambar, misalnya diagram konteks, untuk menunjukkan hubungan produk dengan sistem lain.>
+Contoh: SIBEASISWA adalah produk baru yang menggantikan proses manual berbasis kertas. Sistem ini menjadi bagian dari portal kampus: data mahasiswa (NPM, nama, program studi, IPK) diambil dari Sistem Informasi Akademik (SIAKAD), sedangkan login memakai akun SSO kampus. [Sisipkan diagram konteks di sini.]
+   6. Kelompok Pengguna dan Karakteristiknya
+<Sebutkan kelompok-kelompok pengguna yang akan memakai produk ini dan jelaskan ciri-ciri pentingnya, misalnya tingkat keahlian, seberapa sering memakai sistem, dan hak aksesnya. Ada kebutuhan yang mungkin hanya berlaku untuk kelompok tertentu. Tandai kelompok pengguna yang paling diprioritaskan. Jika uraian kelompok pengguna sudah ada di dokumen lain, cukup rujuk dokumen tersebut.>
+Contoh:
+1. Mahasiswa (pengguna prioritas) – jumlahnya ribuan, terbiasa memakai ponsel, memakai sistem beberapa kali per semester untuk mengajukan beasiswa dan melihat hasil.
+2. Admin Kemahasiswaan – 3–5 orang staf, memakai sistem setiap hari selama periode pendaftaran untuk memverifikasi berkas.
+3. Pimpinan (Wakil Rektor/Kepala Biro) – jarang memakai sistem, hanya melihat laporan dan menyetujui daftar penerima.
+   7. Lingkungan Operasional
+<Jelaskan di lingkungan seperti apa perangkat lunak akan berjalan: perangkat keras, sistem operasi beserta versinya, lokasi pengguna, server, dan database, serta pihak yang mengelola server, database, dan website tersebut. Sebutkan juga aplikasi lain yang harus bisa berjalan berdampingan dengan sistem ini tanpa saling mengganggu. Jika dibutuhkan pekerjaan infrastruktur teknis yang besar, buat dokumen kebutuhan infrastruktur tersendiri.>
+Contoh: SIBEASISWA berjalan di server Linux (Ubuntu 22.04) milik Unit TI kampus dengan web server Nginx, PHP 8.2, dan database MySQL 8. Pengguna mengakses sistem melalui browser (Chrome, Firefox, Edge, atau Safari versi terbaru) dari laptop maupun ponsel, baik dari dalam kampus maupun dari rumah. Sistem harus bisa berjalan berdampingan dengan SIAKAD dan portal SSO yang sudah ada.
+   8. Batasan Desain dan Implementasi
+<Jelaskan hal-hal yang membatasi pilihan tim pengembang. Misalnya: kebijakan organisasi atau peraturan pemerintah; keterbatasan perangkat keras (waktu proses atau kapasitas memori); keharusan terhubung dengan aplikasi lain; teknologi, alat, atau database tertentu yang wajib dipakai; serta aturan tentang bahasa pemrograman.>
+Contoh:
+1. Sistem wajib dibangun dengan framework Laravel dan database MySQL sesuai standar Unit TI.
+2. Sistem wajib memakai login SSO kampus dan tidak boleh membuat sistem login sendiri.
+3. Pengelolaan data pribadi mahasiswa harus mengikuti UU No. 27 Tahun 2022 tentang Pelindungan Data Pribadi.
+4. Ukuran setiap berkas unggahan dibatasi maksimal 2 MB karena kapasitas server terbatas.
+   9. Asumsi dan Ketergantungan
+<Tuliskan hal-hal yang dianggap benar (tetapi belum pasti) yang bisa memengaruhi kebutuhan di dokumen ini. Misalnya: komponen dari pihak ketiga atau produk komersial yang akan dipakai, rencana memakai ulang kode yang sudah ada, atau kondisi lingkungan pengembangan dan operasional. Proyek bisa terganggu jika asumsi ini ternyata salah, tidak disepakati bersama, atau berubah. Sebutkan juga ketergantungan proyek pada pihak luar yang tidak bisa dikendalikan oleh tim.>
+Contoh:
+1. Asumsi: Unit TI sudah menyediakan API SIAKAD untuk mengambil data IPK mahasiswa paling lambat November 2026.
+2. Asumsi: Semua mahasiswa aktif sudah memiliki akun SSO.
+3. Ketergantungan: Pengiriman notifikasi bergantung pada layanan email kampus. Jika layanan ini terganggu, notifikasi akan tertunda.
+3. Fitur Sistem
+<Di template ini, kebutuhan fungsional dikelompokkan berdasarkan fitur sistem, yaitu layanan-layanan utama yang disediakan produk. Anda boleh mengelompokkannya dengan cara lain jika lebih masuk akal untuk produk Anda, misalnya berdasarkan use case, mode operasi, kelompok pengguna, kelas objek, hierarki fungsi, pemicu dan respons, atau gabungan dari beberapa cara tersebut.>
+Contoh: Fitur SIBEASISWA dikelompokkan menjadi: 3.1 Pengajuan Beasiswa Online, 3.2 Verifikasi Berkas oleh Admin, 3.3 Pengumuman Hasil Seleksi, dan 3.4 Laporan Penerima Beasiswa.
+   10. Fitur Sistem 1
+<Jangan benar-benar menulis “Fitur Sistem 1”. Ganti dengan nama fitur yang singkat, cukup beberapa kata.>
+Contoh: 3.1 Pengajuan Beasiswa Online
+      1. Deskripsi
+<Jelaskan fitur ini secara singkat dan tentukan prioritasnya: Tinggi, Sedang, atau Rendah.>
+Contoh: Fitur ini memungkinkan mahasiswa memilih program beasiswa yang sedang dibuka, mengisi formulir, dan mengunggah berkas persyaratan secara online. Prioritas: Tinggi.
+      2. Urutan Aksi Pengguna dan Respons Sistem
+<Tuliskan urutan langkahnya: apa yang dilakukan pengguna, lalu bagaimana sistem meresponsnya. Urutan ini biasanya sama dengan alur interaksi pada use case.>
+Contoh:
+1. Mahasiswa memilih menu “Ajukan Beasiswa” → sistem menampilkan daftar program beasiswa yang masih dibuka.
+2. Mahasiswa memilih salah satu program → sistem menampilkan formulir dan daftar berkas yang wajib diunggah.
+3. Mahasiswa mengisi formulir, mengunggah berkas, lalu menekan “Kirim” → sistem memeriksa kelengkapan data, menyimpan pengajuan, dan menampilkan nomor pengajuan.
+4. Sistem mengirim email konfirmasi ke mahasiswa.
+      3. Kebutuhan Fungsional
+<Rinci satu per satu kemampuan yang harus dimiliki perangkat lunak agar pengguna bisa memakai fitur ini atau menjalankan use case-nya. Jelaskan juga bagaimana sistem harus bereaksi jika terjadi kesalahan yang sudah bisa diperkirakan. Tulis “TBD” (To Be Determined – belum ditentukan) jika informasinya belum tersedia.>
+Contoh:
+FR-01: Sistem harus menampilkan hanya program beasiswa yang periode pendaftarannya masih dibuka.
+FR-02: Sistem harus menolak pengajuan jika IPK mahasiswa di bawah syarat minimum program, dan menampilkan pesan “IPK Anda belum memenuhi syarat program ini”.
+FR-03: Sistem hanya menerima berkas PDF atau JPG dengan ukuran maksimal 2 MB. Jika tidak sesuai, sistem menampilkan pesan kesalahan dan berkas tidak disimpan.
+FR-04: Sistem harus mencegah mahasiswa mengajukan program yang sama lebih dari satu kali dalam satu periode.
+FR-05: Batas waktu mahasiswa boleh mengubah pengajuan setelah dikirim: TBD.
+   11. Fitur Sistem 2 (dan seterusnya)
+<Ulangi susunan yang sama seperti bagian 3.1 (Deskripsi, Urutan Aksi Pengguna dan Respons Sistem, Kebutuhan Fungsional) untuk setiap fitur berikutnya.>
+Contoh: 3.2 Verifikasi Berkas oleh Admin – admin membuka daftar pengajuan baru, memeriksa berkas, lalu memberi status “Lengkap” atau “Perlu Perbaikan” beserta catatan untuk mahasiswa. Prioritas: Tinggi.
+4. Kebutuhan Data
+<Bagian ini menjelaskan data yang diterima sistem sebagai masukan, data yang diolah, dan data yang dihasilkan sebagai keluaran.>
+Contoh: SIBEASISWA menerima data formulir dan berkas dari mahasiswa, mengambil data akademik dari SIAKAD, lalu menghasilkan status seleksi dan laporan penerima beasiswa.
+   12. Model Data Logis
+<Model data adalah gambar yang menunjukkan objek-objek data yang diolah sistem dan hubungan di antara objek tersebut. Buat model data untuk proses bisnis yang ditangani sistem, atau gambaran logis dari data yang diolah oleh sistem. Model data paling sering dibuat dalam bentuk Entity-Relationship Diagram (ERD).>
+Contoh: Entitas utama adalah Mahasiswa, ProgramBeasiswa, Pengajuan, Berkas, dan Admin. Hubungannya: satu Mahasiswa dapat membuat banyak Pengajuan; satu ProgramBeasiswa dapat menerima banyak Pengajuan; satu Pengajuan memiliki banyak Berkas; satu Admin dapat memverifikasi banyak Pengajuan. [Sisipkan gambar ERD di sini.]
+   13. Kamus Data
+<Kamus data menjelaskan isi setiap struktur data: arti, tipe data, panjang, format, dan nilai yang diperbolehkan untuk setiap elemen data. Sering kali lebih baik menyimpan kamus data sebagai dokumen terpisah, bukan diletakkan di tengah SRS, agar bisa dipakai ulang di proyek lain.>
+Contoh (tabel Pengajuan):
+Nama Elemen
+	Arti
+	Tipe & Panjang
+	Format / Nilai yang Boleh
+	npm
+	Nomor Pokok Mahasiswa
+	Char(8)
+	8 digit angka, contoh: 12345678
+	id_pengajuan
+	Nomor unik pengajuan
+	Varchar(15)
+	BEA-YYYY-NNNNN, contoh: BEA-2026-00012
+	ipk
+	Indeks Prestasi Kumulatif
+	Decimal(3,2)
+	0.00 – 4.00
+	tgl_pengajuan
+	Tanggal pengajuan dikirim
+	Datetime
+	DD-MM-YYYY hh:mm (WIB)
+	status
+	Status pengajuan
+	Enum
+	Diajukan, Diverifikasi, Perlu Perbaikan, Diterima, Ditolak
+	
+
+   14. Laporan
+<Jika aplikasi akan menghasilkan laporan, sebutkan laporan apa saja dan jelaskan cirinya. Jika laporan harus mengikuti format baku tertentu, tuliskan sebagai batasan, bila perlu sertakan contohnya. Jika tidak, cukup jelaskan isi laporan secara logis: data apa yang ditampilkan, urutannya, dan total atau subtotalnya. Detail tampilan laporan bisa dibahas nanti di tahap desain.>
+Contoh: Laporan Rekap Penerima Beasiswa per Semester – berisi NPM, nama, fakultas, program studi, nama program beasiswa, dan nominal. Data diurutkan berdasarkan fakultas lalu nama mahasiswa, dengan subtotal jumlah penerima dan nominal per fakultas, serta total keseluruhan di bagian akhir. Laporan dapat diunduh dalam format PDF dan Excel.
+   15. Perolehan, Integritas, Penyimpanan, dan Penghapusan Data
+<Jika relevan, jelaskan dari mana data diperoleh dan bagaimana data dipelihara. Tuliskan kebutuhan untuk menjaga keutuhan (integritas) data dan cara khusus yang diperlukan, misalnya backup, checkpoint, mirroring, atau pengecekan keakuratan data. Tuliskan juga aturan berapa lama data disimpan dan kapan dihapus, termasuk data sementara, metadata, sisa data yang sudah dihapus, cache, salinan lokal, arsip, dan backup.>
+Contoh:
+1. Data IPK diambil otomatis dari SIAKAD dan tidak bisa diubah oleh mahasiswa maupun admin.
+2. Database di-backup otomatis setiap hari pukul 01.00 WIB; setiap backup disimpan selama 30 hari.
+3. Berkas pengajuan disimpan selama 5 tahun sejak periode beasiswa berakhir, kemudian dihapus permanen.
+4. Berkas sementara yang gagal diunggah dihapus otomatis setelah 24 jam.
+5. Kebutuhan Antarmuka Eksternal
+<Bagian ini memastikan sistem dapat berkomunikasi dengan benar, baik dengan pengguna maupun dengan perangkat keras atau perangkat lunak lain di luar sistem.>
+Contoh: SIBEASISWA berinteraksi dengan pengguna melalui browser, dengan SIAKAD dan SSO melalui API, serta dengan layanan email kampus untuk mengirim notifikasi.
+   16. Antarmuka Pengguna
+<Jelaskan ciri-ciri setiap tampilan yang menghubungkan pengguna dengan perangkat lunak. Bisa berupa contoh gambar layar, standar tampilan atau panduan gaya yang harus diikuti, aturan tata letak layar, tombol dan fungsi standar yang muncul di setiap layar (misalnya tombol Bantuan), shortcut keyboard, standar tampilan pesan kesalahan, dan sebagainya. Sebutkan bagian perangkat lunak mana saja yang membutuhkan tampilan. Detail desain tampilan sebaiknya ditulis di dokumen spesifikasi antarmuka pengguna tersendiri.>
+Contoh:
+1. Tampilan mengikuti Panduan Tampilan Aplikasi Kampus versi 2.1 (warna, logo, dan jenis huruf).
+2. Tampilan harus responsif dan nyaman dipakai di layar ponsel mulai lebar 360 piksel.
+3. Setiap halaman memiliki menu navigasi di bagian atas dan tombol “Bantuan” di pojok kanan atas.
+4. Pesan kesalahan ditampilkan dengan warna merah tepat di bawah kolom isian yang salah.
+   17. Antarmuka Perangkat Lunak
+<Jelaskan hubungan produk ini dengan perangkat lunak lain (sebutkan nama dan versinya), misalnya aplikasi lain, database, sistem operasi, tools, library, website, atau komponen komersial. Jelaskan tujuan, format, dan isi data atau pesan yang saling dikirim, serta bagaimana data diterjemahkan jika format kedua sistem berbeda. Sebutkan data yang dipakai bersama, layanan yang dibutuhkan dari atau diberikan ke sistem lain, serta kebutuhan non-fungsional yang memengaruhi hubungan tersebut, misalnya batas waktu respons atau aturan keamanan.>
+Contoh:
+1. SIAKAD (API REST v2): SIBEASISWA mengirim NPM dan menerima data nama, program studi, semester, dan IPK dalam format JSON. Waktu respons maksimal 3 detik.
+2. SSO Kampus (OAuth 2.0): dipakai untuk login. SIBEASISWA hanya menerima token dan identitas pengguna, dan tidak pernah menyimpan password.
+   18. Antarmuka Perangkat Keras
+<Jelaskan hubungan antara perangkat lunak dan perangkat keras dalam sistem (jika ada). Misalnya jenis perangkat yang didukung, data dan perintah yang saling dikirim antara perangkat lunak dan perangkat keras, serta protokol komunikasinya. Sebutkan masukan dan keluaran, formatnya, nilai yang valid, dan hal terkait waktu yang perlu diperhatikan programmer. Jika informasinya banyak, buat dokumen spesifikasi antarmuka tersendiri.>
+Contoh: SIBEASISWA tidak terhubung langsung dengan perangkat keras khusus. Pengguna hanya membutuhkan laptop atau ponsel dengan kamera/pemindai untuk membuat berkas yang akan diunggah.
+(Contoh lain, untuk sistem presensi: aplikasi membaca kartu mahasiswa melalui pembaca RFID berbasis USB. Data yang diterima berupa ID kartu 10 digit dan harus terbaca dalam waktu kurang dari 1 detik.)
+   19. Antarmuka Komunikasi
+<Tuliskan kebutuhan untuk fungsi komunikasi yang dipakai produk, misalnya email, browser, protokol jaringan, dan formulir elektronik. Jelaskan format pesan yang dipakai, kebutuhan keamanan atau enkripsi komunikasi, kecepatan transfer data, serta cara sinkronisasinya. Sebutkan juga batasannya, misalnya boleh tidaknya email berisi lampiran.>
+Contoh:
+1. Semua komunikasi antara browser dan server wajib memakai HTTPS (TLS 1.2 atau lebih baru).
+2. Notifikasi dikirim melalui email kampus (SMTP) dengan subjek “[SIBEASISWA] Status Pengajuan BEA-2026-00012”, berisi status terbaru dan tautan ke sistem.
+3. Email notifikasi tidak boleh berisi lampiran berkas pribadi mahasiswa.
+6. Atribut Kualitas
+<Bagian ini menjelaskan seberapa baik sistem harus bekerja (bukan apa yang dilakukan sistem). Tulis setiap atribut secara spesifik dan bisa diukur.>
+   20. Kemudahan Penggunaan (Usability)
+<Tuliskan kebutuhan yang membuat perangkat lunak terasa “ramah pengguna” (user-friendly). Ini mencakup: mudah dipakai, mudah dipelajari, mudah diingat, mencegah dan menangani kesalahan pengguna, efisien, mudah diakses semua orang (aksesibilitas), dan nyaman (ergonomis). Kadang hal-hal ini saling bertentangan, misalnya “cepat dipakai oleh pengguna mahir” dengan “mudah dipelajari oleh pengguna baru”. Sebutkan juga standar atau panduan desain tampilan yang wajib diikuti.>
+Contoh:
+1. Mahasiswa baru harus bisa menyelesaikan pengajuan pertamanya dalam waktu kurang dari 10 menit tanpa membaca buku panduan.
+2. Sebelum pengajuan dikirim, sistem menampilkan ringkasan data untuk dicek ulang oleh mahasiswa.
+3. Isian formulir tersimpan otomatis sebagai draf agar data tidak hilang jika koneksi terputus.
+   21. Kinerja (Performance)
+<Tuliskan target kinerja yang spesifik untuk berbagai operasi sistem. Jika fitur yang berbeda punya target kinerja yang berbeda, lebih baik tulis targetnya langsung di bagian kebutuhan fungsional fitur tersebut, bukan dikumpulkan di sini.>
+Contoh:
+1. Halaman utama tampil dalam waktu maksimal 2 detik pada koneksi 4G.
+2. Sistem mampu melayani 1.000 pengguna yang mengakses bersamaan pada hari terakhir pendaftaran tanpa penurunan kinerja yang berarti.
+3. Unggah berkas berukuran 2 MB selesai dalam waktu maksimal 5 detik.
+   22. Keamanan (Security)
+<Tuliskan kebutuhan keamanan dan privasi yang membatasi siapa yang boleh mengakses atau memakai produk. Bisa berupa keamanan fisik, keamanan data, atau keamanan perangkat lunak. Kebutuhan keamanan biasanya berasal dari aturan bisnis, jadi sebutkan kebijakan atau peraturan keamanan/privasi yang wajib dipatuhi. Jika aturan tersebut sudah ditulis di dokumen lain, cukup rujuk dokumennya.>
+Contoh:
+1. Mahasiswa hanya dapat melihat dan mengubah pengajuan miliknya sendiri.
+2. Hanya Admin Kemahasiswaan yang dapat mengubah status pengajuan.
+3. Sesi login otomatis berakhir setelah 30 menit tidak ada aktivitas.
+4. Setiap perubahan status pengajuan dicatat (siapa, kapan, dan apa yang diubah) dalam log audit.
+   23. Keselamatan (Safety)
+<Tuliskan kebutuhan yang berkaitan dengan kemungkinan kerugian, kerusakan, atau bahaya akibat penggunaan produk. Sebutkan pengaman yang harus ada, tindakan yang wajib dilakukan, dan tindakan berbahaya yang harus dicegah. Sebutkan juga sertifikasi, kebijakan, atau peraturan keselamatan yang wajib dipenuhi.>
+Contoh:
+1. Sistem meminta konfirmasi ulang sebelum admin menghapus pengajuan atau mengubah statusnya menjadi “Ditolak”.
+2. Data yang dihapus tidak langsung hilang, tetapi dipindahkan ke “Tempat Sampah” selama 30 hari agar bisa dipulihkan jika terjadi kesalahan.
+   24. [Atribut lain yang relevan]
+<Buat bagian tersendiri untuk setiap atribut kualitas lain yang penting bagi pelanggan atau pengembang. Pilihannya antara lain: ketersediaan (availability), efisiensi, kemudahan instalasi, integritas, interoperabilitas, kemudahan diubah (modifiability), portabilitas, keandalan (reliability), kemudahan dipakai ulang (reusability), ketangguhan (robustness), skalabilitas, dan kemudahan diverifikasi. Tulis secara spesifik, terukur, dan bisa dibuktikan. Jelaskan juga mana yang lebih diutamakan, misalnya keamanan lebih penting daripada kinerja.>
+Contoh – Ketersediaan (Availability): Sistem harus dapat diakses minimal 99% dari waktu selama periode pendaftaran beasiswa. Pemeliharaan terjadwal hanya boleh dilakukan pukul 00.00–04.00 WIB dan diumumkan paling lambat 2 hari sebelumnya. Jika terjadi konflik, keamanan data lebih diutamakan daripada kecepatan.
+7. Kebutuhan Internasionalisasi dan Lokalisasi
+<Kebutuhan internasionalisasi dan lokalisasi memastikan produk bisa dipakai di negara, budaya, dan wilayah lain selain tempat produk itu dibuat. Hal yang perlu diperhatikan antara lain: mata uang; format tanggal, angka, alamat, dan nomor telepon; bahasa, termasuk perbedaan ejaan dalam bahasa yang sama (misalnya bahasa Inggris Amerika dan Inggris Britania); simbol dan set karakter; urutan nama depan dan nama keluarga; zona waktu; hukum dan peraturan internasional; isu budaya dan politik; ukuran kertas; satuan berat dan ukuran; tegangan listrik dan bentuk colokan; dan lain-lain.>
+Contoh:
+1. Bahasa utama tampilan adalah Bahasa Indonesia; tersedia pilihan Bahasa Inggris untuk mahasiswa internasional.
+2. Format tanggal DD-MM-YYYY (contoh: 12-10-2026) dengan zona waktu WIB (UTC+7).
+3. Nominal ditulis dalam Rupiah dengan titik sebagai pemisah ribuan (contoh: Rp2.500.000).
+4. Kolom nama harus menerima nama satu kata (tanpa nama keluarga) yang umum di Indonesia.
+8. Kebutuhan Lainnya
+<Contohnya: kebutuhan kepatuhan terhadap hukum, peraturan, ketentuan keuangan, dan standar; kebutuhan instalasi, konfigurasi, menyalakan (startup), dan mematikan (shutdown) sistem; serta kebutuhan pencatatan aktivitas (logging), pemantauan (monitoring), dan jejak audit (audit trail). Daripada mengumpulkan semuanya di bagian “Lainnya”, lebih baik tambahkan bagian baru di template ini sesuai kebutuhan proyek Anda. Hapus bagian ini jika semua kebutuhan sudah tercakup di bagian lain.>
+Contoh:
+1. Sistem harus mematuhi UU No. 27 Tahun 2022 tentang Pelindungan Data Pribadi.
+2. Sistem harus dapat dipasang ulang di server baru dalam waktu maksimal 1 hari kerja dengan mengikuti panduan instalasi.
+3. Setiap error sistem dicatat dalam log, dan tim TI otomatis menerima email jika error yang sama terjadi lebih dari 10 kali dalam 5 menit.
+Lampiran A: Glosarium
+<Jelaskan istilah-istilah khusus yang perlu dipahami pembaca SRS ini, termasuk singkatan dan akronim. Tuliskan kepanjangan setiap akronim beserta artinya. Pertimbangkan membuat glosarium bersama di tingkat organisasi yang bisa dipakai di banyak proyek, lalu cukup rujuk istilah yang relevan untuk proyek ini.>
+Contoh:
+API (Application Programming Interface) – penghubung yang memungkinkan dua aplikasi saling bertukar data.
+IPK (Indeks Prestasi Kumulatif) – nilai rata-rata seluruh mata kuliah yang sudah ditempuh mahasiswa.
+NPM (Nomor Pokok Mahasiswa) – nomor identitas unik setiap mahasiswa.
+SIAKAD (Sistem Informasi Akademik) – sistem kampus yang menyimpan data akademik mahasiswa.
+SSO (Single Sign-On) – satu akun login untuk mengakses banyak aplikasi kampus.
+TBD (To Be Determined) – informasi yang belum ditentukan.
+Lampiran B: Model Analisis
+<Bagian opsional ini berisi (atau merujuk ke) model-model analisis yang relevan, misalnya Data Flow Diagram (DFD), pohon fitur, diagram transisi status (state diagram), atau ERD. Anda juga boleh meletakkan model-model tersebut langsung di bagian yang berkaitan, tidak harus dikumpulkan di akhir dokumen.>
+Contoh:
+B.1 Diagram Konteks SIBEASISWA.
+B.2 DFD Level 1 Proses Pengajuan Beasiswa.
+B.3 Diagram Transisi Status Pengajuan: Diajukan → Diverifikasi / Perlu Perbaikan → Diterima / Ditolak.
+[Sisipkan gambar diagram di sini.]
+Hak Cipta © 2013 oleh Karl Wiegers dan Seilevel. Diizinkan untuk menggunakan dan memodifikasi dokumen ini.

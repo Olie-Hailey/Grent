@@ -1,0 +1,228 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 1100" width="1440" height="1100" fill="none">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&amp;display=swap');
+      text { font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    </style>
+    <filter id="shadow-card" x="-5%" y="-5%" width="110%" height="115%" filterUnits="objectBoundingBox">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.06"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1440" height="1100" fill="#F8FAFC"/>
+
+  <!-- Admin Navbar -->
+  <rect width="1440" height="70" fill="#0F172A"/>
+  <g transform="translate(140, 15)">
+    <rect width="40" height="40" rx="10" fill="#1E293B"/>
+    <text x="20" y="27" fill="#34D399" font-size="20" font-weight="900" text-anchor="middle">G</text>
+    <text x="50" y="27" fill="#FFFFFF" font-size="20" font-weight="900">Grent</text>
+    <rect x="110" y="8" width="84" height="24" rx="6" fill="#334155"/>
+    <text x="152" y="24" fill="#E2E8F0" font-size="11" font-weight="700" text-anchor="middle">Panel Admin</text>
+  </g>
+
+  <!-- Admin Right Profile Pill in Navbar -->
+  <g transform="translate(1080, 15)">
+    <rect width="220" height="40" rx="10" fill="#1E293B"/>
+    <circle cx="20" cy="20" r="14" fill="#059669"/>
+    <text x="20" y="24" fill="#FFFFFF" font-size="11" font-weight="800" text-anchor="middle">A</text>
+    <text x="42" y="18" fill="#FFFFFF" font-size="12" font-weight="700">Petugas Admin</text>
+    <text x="42" y="31" fill="#34D399" font-size="10" font-weight="600">Super Admin Operasional</text>
+  </g>
+
+  <!-- Main Container -->
+  <g transform="translate(140, 105)">
+    <!-- Header Title -->
+    <rect x="0" y="0" width="168" height="22" rx="4" fill="#D1FAE5"/>
+    <text x="84" y="15" fill="#065F46" font-size="10" font-weight="700" text-anchor="middle">AREA OPERASIONAL PETUGAS</text>
+
+    <text x="0" y="52" fill="#0F172A" font-size="28" font-weight="900">Dashboard Manajemen Admin Grent</text>
+    <text x="0" y="74" fill="#64748B" font-size="13">Kelola pesanan penyewaan, etalase unit, dan konfigurasi profil staff</text>
+
+    <!-- Tab Switcher -->
+    <g transform="translate(860, 30)">
+      <rect width="300" height="42" rx="12" fill="#F1F5F9" stroke="#E2E8F0"/>
+      <rect x="4" y="4" width="105" height="34" rx="8" fill="#FFFFFF" filter="url(#shadow-card)"/>
+      <text x="56" y="25" fill="#0F172A" font-size="12" font-weight="700" text-anchor="middle">Kelola Booking</text>
+      <text x="156" y="25" fill="#64748B" font-size="12" font-weight="600" text-anchor="middle">Katalog Gadget</text>
+      <text x="250" y="25" fill="#64748B" font-size="12" font-weight="600" text-anchor="middle">Profil Admin</text>
+    </g>
+
+    <!-- 3 Summary Metrics -->
+    <g transform="translate(0, 100)">
+      <!-- Card 1 -->
+      <g transform="translate(0, 0)" filter="url(#shadow-card)">
+        <rect width="365" height="90" rx="14" fill="#FFFFFF" stroke="#E2E8F0"/>
+        <text x="20" y="30" fill="#64748B" font-size="12">Total Booking Aktif</text>
+        <text x="20" y="65" fill="#0F172A" font-size="26" font-weight="900">12 <tspan font-size="14" font-weight="600" fill="#64748B">Pesanan</tspan></text>
+      </g>
+
+      <!-- Card 2: Menunggu Konfirmasi Cash -->
+      <g transform="translate(395, 0)" filter="url(#shadow-card)">
+        <rect width="365" height="90" rx="14" fill="#FFFFFF" stroke="#FDE68A"/>
+        <text x="20" y="30" fill="#D97706" font-size="12" font-weight="700">Menunggu Konfirmasi Cash</text>
+        <text x="20" y="65" fill="#B45309" font-size="26" font-weight="900">1 <tspan font-size="14" font-weight="600" fill="#D97706">Pesanan di Toko</tspan></text>
+      </g>
+
+      <!-- Card 3 -->
+      <g transform="translate(790, 0)" filter="url(#shadow-card)">
+        <rect width="370" height="90" rx="14" fill="#FFFFFF" stroke="#E2E8F0"/>
+        <text x="20" y="30" fill="#64748B" font-size="12">Unit Sedang Disewa</text>
+        <text x="20" y="65" fill="#059669" font-size="26" font-weight="900">8 <tspan font-size="14" font-weight="600" fill="#64748B">Unit Aktif</tspan></text>
+      </g>
+    </g>
+
+    <!-- ================= SECTION A: TABEL KELOLA BOOKING ================= -->
+    <g transform="translate(0, 220)" filter="url(#shadow-card)">
+      <rect width="1160" height="320" rx="16" fill="#FFFFFF" stroke="#E2E8F0"/>
+
+      <text x="24" y="36" fill="#0F172A" font-size="15" font-weight="800">Daftar Reservasi &amp; Konfirmasi Pembayaran Tunai</text>
+      <text x="1136" y="36" fill="#64748B" font-size="11" text-anchor="end">Otomatis sinkron dengan database SQLite</text>
+      <line x1="0" y1="56" x2="1160" y2="56" stroke="#E2E8F0"/>
+
+      <!-- Table Header -->
+      <rect x="0" y="56" width="1160" height="36" fill="#F8FAFC"/>
+      <text x="24" y="78" fill="#64748B" font-size="11" font-weight="700">PENYEWA &amp; KONTAK</text>
+      <text x="260" y="78" fill="#64748B" font-size="11" font-weight="700">UNIT GADGET</text>
+      <text x="470" y="78" fill="#64748B" font-size="11" font-weight="700">DURASI</text>
+      <text x="600" y="78" fill="#64748B" font-size="11" font-weight="700">METODE BAYAR</text>
+      <text x="790" y="78" fill="#64748B" font-size="11" font-weight="700">TOTAL BIAYA</text>
+      <text x="910" y="78" fill="#64748B" font-size="11" font-weight="700">STATUS</text>
+      <text x="1136" y="78" fill="#64748B" font-size="11" font-weight="700" text-anchor="end">AKSI PETUGAS</text>
+
+      <!-- Row 1: Pesanan Menunggu Cash -->
+      <g transform="translate(0, 110)">
+        <text x="24" y="0" fill="#0F172A" font-size="13" font-weight="700">Budi Santoso</text>
+        <text x="24" y="16" fill="#64748B" font-size="11">0812-9876-5432</text>
+
+        <text x="260" y="0" fill="#0F172A" font-size="13" font-weight="600">MacBook Pro M3</text>
+        <text x="260" y="16" fill="#64748B" font-size="11">512GB · Space Gray</text>
+
+        <text x="470" y="0" fill="#0F172A" font-size="12" font-weight="600">3 Hari</text>
+        <text x="470" y="16" fill="#64748B" font-size="10">27 Okt - 30 Okt</text>
+
+        <!-- Method Badge -->
+        <rect x="600" y="-12" width="140" height="22" rx="4" fill="#FEF3C7"/>
+        <text x="670" y="3" fill="#92400E" font-size="10" font-weight="700" text-anchor="middle">CASH (TUNAI DI TOKO)</text>
+
+        <text x="790" y="2" fill="#0F172A" font-size="14" font-weight="800">Rp 660.000</text>
+
+        <!-- Status Badge -->
+        <rect x="910" y="-12" width="130" height="22" rx="11" fill="#FEF3C7"/>
+        <text x="975" y="3" fill="#B45309" font-size="10" font-weight="700" text-anchor="middle">Menunggu Bayar</text>
+
+        <!-- Button Konfirmasi Cash -->
+        <g transform="translate(1000, -14)">
+          <rect width="136" height="32" rx="8" fill="#059669"/>
+          <text x="68" y="20" fill="#FFFFFF" font-size="11" font-weight="700" text-anchor="middle">Konfirmasi Bayar Cash</text>
+        </g>
+      </g>
+
+      <line x1="24" y1="170" x2="1136" y2="170" stroke="#F1F5F9"/>
+
+      <!-- Row 2: Pesanan QRIS Lunas -->
+      <g transform="translate(0, 205)">
+        <text x="24" y="0" fill="#0F172A" font-size="13" font-weight="700">Siti Rahma</text>
+        <text x="24" y="16" fill="#64748B" font-size="11">0857-1122-3344</text>
+
+        <text x="260" y="0" fill="#0F172A" font-size="13" font-weight="600">iPhone 15 Pro Max</text>
+        <text x="260" y="16" fill="#64748B" font-size="11">256GB · Natural Titanium</text>
+
+        <text x="470" y="0" fill="#0F172A" font-size="12" font-weight="600">2 Hari</text>
+        <text x="470" y="16" fill="#64748B" font-size="10">26 Okt - 28 Okt</text>
+
+        <rect x="600" y="-12" width="100" height="22" rx="4" fill="#E2E8F0"/>
+        <text x="650" y="3" fill="#334155" font-size="10" font-weight="700" text-anchor="middle">QRIS DIGITAL</text>
+
+        <text x="790" y="2" fill="#0F172A" font-size="14" font-weight="800">Rp 380.000</text>
+
+        <rect x="910" y="-12" width="110" height="22" rx="11" fill="#D1FAE5"/>
+        <text x="965" y="3" fill="#065F46" font-size="10" font-weight="700" text-anchor="middle">Lunas / Disewa</text>
+
+        <g transform="translate(1036, -14)">
+          <rect width="100" height="32" rx="8" fill="#F1F5F9" stroke="#E2E8F0"/>
+          <text x="50" y="20" fill="#475569" font-size="11" font-weight="600" text-anchor="middle">Detail Unit</text>
+        </g>
+      </g>
+    </g>
+
+    <!-- ================= SECTION B: PROFIL ADMIN & HAK AKSES SISTEM ================= -->
+    <g transform="translate(0, 570)">
+      <!-- Left: Kartu Staff Identitas -->
+      <g transform="translate(0, 0)" filter="url(#shadow-card)">
+        <rect width="365" height="380" rx="16" fill="#FFFFFF" stroke="#E2E8F0"/>
+
+        <!-- Staff Avatar -->
+        <circle cx="182" cy="70" r="42" fill="#0F172A"/>
+        <text x="182" y="78" fill="#34D399" font-size="22" font-weight="900" text-anchor="middle">ADM</text>
+
+        <text x="182" y="140" fill="#0F172A" font-size="17" font-weight="900" text-anchor="middle">Petugas Admin Grent</text>
+        <rect x="100" y="152" width="164" height="22" rx="11" fill="#D1FAE5"/>
+        <text x="182" y="167" fill="#065F46" font-size="10" font-weight="700" text-anchor="middle">Super Admin Operasional</text>
+
+        <line x1="24" y1="195" x2="341" y2="195" stroke="#F1F5F9"/>
+
+        <g transform="translate(24, 220)" font-size="11" fill="#475569">
+          <text x="0" y="0"><tspan font-weight="700" fill="#0F172A">Username:</tspan> admin</text>
+          <text x="0" y="24"><tspan font-weight="700" fill="#0F172A">Cabang Toko:</tspan> Grent Margonda Raya, Depok</text>
+          <text x="0" y="48"><tspan font-weight="700" fill="#0F172A">Status Akun:</tspan> <tspan fill="#059669" font-weight="700">Aktif &amp; Berwenang</tspan></text>
+        </g>
+
+        <rect x="24" y="315" width="317" height="38" rx="10" fill="#F8FAFC" stroke="#CBD5E1"/>
+        <text x="182" y="339" fill="#334155" font-size="12" font-weight="600" text-anchor="middle">Ganti Foto Profil Staff</text>
+      </g>
+
+      <!-- Right: Informasi Operasional & Hak Akses -->
+      <g transform="translate(395, 0)" filter="url(#shadow-card)">
+        <rect width="765" height="380" rx="16" fill="#FFFFFF" stroke="#E2E8F0"/>
+
+        <text x="24" y="36" fill="#0F172A" font-size="15" font-weight="800">Informasi Kontak Toko &amp; Hak Akses Operasional</text>
+        <line x1="24" y1="56" x2="741" y2="56" stroke="#E2E8F0"/>
+
+        <!-- 4 Data Fields -->
+        <g transform="translate(24, 76)">
+          <!-- Field 1 -->
+          <g transform="translate(0, 0)">
+            <text x="0" y="0" fill="#64748B" font-size="11" font-weight="600">Nama Petugas Resmi</text>
+            <rect x="0" y="8" width="335" height="38" rx="8" fill="#F8FAFC" stroke="#CBD5E1"/>
+            <text x="12" y="32" fill="#0F172A" font-size="12" font-weight="600">Petugas Admin Grent</text>
+          </g>
+
+          <!-- Field 2 -->
+          <g transform="translate(365, 0)">
+            <text x="0" y="0" fill="#64748B" font-size="11" font-weight="600">Email Operasional Toko</text>
+            <rect x="0" y="8" width="350" height="38" rx="8" fill="#F8FAFC" stroke="#CBD5E1"/>
+            <text x="12" y="32" fill="#0F172A" font-size="12" font-weight="600">admin@staffadmin.id</text>
+          </g>
+
+          <!-- Field 3 -->
+          <g transform="translate(0, 68)">
+            <text x="0" y="0" fill="#64748B" font-size="11" font-weight="600">Hotline Operasional Toko</text>
+            <rect x="0" y="8" width="335" height="38" rx="8" fill="#F8FAFC" stroke="#CBD5E1"/>
+            <text x="12" y="32" fill="#0F172A" font-size="12" font-weight="600">0895-6229-96629</text>
+          </g>
+
+          <!-- Field 4 -->
+          <g transform="translate(365, 68)">
+            <text x="0" y="0" fill="#64748B" font-size="11" font-weight="600">Penugasan Cabang</text>
+            <rect x="0" y="8" width="350" height="38" rx="8" fill="#F8FAFC" stroke="#CBD5E1"/>
+            <text x="12" y="32" fill="#0F172A" font-size="12" font-weight="600">Grent Margonda Raya No. 525, Depok</text>
+          </g>
+        </g>
+
+        <!-- Privilege Checklist -->
+        <g transform="translate(24, 226)">
+          <text x="0" y="0" fill="#0F172A" font-size="12" font-weight="800">Daftar Hak Akses Sistem Operasional:</text>
+
+          <g transform="translate(0, 16)" font-size="11" fill="#475569">
+            <text x="0" y="10"><tspan fill="#059669" font-weight="900">&check; </tspan>Konfirmasi pembayaran tunai (Cash) saat serah terima unit di toko</text>
+            <text x="0" y="32"><tspan fill="#059669" font-weight="900">&check; </tspan>Verifikasi pembayaran otomatis QRIS dan kode invoice pelanggan</text>
+            <text x="0" y="54"><tspan fill="#059669" font-weight="900">&check; </tspan>Kelola etalase sewa (update tarif harian/mingguan/bulanan dan stok gadget)</text>
+            <text x="0" y="76"><tspan fill="#059669" font-weight="900">&check; </tspan>Pemeriksaan kelengkapan verifikasi e-KTP dan data diri pelanggan (KYC)</text>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

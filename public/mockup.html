@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mockup Interaktif Aplikasi Grent Gadget Rental</title>
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
+            },
+            slate: {
+              850: '#151f32',
+              900: '#0f172a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @media print {
+      .no-print {
+        display: none !important;
+      }
+      body {
+        background: white !important;
+        color: black !important;
+      }
+      .print-page {
+        box-shadow: none !important;
+        border: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="bg-[#f8fafc] text-slate-800 font-sans antialiased selection:bg-emerald-100 selection:text-emerald-900 min-h-screen flex flex-col">
+
+  <!-- ============================================================ -->
+  <!-- 0. PRESENTER DEMO CONTROLLER (Sticky Quick Navigation Bar)   -->
+  <!-- ============================================================ -->
+  <header class="no-print sticky top-0 z-50 bg-slate-900 text-white shadow-lg border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 py-2.5 flex flex-wrap items-center justify-between gap-3 text-xs">
+      <div class="flex items-center gap-2.5">
+        <span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+          DEMO PRESENTASI DOSEN
+        </span>
+        <span class="font-bold tracking-wide text-slate-200">Grent Rental Gadget — Mockup Sistem Terintegrasi</span>
+      </div>
+
+      <!-- Quick Section Switcher Buttons -->
+      <nav class="flex flex-wrap items-center gap-1.5 overflow-x-auto py-1">
+        <button onclick="switchView('landing')" id="btn-view-landing" class="px-2.5 py-1 rounded font-medium transition bg-emerald-600 text-white hover:bg-emerald-500">
+          1. Katalog & Solusi
+        </button>
+        <button onclick="openBookingModal('mbp-m3')" id="btn-view-booking" class="px-2.5 py-1 rounded font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white">
+          2. Form Booking
+        </button>
+        <button onclick="openKycModal()" id="btn-view-kyc" class="px-2.5 py-1 rounded font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white">
+          3. Verifikasi Profil/KTP
+        </button>
+        <button onclick="openTermsModal()" id="btn-view-terms" class="px-2.5 py-1 rounded font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white">
+          4. Pop-up S&K & Denda
+        </button>
+        <button onclick="switchView('invoice')" id="btn-view-invoice" class="px-2.5 py-1 rounded font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white">
+          5. Invoice 1 Halaman
+        </button>
+        <button onclick="switchView('admin')" id="btn-view-admin" class="px-2.5 py-1 rounded font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white">
+          6. Dashboard Admin
+        </button>
+      </nav>
+
+      <!-- Active Mode Switcher -->
+      <div class="flex items-center gap-2">
+        <span class="text-slate-400 text-[11px]">Peran:</span>
+        <div class="bg-slate-800 p-0.5 rounded-lg border border-slate-700 flex text-[11px]">
+          <button onclick="setRole('customer')" id="role-cust-btn" class="px-2 py-0.5 rounded font-semibold bg-emerald-500 text-slate-900 transition">
+            Customer
+          </button>
+          <button onclick="setRole('admin')" id="role-admin-btn" class="px-2 py-0.5 rounded font-medium text-slate-300 hover:text-white transition">
+            Admin
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================ -->
+  <!-- 1. NAVBAR APLIKASI UTAMA (Customer View)                     -->
+  <!-- ============================================================ -->
+  <nav id="app-navbar" class="no-print bg-white/95 backdrop-blur border-b border-slate-200 sticky top-10 z-40">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
+      <!-- Logo Grent -->
+      <a href="javascript:void(0)" onclick="switchView('landing')" class="flex items-center gap-2.5 group">
+        <div class="h-9 w-9 rounded-xl bg-slate-900 flex items-center justify-center text-emerald-400 font-black text-lg shadow-sm group-hover:scale-105 transition">
+          G
+        </div>
+        <div class="flex items-center gap-1.5">
+          <span class="text-2xl font-black text-slate-900 tracking-tight">Grent</span>
+          <span class="text-[11px] font-bold px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded-md">
+            Gadget
+          </span>
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <div class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600">
+        <a href="#katalog-section" onclick="switchView('landing')" class="hover:text-emerald-600 transition">Katalog Gadget</a>
+        <a href="#solusi-section" onclick="switchView('landing')" class="hover:text-emerald-600 transition">Solusi Fleksibel</a>
+        <a href="javascript:void(0)" onclick="openTermsModal()" class="hover:text-emerald-600 transition">Ketentuan & Denda</a>
+        <a href="javascript:void(0)" onclick="openKycModal()" class="hover:text-emerald-600 transition">Data Diri (KTP)</a>
+      </div>
+
+      <!-- Auth State Menu -->
+      <div class="flex items-center gap-3">
+        <!-- Customer Profile Summary Pill -->
+        <div id="customer-profile-pill" class="flex items-center gap-2 bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-full cursor-pointer hover:bg-slate-200 transition" onclick="openKycModal()">
+          <div class="w-6 h-6 rounded-full bg-emerald-600 text-white font-bold text-xs flex items-center justify-center">
+            B
+          </div>
+          <div class="text-left text-xs">
+            <p class="font-bold text-slate-800 leading-none" id="nav-cust-name">Budi Santoso</p>
+            <p class="text-[10px] text-emerald-600 font-semibold leading-none mt-0.5" id="nav-cust-status">KYC Terverifikasi</p>
+          </div>
+        </div>
+
+        <button onclick="switchView('admin')" class="hidden sm:inline-flex text-xs font-semibold px-3 py-1.5 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-100 transition">
+          Buka Panel Admin
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================================ -->
+  <!-- 2. MAIN VIEW CONTAINER                                       -->
+  <!-- ============================================================ -->
+  <main class="flex-1">
+
+    <!-- ========================================================== -->
+    <!-- VIEW A: LANDING PAGE & KATALOG                             -->
+    <!-- ========================================================== -->
+    <div id="view-landing" class="block">
+      <!-- Hero Banner -->
+      <section class="bg-gradient-to-b from-slate-100 to-[#f8fafc] border-b border-slate-200 py-12 sm:py-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 text-center">
+          <span class="inline-block px-3 py-1 bg-emerald-100 text-emerald-800 text-xs font-bold rounded-full mb-4">
+            Rental Laptop, Smartphone & Tablet Terlengkap
+          </span>
+          <h1 class="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight max-w-3xl mx-auto">
+            Sewa Gadget Resmi, Praktis, & Siap Pakai Untuk Segala Kebutuhan
+          </h1>
+          <p class="mt-4 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
+            Dukung produktivitas tugas kuliah, pekerjaan kantor, riset, atau event penting tanpa perlu beli baru. Tarif harian, mingguan, dan bulanan yang terjangkau.
+          </p>
+          <div class="mt-8 flex flex-wrap justify-center gap-3">
+            <a href="#katalog-section" class="px-6 py-3 rounded-xl bg-emerald-600 text-white font-bold text-sm hover:bg-emerald-700 shadow-md transition">
+              Lihat Katalog Gadget
+            </a>
+            <button onclick="openTermsModal()" class="px-6 py-3 rounded-xl bg-white border border-slate-300 text-slate-700 font-semibold text-sm hover:bg-slate-50 transition">
+              Ketentuan & Denda Sewa
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Solusi Fleksibel (Ikon / Emoticon Diperbolehkan Khusus di Sini) -->
+      <section id="solusi-section" class="py-12 border-b border-slate-200 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+          <div class="text-center max-w-xl mx-auto mb-10">
+            <h2 class="text-2xl font-bold text-slate-900 tracking-tight">Solusi Fleksibel Dari Grent</h2>
+            <p class="text-sm text-slate-500 mt-1">Kemudahan penyewaan unit dirancang khusus untuk kenyamanan pelanggan</p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-emerald-300 transition">
+              <div class="text-3xl mb-3">📅</div>
+              <h3 class="font-bold text-slate-900 text-base">Durasi Sewa Sesuai Kebutuhan</h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                Pilih paket sewa harian untuk kebutuhan singkat, mingguan (diskon 15%), atau bulanan (diskon 35%) untuk masa pemakaian jangka panjang.
+              </p>
+            </div>
+
+            <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-emerald-300 transition">
+              <div class="text-3xl mb-3">⚡</div>
+              <h3 class="font-bold text-slate-900 text-base">Serah Terima & Pengambilan Cepat</h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                Unit siap diambil langsung di toko atau diantar ke alamat rumah/kantor. Cukup tunjukkan invoice digital dan e-KTP terverifikasi.
+              </p>
+            </div>
+
+            <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-emerald-300 transition">
+              <div class="text-3xl mb-3">🛡️</div>
+              <h3 class="font-bold text-slate-900 text-base">Jaminan Unit Bersih & Bergaransi</h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                Semua unit melewati Quality Control ketat: baterai sehat, sistem operasi fresh install, bersih dari akun pemilik sebelumnya, dan bergaransi tukar unit.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Katalog Gadget -->
+      <section id="katalog-section" class="py-12 max-w-6xl mx-auto px-4 sm:px-6">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+          <div>
+            <h2 class="text-2xl font-bold text-slate-900 tracking-tight">Katalog Gadget Siap Sewa</h2>
+            <p class="text-xs text-slate-500 mt-1">Pilih gadget pilihan Anda untuk melihat detail dan kalkulasi biaya sewa</p>
+          </div>
+
+          <!-- Filter Sesuai Request User: 1 Listbox Tunggal (All / Laptop / Gadget Lainnya) Tanpa Min-Max -->
+          <div class="flex items-center gap-3">
+            <label for="category-filter" class="text-xs font-semibold text-slate-600 whitespace-nowrap">Filter Kategori:</label>
+            <select id="category-filter" onchange="filterCategory(this.value)" class="bg-white border border-slate-300 text-slate-800 text-xs rounded-xl px-3.5 py-2 font-medium focus:ring-2 focus:ring-emerald-500 outline-none shadow-sm cursor-pointer">
+              <option value="ALL">Semua Gadget (All)</option>
+              <option value="Laptop">Laptop / Notebook</option>
+              <option value="Smartphone">Smartphone (iPhone)</option>
+              <option value="Tablet">Tablet (iPad)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Gadget Grid -->
+        <div id="gadget-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Card 1 -->
+          <div class="gadget-card bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col" data-category="Laptop">
+            <div class="h-44 bg-slate-100 flex items-center justify-center p-4 relative">
+              <span class="absolute top-3 left-3 bg-white/90 backdrop-blur px-2 py-0.5 text-[10px] font-bold uppercase rounded text-slate-700">Laptop</span>
+              <span class="absolute top-3 right-3 bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full">Stok: 3 Unit</span>
+              <div class="text-center font-bold text-slate-400 text-sm">MacBook Pro 14" M3</div>
+            </div>
+            <div class="p-5 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="font-bold text-slate-900 text-base">MacBook Pro M3 (2024)</h3>
+                <p class="text-xs text-slate-500 mt-0.5">512GB SSD · 16GB RAM · Space Gray</p>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-baseline justify-between">
+                  <span class="text-xs text-slate-400">Harga Sewa:</span>
+                  <div class="text-right">
+                    <span class="text-base font-extrabold text-slate-900">Rp 220.000</span>
+                    <span class="text-[11px] text-slate-500 font-normal"> /hari</span>
+                  </div>
+                </div>
+              </div>
+              <button onclick="openBookingModal('mbp-m3')" class="mt-4 w-full py-2.5 rounded-xl bg-emerald-600 text-white font-bold text-xs hover:bg-emerald-700 transition">
+                Sewa Sekarang
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="gadget-card bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col" data-category="Smartphone">
+            <div class="h-44 bg-slate-100 flex items-center justify-center p-4 relative">
+              <span class="absolute top-3 left-3 bg-white/90 backdrop-blur px-2 py-0.5 text-[10px] font-bold uppercase rounded text-slate-700">Smartphone</span>
+              <span class="absolute top-3 right-3 bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full">Stok: 5 Unit</span>
+              <div class="text-center font-bold text-slate-400 text-sm">iPhone 15 Pro Max</div>
+            </div>
+            <div class="p-5 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="font-bold text-slate-900 text-base">iPhone 15 Pro Max</h3>
+                <p class="text-xs text-slate-500 mt-0.5">256GB · Natural Titanium</p>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-baseline justify-between">
+                  <span class="text-xs text-slate-400">Harga Sewa:</span>
+                  <div class="text-right">
+                    <span class="text-base font-extrabold text-slate-900">Rp 190.000</span>
+                    <span class="text-[11px] text-slate-500 font-normal"> /hari</span>
+                  </div>
+                </div>
+              </div>
+              <button onclick="openBookingModal('ip15-pm')" class="mt-4 w-full py-2.5 rounded-xl bg-emerald-600 text-white font-bold text-xs hover:bg-emerald-700 transition">
+                Sewa Sekarang
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="gadget-card bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col" data-category="Tablet">
+            <div class="h-44 bg-slate-100 flex items-center justify-center p-4 relative">
+              <span class="absolute top-3 left-3 bg-white/90 backdrop-blur px-2 py-0.5 text-[10px] font-bold uppercase rounded text-slate-700">Tablet</span>
+              <span class="absolute top-3 right-3 bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full">Stok: 2 Unit</span>
+              <div class="text-center font-bold text-slate-400 text-sm">iPad Pro 11" M2</div>
+            </div>
+            <div class="p-5 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="font-bold text-slate-900 text-base">iPad Pro 11" M2 Chip</h3>
+                <p class="text-xs text-slate-500 mt-0.5">128GB Wi-Fi · Space Gray</p>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-baseline justify-between">
+                  <span class="text-xs text-slate-400">Harga Sewa:</span>
+                  <div class="text-right">
+                    <span class="text-base font-extrabold text-slate-900">Rp 135.000</span>
+                    <span class="text-[11px] text-slate-500 font-normal"> /hari</span>
+                  </div>
+                </div>
+              </div>
+              <button onclick="openBookingModal('ipad-m2')" class="mt-4 w-full py-2.5 rounded-xl bg-emerald-600 text-white font-bold text-xs hover:bg-emerald-700 transition">
+                Sewa Sekarang
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="gadget-card bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col" data-category="Laptop">
+            <div class="h-44 bg-slate-100 flex items-center justify-center p-4 relative">
+              <span class="absolute top-3 left-3 bg-white/90 backdrop-blur px-2 py-0.5 text-[10px] font-bold uppercase rounded text-slate-700">Laptop</span>
+              <span class="absolute top-3 right-3 bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full">Stok: 2 Unit</span>
+              <div class="text-center font-bold text-slate-400 text-sm">ASUS ROG Zephyrus G14</div>
+            </div>
+            <div class="p-5 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="font-bold text-slate-900 text-base">ASUS ROG Zephyrus G14</h3>
+                <p class="text-xs text-slate-500 mt-0.5">Ryzen 9 · 16GB · RTX 4060 · 1TB</p>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-baseline justify-between">
+                  <span class="text-xs text-slate-400">Harga Sewa:</span>
+                  <div class="text-right">
+                    <span class="text-base font-extrabold text-slate-900">Rp 240.000</span>
+                    <span class="text-[11px] text-slate-500 font-normal"> /hari</span>
+                  </div>
+                </div>
+              </div>
+              <button onclick="openBookingModal('rog-g14')" class="mt-4 w-full py-2.5 rounded-xl bg-emerald-600 text-white font-bold text-xs hover:bg-emerald-700 transition">
+                Sewa Sekarang
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ========================================================== -->
+    <!-- VIEW B: HALAMAN INVOICE RESMI (Muat 1 Halaman & Siap Cetak)-->
+    <!-- ========================================================== -->
+    <div id="view-invoice" class="hidden py-8 px-4 sm:px-6">
+      <div class="max-w-3xl mx-auto mb-4 no-print flex items-center justify-between">
+        <button onclick="switchView('landing')" class="text-xs font-semibold text-slate-600 hover:text-slate-900 flex items-center gap-1">
+          &larr; Kembali ke Beranda
+        </button>
+        <div class="flex items-center gap-2">
+          <button onclick="window.print()" class="px-4 py-2 bg-emerald-600 text-white text-xs font-bold rounded-xl hover:bg-emerald-700 shadow-sm transition">
+            Opsi Simpan PDF / Cetak Invoice
+          </button>
+          <button onclick="switchView('admin')" class="px-3 py-2 bg-slate-800 text-white text-xs font-semibold rounded-xl hover:bg-slate-700 transition">
+            Buka di Admin
+          </button>
+        </div>
+      </div>
+
+      <!-- INVOICE SHEET (Desain Bersih 1 Halaman Sesuai Permintaan) -->
+      <div class="print-page max-w-3xl mx-auto bg-white border border-slate-300 rounded-2xl p-6 sm:p-8 shadow-sm text-slate-800">
+        <!-- Header Invoice -->
+        <div class="flex justify-between items-start pb-6 border-b border-slate-200">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-2xl font-black text-slate-900 tracking-tight">Grent</span>
+              <span class="text-xs font-bold px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded">
+                Gadget Rental
+              </span>
+            </div>
+            <p class="text-[11px] text-slate-500 mt-1">Layanan Penyewaan Gadget Resmi & Terpercaya</p>
+            <p class="text-[11px] text-slate-500">Cabang Margonda Raya No. 525, Depok · Hotline: 0895-6229-96629</p>
+          </div>
+
+          <div class="text-right">
+            <span class="text-xs uppercase tracking-wider font-bold text-slate-400">Lembar Invoice Resmi</span>
+            <p class="text-base font-extrabold text-slate-900 mt-0.5" id="inv-code">INV-20261027-GR889</p>
+            <p class="text-[11px] text-slate-500 mt-1">Tanggal: <span id="inv-created-date">27 Oktober 2026</span></p>
+            <span id="inv-status-badge" class="mt-2 inline-block px-3 py-1 text-xs font-bold rounded-full bg-emerald-100 text-emerald-800">
+              LUNAS / SIAP AMBIL
+            </span>
+          </div>
+        </div>
+
+        <!-- Detail Penyewa & Serah Terima -->
+        <div class="grid grid-cols-2 gap-6 py-5 border-b border-slate-200 text-xs">
+          <div>
+            <span class="text-[10px] uppercase font-bold text-slate-400">Penyewa (Customer)</span>
+            <p class="font-bold text-slate-900 text-sm mt-0.5" id="inv-cust-name">Budi Santoso</p>
+            <p class="text-slate-600 mt-0.5">Telepon: <span id="inv-cust-phone">0812-9876-5432</span></p>
+            <p class="text-slate-600">Email: <span id="inv-cust-email">budi.santoso@gmail.com</span></p>
+            <p class="text-slate-600">Alamat: <span id="inv-cust-address">Jl. Margonda Raya No. 12, Depok</span></p>
+          </div>
+          <div class="text-right">
+            <span class="text-[10px] uppercase font-bold text-slate-400">Metode & Periode Sewa</span>
+            <p class="font-bold text-slate-900 text-sm mt-0.5" id="inv-method">Ambil di Toko (Pickup)</p>
+            <p class="text-slate-600 mt-0.5">Mulai: <strong id="inv-start-date">27 Oktober 2026</strong></p>
+            <p class="text-slate-600">Selesai: <strong id="inv-end-date">30 Oktober 2026</strong></p>
+            <p class="text-emerald-700 font-semibold">Durasi: <span id="inv-duration">3 Hari Sewa</span></p>
+          </div>
+        </div>
+
+        <!-- Tabel Rincian Biaya -->
+        <div class="py-5 border-b border-slate-200">
+          <table class="w-full text-left text-xs">
+            <thead>
+              <tr class="border-b border-slate-200 text-slate-400 uppercase text-[10px]">
+                <th class="pb-2">Rincian Gadget</th>
+                <th class="pb-2 text-center">Durasi</th>
+                <th class="pb-2 text-right">Tarif Harian</th>
+                <th class="pb-2 text-right">Subtotal</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr>
+                <td class="py-3">
+                  <p class="font-bold text-slate-900 text-sm" id="inv-unit-model">MacBook Pro M3 (2024)</p>
+                  <p class="text-[11px] text-slate-500" id="inv-unit-spec">512GB SSD · 16GB RAM · Space Gray</p>
+                </td>
+                <td class="py-3 text-center font-medium" id="inv-table-duration">3 Hari</td>
+                <td class="py-3 text-right" id="inv-table-rate">Rp 220.000</td>
+                <td class="py-3 text-right font-bold text-slate-900" id="inv-table-subtotal">Rp 660.000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Ringkasan Total & Pembayaran -->
+        <div class="pt-5 flex justify-between items-center text-xs">
+          <div>
+            <span class="text-[10px] uppercase font-bold text-slate-400">Metode Pembayaran</span>
+            <p class="font-bold text-slate-900 mt-0.5" id="inv-pay-method">QRIS Statis (Terverifikasi Otomatis)</p>
+            <p class="text-[11px] text-slate-500 mt-1 max-w-sm">
+              Tunjukkan lembar invoice ini beserta e-KTP fisik asli kepada petugas toko saat serah terima unit gadget.
+            </p>
+          </div>
+          <div class="text-right">
+            <span class="text-[11px] text-slate-500">Total Biaya Sewa:</span>
+            <p class="text-2xl font-black text-slate-900 mt-0.5" id="inv-total-price">Rp 660.000</p>
+          </div>
+        </div>
+
+        <!-- Footer Tanda Tangan & QR Validasi -->
+        <div class="mt-8 pt-4 border-t border-slate-200 flex justify-between items-end text-[11px] text-slate-500">
+          <div>
+            <p class="font-bold text-slate-800">Grent Rental Gadget Indonesia</p>
+            <p>Sistem Manajemen Operasional & Penjaminan Unit</p>
+          </div>
+          <div class="text-center">
+            <div class="w-16 h-16 bg-slate-100 border border-slate-300 rounded flex items-center justify-center font-mono text-[9px] text-slate-400 mx-auto">
+              [QR VALID]
+            </div>
+            <p class="mt-1 text-[10px] font-semibold text-slate-700">Kode Verifikasi Toko</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================== -->
+    <!-- VIEW C: DASHBOARD ADMIN                                    -->
+    <!-- ========================================================== -->
+    <div id="view-admin" class="hidden py-8 max-w-6xl mx-auto px-4 sm:px-6">
+      <!-- Admin Subheader -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <div>
+          <span class="text-[11px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">
+            Area Operasional Petugas
+          </span>
+          <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mt-1">
+            Dashboard Manajemen Admin Grent
+          </h1>
+          <p class="text-xs text-slate-500 mt-0.5">Kelola pesanan penyewaan, etalase unit, dan konfigurasi profil staff</p>
+        </div>
+
+        <!-- Admin Tabs -->
+        <div class="flex items-center gap-1.5 bg-slate-100 p-1 rounded-xl border border-slate-200 text-xs font-semibold">
+          <button onclick="setAdminTab('rentals')" id="admin-tab-rentals" class="px-3.5 py-1.5 rounded-lg bg-white text-slate-900 shadow-sm transition">
+            Kelola Booking
+          </button>
+          <button onclick="setAdminTab('phones')" id="admin-tab-phones" class="px-3.5 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition">
+            Katalog Gadget
+          </button>
+          <button onclick="setAdminTab('profile')" id="admin-tab-profile" class="px-3.5 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition">
+            Profil Admin
+          </button>
+        </div>
+      </div>
+
+      <!-- Admin Tab 1: Kelola Booking -->
+      <div id="admin-content-rentals" class="block space-y-4">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+            <span class="text-xs text-slate-500">Total Booking Aktif</span>
+            <p class="text-2xl font-bold text-slate-900 mt-1">12 Pesanan</p>
+          </div>
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+            <span class="text-xs text-slate-500">Menunggu Konfirmasi Cash</span>
+            <p class="text-2xl font-bold text-amber-600 mt-1" id="admin-pending-count">1 Pesanan</p>
+          </div>
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+            <span class="text-xs text-slate-500">Unit Sedang Disewa</span>
+            <p class="text-2xl font-bold text-emerald-600 mt-1">8 Unit</p>
+          </div>
+        </div>
+
+        <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
+          <div class="px-6 py-4 border-b border-slate-200 flex justify-between items-center">
+            <h3 class="font-bold text-slate-900 text-sm">Daftar Reservasi & Konfirmasi Pembayaran</h3>
+            <span class="text-xs text-slate-500">Otomatis sinkron dengan database</span>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-slate-50 border-b border-slate-200 text-slate-500 uppercase text-[10px]">
+                <tr>
+                  <th class="px-6 py-3">Penyewa & Kontak</th>
+                  <th class="px-6 py-3">Unit Gadget</th>
+                  <th class="px-6 py-3">Durasi</th>
+                  <th class="px-6 py-3">Metode Bayar</th>
+                  <th class="px-6 py-3">Total Biaya</th>
+                  <th class="px-6 py-3">Status</th>
+                  <th class="px-6 py-3 text-right">Aksi Petugas</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100" id="admin-booking-tbody">
+                <!-- Baris Booking Dinamis -->
+                <tr id="admin-row-demo">
+                  <td class="px-6 py-4">
+                    <p class="font-bold text-slate-900">Budi Santoso</p>
+                    <p class="text-[11px] text-slate-500">0812-9876-5432</p>
+                  </td>
+                  <td class="px-6 py-4">
+                    <p class="font-semibold text-slate-800">MacBook Pro M3</p>
+                    <p class="text-[11px] text-slate-500">512GB · Space Gray</p>
+                  </td>
+                  <td class="px-6 py-4">
+                    <p class="font-medium text-slate-700">3 Hari</p>
+                    <p class="text-[10px] text-slate-400">27 Okt - 30 Okt</p>
+                  </td>
+                  <td class="px-6 py-4">
+                    <span class="px-2 py-0.5 rounded font-bold text-[10px] bg-amber-100 text-amber-800" id="row-pay-badge">
+                      CASH (TUNAI DI TOKO)
+                    </span>
+                  </td>
+                  <td class="px-6 py-4 font-bold text-slate-900">
+                    Rp 660.000
+                  </td>
+                  <td class="px-6 py-4">
+                    <span class="px-2.5 py-1 rounded-full font-bold text-[10px] bg-amber-100 text-amber-800" id="row-status-badge">
+                      Menunggu Bayar di Toko
+                    </span>
+                  </td>
+                  <td class="px-6 py-4 text-right">
+                    <button onclick="adminConfirmCash()" id="btn-admin-confirm" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg text-[11px] transition">
+                      Konfirmasi Bayar Cash
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Admin Tab 2: Katalog Gadget (Edit Etalase) -->
+      <div id="admin-content-phones" class="hidden space-y-6">
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="font-bold text-slate-900 text-sm">Kelola Etalase Unit Sewa</h3>
+            <span class="text-xs text-slate-500">Admin dapat mengubah tarif dan ketersediaan stok</span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="border border-slate-200 p-4 rounded-xl flex items-center justify-between">
+              <div>
+                <p class="font-bold text-slate-900 text-sm">MacBook Pro M3 (2024)</p>
+                <p class="text-xs text-slate-500">Tarif Saat Ini: Rp 220.000 /hari · Stok: 3</p>
+              </div>
+              <button onclick="alert('Fitur edit etalase aktif di sistem')" class="px-3 py-1.5 text-xs font-semibold rounded-lg border border-slate-300 hover:bg-slate-50">
+                Ubah Harga & Stok
+              </button>
+            </div>
+
+            <div class="border border-slate-200 p-4 rounded-xl flex items-center justify-between">
+              <div>
+                <p class="font-bold text-slate-900 text-sm">iPhone 15 Pro Max</p>
+                <p class="text-xs text-slate-500">Tarif Saat Ini: Rp 190.000 /hari · Stok: 5</p>
+              </div>
+              <button onclick="alert('Fitur edit etalase aktif di sistem')" class="px-3 py-1.5 text-xs font-semibold rounded-lg border border-slate-300 hover:bg-slate-50">
+                Ubah Harga & Stok
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Admin Tab 3: Profil Admin (Sesuai Fitur Terbaru) -->
+      <div id="admin-content-profile" class="hidden space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Kolom Kiri: Kartu Identitas Staff -->
+          <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col items-center text-center">
+            <div class="w-24 h-24 rounded-full bg-slate-900 text-emerald-400 font-black text-3xl flex items-center justify-center border-4 border-slate-100 shadow">
+              ADM
+            </div>
+            <h3 class="font-extrabold text-slate-900 text-lg mt-3">Petugas Admin Grent</h3>
+            <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-3 py-0.5 rounded-full mt-1">
+              Super Admin Operasional
+            </span>
+            <div class="w-full mt-6 pt-4 border-t border-slate-100 text-left text-xs space-y-2 text-slate-600">
+              <p><strong>Username:</strong> admin</p>
+              <p><strong>Cabang:</strong> Grent Margonda Raya No. 525, Depok</p>
+              <p><strong>Status Akun:</strong> <span class="text-emerald-600 font-bold">Aktif & Berwenang</span></p>
+            </div>
+          </div>
+
+          <!-- Kolom Kanan: Form Profil & Hak Akses -->
+          <div class="md:col-span-2 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+            <h3 class="font-bold text-slate-900 text-sm mb-4">Informasi Petugas & Kontak Resmi Toko</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+              <div>
+                <label class="font-semibold text-slate-700">Nama Lengkap Petugas</label>
+                <input type="text" value="Petugas Admin Grent" class="w-full mt-1 px-3 py-2 border border-slate-300 rounded-lg outline-none" readonly />
+              </div>
+              <div>
+                <label class="font-semibold text-slate-700">Email Operasional</label>
+                <input type="email" value="admin@staffadmin.id" class="w-full mt-1 px-3 py-2 border border-slate-300 rounded-lg outline-none" readonly />
+              </div>
+              <div>
+                <label class="font-semibold text-slate-700">Hotline Operasional Toko</label>
+                <input type="text" value="0895-6229-96629" class="w-full mt-1 px-3 py-2 border border-slate-300 rounded-lg outline-none" readonly />
+              </div>
+              <div>
+                <label class="font-semibold text-slate-700">Cabang Penugasan</label>
+                <input type="text" value="Grent Margonda Raya No. 525, Depok" class="w-full mt-1 px-3 py-2 border border-slate-300 rounded-lg outline-none" readonly />
+              </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-slate-100">
+              <span class="text-xs font-bold text-slate-800">Daftar Hak Akses Sistem:</span>
+              <ul class="mt-2 text-xs text-slate-600 space-y-1.5">
+                <li class="flex items-center gap-2">
+                  <span class="text-emerald-600 font-bold">&check;</span>
+                  Konfirmasi pembayaran tunai (Cash) saat serah terima unit di toko
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="text-emerald-600 font-bold">&check;</span>
+                  Verifikasi validitas pembayaran QRIS dan kode invoice pelanggan
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="text-emerald-600 font-bold">&check;</span>
+                  Edit etalase sewa (penyesuaian tarif harian/mingguan/bulanan dan stok)
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="text-emerald-600 font-bold">&check;</span>
+                  Memeriksa kelengkapan data diri dan verifikasi e-KTP pelanggan
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ============================================================ -->
+  <!-- MODAL 1: FORMULIR BOOKING GADGET                             -->
+  <!-- ============================================================ -->
+  <div id="modal-booking" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-xl w-full p-6 shadow-2xl border border-slate-200 max-h-[92vh] overflow-y-auto custom-scrollbar">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div>
+          <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded">
+            Langkah 1 dari 3
+          </span>
+          <h3 class="font-bold text-lg text-slate-900 mt-1">Formulir Pemesanan Gadget</h3>
+        </div>
+        <button onclick="closeModal('modal-booking')" class="w-8 h-8 rounded-full border border-slate-200 text-slate-400 hover:text-slate-700 flex items-center justify-center">
+          &times;
+        </button>
+      </div>
+
+      <!-- Unit terpilih -->
+      <div class="my-4 p-3.5 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between text-xs">
+        <div>
+          <span class="text-[10px] text-slate-400 uppercase font-semibold">Unit Gadget:</span>
+          <p class="font-bold text-slate-900 text-sm" id="modal-unit-name">MacBook Pro M3 (2024)</p>
+          <p class="text-slate-500" id="modal-unit-spec">512GB SSD · 16GB RAM · Space Gray</p>
+        </div>
+        <div class="text-right">
+          <span class="text-[10px] text-slate-400">Tarif Harian:</span>
+          <p class="font-extrabold text-slate-900 text-sm" id="modal-unit-rate">Rp 220.000 /hari</p>
+        </div>
+      </div>
+
+      <!-- Tanggal Sewa & Durasi Realtime -->
+      <div class="grid grid-cols-2 gap-3 text-xs mb-4">
+        <div>
+          <label class="font-semibold text-slate-700">Tanggal Mulai Sewa</label>
+          <input type="date" id="book-start-date" value="2026-10-27" onchange="calculateBooking()" class="w-full mt-1 px-3 py-2 border border-slate-300 rounded-lg outline-none focus:ring-1 focus:ring-emerald-500" />
+        </div>
+        <div>
+          <label class="font-semibold text-slate-700">Tanggal Selesai Sewa</label>
+          <input type="date" id="book-end-date" value="2026-10-30" onchange="calculateBooking()" class="w-full mt-1 px-3 py-2 border border-slate-300 rounded-lg outline-none focus:ring-1 focus:ring-emerald-500" />
+        </div>
+      </div>
+
+      <!-- Metode Pembayaran: QRIS vs Cash -->
+      <div class="mb-4">
+        <label class="text-xs font-semibold text-slate-700 block mb-2">Pilih Metode Pembayaran:</label>
+        <div class="grid grid-cols-2 gap-3 text-xs">
+          <label class="border border-slate-200 p-3 rounded-xl cursor-pointer hover:border-emerald-500 flex items-start gap-2.5 has-[:checked]:border-emerald-600 has-[:checked]:bg-emerald-50/40">
+            <input type="radio" name="pay-method" value="QRIS" checked onchange="togglePaymentNote(this.value)" class="mt-0.5 text-emerald-600 focus:ring-emerald-500" />
+            <div>
+              <p class="font-bold text-slate-900">QRIS (Otomatis)</p>
+              <p class="text-[11px] text-slate-500 mt-0.5">Masa aktif 24 jam. Langsung dapat invoice untuk pengambilan di toko.</p>
+            </div>
+          </label>
+
+          <label class="border border-slate-200 p-3 rounded-xl cursor-pointer hover:border-emerald-500 flex items-start gap-2.5 has-[:checked]:border-emerald-600 has-[:checked]:bg-emerald-50/40">
+            <input type="radio" name="pay-method" value="CASH" onchange="togglePaymentNote(this.value)" class="mt-0.5 text-emerald-600 focus:ring-emerald-500" />
+            <div>
+              <p class="font-bold text-slate-900">Cash (Tunai di Toko)</p>
+              <p class="text-[11px] text-slate-500 mt-0.5">Bayar tunai kepada petugas toko saat ambil gadget.</p>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Note Kecil / Guide Book Otomatis Muncul Saat Memilih Cash Sesuai Request User -->
+      <div id="cash-guide-note" class="hidden mb-4 p-4 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-900 leading-relaxed">
+        <div class="flex items-center gap-1.5 font-bold text-amber-950 mb-1">
+          <span>Panduan Pembayaran Cash (Tunai di Toko):</span>
+        </div>
+        <ol class="list-decimal pl-4 space-y-1 text-[11px]">
+          <li><strong>Pemesanan:</strong> Sistem mencatat pesanan Anda dengan status <em>Menunggu Pembayaran / Konfirmasi Admin</em>.</li>
+          <li><strong>Pengambilan di Toko:</strong> Anda datang ke cabang Grent Store dan melakukan pembayaran tunai langsung kepada petugas.</li>
+          <li><strong>Konfirmasi Petugas:</strong> Petugas admin memverifikasi uang fisik dan mengonfirmasi pembayaran di sistem menjadi <em>Lunas</em>.</li>
+          <li><strong>Serah Terima:</strong> Gadget siap diserahkan dan dicek bersama petugas.</li>
+        </ol>
+      </div>
+
+      <!-- Ringkasan Biaya -->
+      <div class="p-4 bg-slate-900 text-white rounded-xl mb-5 flex justify-between items-center text-xs">
+        <div>
+          <span class="text-slate-400 text-[10px]">Durasi: <strong id="book-calc-days" class="text-white">3 Hari Sewa</strong></span>
+          <p class="text-slate-300 text-[11px]">Tarif Harian x Durasi</p>
+        </div>
+        <div class="text-right">
+          <span class="text-slate-400 text-[10px]">Total Estimasi Biaya:</span>
+          <p class="text-xl font-black text-emerald-400" id="book-calc-total">Rp 660.000</p>
+        </div>
+      </div>
+
+      <!-- Tombol Aksi -->
+      <div class="flex items-center justify-end gap-2.5">
+        <button onclick="closeModal('modal-booking')" class="px-4 py-2 border border-slate-300 text-slate-600 rounded-xl text-xs font-semibold hover:bg-slate-50">
+          Batal
+        </button>
+        <button onclick="proceedToTerms()" class="px-5 py-2.5 bg-emerald-600 text-white rounded-xl text-xs font-bold hover:bg-emerald-700 shadow-sm">
+          Lanjut ke Ketentuan & Denda &rarr;
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- MODAL 2: POP-UP KETENTUAN, SYARAT & DENDA (S&K)             -->
+  <!-- ============================================================ -->
+  <div id="modal-terms" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-2xl w-full p-6 shadow-2xl border border-slate-200 max-h-[92vh] flex flex-col">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div>
+          <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded">
+            Persetujuan Wajib Pelanggan
+          </span>
+          <h3 class="font-bold text-lg text-slate-900 mt-1">Syarat, Ketentuan & Kebijakan Denda Rental</h3>
+        </div>
+        <button onclick="closeModal('modal-terms')" class="w-8 h-8 rounded-full border border-slate-200 text-slate-400 hover:text-slate-700 flex items-center justify-center">
+          &times;
+        </button>
+      </div>
+
+      <!-- Scrollable Terms Content -->
+      <div class="my-4 overflow-y-auto space-y-4 text-xs text-slate-700 leading-relaxed pr-2 custom-scrollbar">
+        <!-- Emoticon Diperbolehkan Khusus di Bagian S&K Sesuai Peraturan User -->
+        <div class="p-3 bg-amber-50 rounded-xl border border-amber-200 text-amber-900">
+          ⚠️ <strong>Penting:</strong> Demi kenyamanan dan keamanan kedua belah pihak, setiap pelanggan wajib mematuhi ketentuan sewa dan menyetujui sanksi denda jika terjadi pelanggaran.
+        </div>
+
+        <div>
+          <h4 class="font-bold text-slate-900 text-sm mb-1.5">📌 1. Ketentuan Peminjaman Gadget</h4>
+          <ul class="list-disc pl-5 space-y-1 text-slate-600">
+            <li>Penyewa wajib memiliki akun Google terdaftar dan telah melengkapi profil e-KTP.</li>
+            <li>Unit yang disewa adalah untuk penggunaan wajar (tugas kuliah, kerja, event, pembuatan konten).</li>
+            <li>Dilarang membongkar baut, memodifikasi software/firmware (jailbreak/root), atau mengganti suku cadang asli.</li>
+            <li>Dilarang memindahtangankan atau menyewakan kembali unit kepada pihak ketiga tanpa izin resmi Grent.</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-bold text-slate-900 text-sm mb-1.5">⚖️ 2. Kebijakan Denda Pelanggaran</h4>
+          <table class="w-full text-left border border-slate-200 rounded-lg overflow-hidden text-xs">
+            <thead class="bg-slate-100 text-slate-600 font-bold">
+              <tr>
+                <th class="p-2 border-b border-slate-200">Jenis Pelanggaran</th>
+                <th class="p-2 border-b border-slate-200 text-right">Biaya / Sanksi Denda</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 text-slate-700">
+              <tr>
+                <td class="p-2">Keterlambatan Pengembalian (Late Return)</td>
+                <td class="p-2 text-right font-bold text-amber-600">Rp 50.000 / hari keterlambatan</td>
+              </tr>
+              <tr>
+                <td class="p-2">Lecet Fisik Ringan / Baret Penggunaan Kasar</td>
+                <td class="p-2 text-right font-bold text-slate-800">Rp 150.000 - Rp 300.000</td>
+              </tr>
+              <tr>
+                <td class="p-2">Kerusakan Layar Pecah / Kerusakan Komponen</td>
+                <td class="p-2 text-right font-bold text-rose-600">Sesuai Biaya Service Center Resmi</td>
+              </tr>
+              <tr>
+                <td class="p-2">Kehilangan Aksesoris (Charger / Kabel Asli)</td>
+                <td class="p-2 text-right font-bold text-slate-800">Rp 250.000 - Rp 500.000 / item</td>
+              </tr>
+              <tr>
+                <td class="p-2">Kehilangan Unit Total</td>
+                <td class="p-2 text-right font-bold text-rose-600">Ganti Unit Setara / 100% Harga Pasar</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Checkbox Persetujuan -->
+        <div class="pt-3 border-t border-slate-200">
+          <label class="flex items-start gap-2.5 cursor-pointer">
+            <input type="checkbox" id="check-agree-terms" class="mt-0.5 rounded text-emerald-600 focus:ring-emerald-500 h-4 w-4" />
+            <span class="text-xs font-semibold text-slate-800">
+              Saya telah membaca, memahami, dan menyetujui seluruh Syarat, Ketentuan, serta Kebijakan Denda peminjaman yang berlaku di Grent.
+            </span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Tombol Aksi -->
+      <div class="pt-3 border-t border-slate-100 flex items-center justify-end gap-2.5">
+        <button onclick="closeModal('modal-terms')" class="px-4 py-2 border border-slate-300 text-slate-600 rounded-xl text-xs font-semibold hover:bg-slate-50">
+          Kembali / Periksa Lagi
+        </button>
+        <button onclick="confirmOrderAndShowInvoice()" class="px-5 py-2.5 bg-emerald-600 text-white rounded-xl text-xs font-bold hover:bg-emerald-700 shadow-sm">
+          Saya Setuju & Konfirmasi Pesanan &rarr;
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- MODAL 3: VERIFIKASI PROFIL & DATA DIRI CUSTOMER (KYC)        -->
+  <!-- ============================================================ -->
+  <div id="modal-kyc" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-xl w-full p-6 shadow-2xl border border-slate-200 max-h-[92vh] overflow-y-auto custom-scrollbar">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div>
+          <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded">
+            Verifikasi Identitas Pelanggan (KYC)
+          </span>
+          <h3 class="font-bold text-lg text-slate-900 mt-1">Data Diri & Dokumen e-KTP</h3>
+        </div>
+        <button onclick="closeModal('modal-kyc')" class="w-8 h-8 rounded-full border border-slate-200 text-slate-400 hover:text-slate-700 flex items-center justify-center">
+          &times;
+        </button>
+      </div>
+
+      <div class="my-4 text-xs text-slate-600">
+        <p class="leading-relaxed">
+          Sesuai kebijakan keamanan Grent, penyewa wajib mengisi data diri lengkap dan mengunggah foto e-KTP asli sebelum dapat melakukan pemesanan gadget.
+        </p>
+
+        <!-- Preview KTP -->
+        <div class="mt-4 p-4 border-2 border-dashed border-slate-300 rounded-xl bg-slate-50 text-center">
+          <div class="w-12 h-8 bg-slate-200 rounded mx-auto mb-2 flex items-center justify-center font-bold text-slate-500 text-[10px]">
+            KTP
+          </div>
+          <p class="font-bold text-slate-800 text-xs">Foto Dokumen e-KTP Asli Terlampir</p>
+          <p class="text-[10px] text-emerald-600 font-semibold mt-0.5">&check; Dokumen Terverifikasi Otomatis</p>
+        </div>
+
+        <div class="mt-4 space-y-3">
+          <div>
+            <label class="font-semibold text-slate-700">Nama Lengkap (Sesuai KTP)</label>
+            <input type="text" id="kyc-input-name" value="Budi Santoso" class="w-full mt-1 px-3 py-2 border border-slate-300 rounded-lg outline-none focus:ring-1 focus:ring-emerald-500" />
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="font-semibold text-slate-700">Nomor Induk Kependudukan (NIK)</label>
+              <input type="text" value="3276012304950001" class="w-full mt-1 px-3 py-2 border border-slate-300 rounded-lg outline-none" />
+            </div>
+            <div>
+              <label class="font-semibold text-slate-700">Tempat, Tanggal Lahir (TTL)</label>
+              <input type="text" value="Jakarta, 12 April 1999" class="w-full mt-1 px-3 py-2 border border-slate-300 rounded-lg outline-none" />
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="font-semibold text-slate-700">Email Akun Google</label>
+              <input type="email" value="budi.santoso@gmail.com" class="w-full mt-1 px-3 py-2 border border-slate-300 rounded-lg outline-none bg-slate-50" readonly />
+            </div>
+            <div>
+              <label class="font-semibold text-slate-700">Nomor WhatsApp Aktif</label>
+              <input type="tel" value="0812-9876-5432" class="w-full mt-1 px-3 py-2 border border-slate-300 rounded-lg outline-none" />
+            </div>
+          </div>
+          <div>
+            <label class="font-semibold text-slate-700">Alamat Domisili Saat Ini</label>
+            <textarea rows="2" class="w-full mt-1 px-3 py-2 border border-slate-300 rounded-lg outline-none">Jl. Margonda Raya No. 12, Kel. Pondok Cina, Kec. Beji, Kota Depok</textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-3 border-t border-slate-100 flex items-center justify-end gap-2.5">
+        <button onclick="closeModal('modal-kyc')" class="px-4 py-2 border border-slate-300 text-slate-600 rounded-xl text-xs font-semibold hover:bg-slate-50">
+          Tutup
+        </button>
+        <button onclick="saveKycData()" class="px-5 py-2.5 bg-emerald-600 text-white rounded-xl text-xs font-bold hover:bg-emerald-700 shadow-sm">
+          Simpan & Perbarui Profil
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- JAVASCRIPT LOGIC & REACTIVE STATE                           -->
+  <!-- ============================================================ -->
+  <script>
+    // State Aplikasi
+    const state = {
+      role: 'customer', // 'customer' | 'admin'
+      view: 'landing',  // 'landing' | 'invoice' | 'admin'
+      adminTab: 'rentals',
+      selectedUnit: {
+        id: 'mbp-m3',
+        model: 'MacBook Pro M3 (2024)',
+        spec: '512GB SSD · 16GB RAM · Space Gray',
+        rate: 220000,
+        category: 'Laptop'
+      },
+      booking: {
+        days: 3,
+        startDate: '2026-10-27',
+        endDate: '2026-10-30',
+        paymentMethod: 'QRIS',
+        totalPrice: 660000,
+        status: 'PAID'
+      },
+      customer: {
+        name: 'Budi Santoso',
+        phone: '0812-9876-5432',
+        email: 'budi.santoso@gmail.com',
+        address: 'Jl. Margonda Raya No. 12, Depok',
+        isVerified: true
+      }
+    };
+
+    // Ganti View Utama
+    function switchView(viewName) {
+      state.view = viewName;
+      document.getElementById('view-landing').classList.add('hidden');
+      document.getElementById('view-invoice').classList.add('hidden');
+      document.getElementById('view-admin').classList.add('hidden');
+
+      // Update Top Nav button active state
+      const buttons = ['landing', 'invoice', 'admin'];
+      buttons.forEach(b => {
+        const btn = document.getElementById(`btn-view-${b}`);
+        if (btn) {
+          if (b === viewName) {
+            btn.className = "px-2.5 py-1 rounded font-medium transition bg-emerald-600 text-white hover:bg-emerald-500";
+          } else {
+            btn.className = "px-2.5 py-1 rounded font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white";
+          }
+        }
+      });
+
+      if (viewName === 'landing') {
+        document.getElementById('view-landing').classList.remove('hidden');
+        document.getElementById('app-navbar').classList.remove('hidden');
+      } else if (viewName === 'invoice') {
+        document.getElementById('view-invoice').classList.remove('hidden');
+        // Hide navbar on invoice view as user specifically requested
+        document.getElementById('app-navbar').classList.add('hidden');
+        updateInvoiceView();
+      } else if (viewName === 'admin') {
+        document.getElementById('view-admin').classList.remove('hidden');
+        document.getElementById('app-navbar').classList.remove('hidden');
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Ganti Role (Customer vs Admin)
+    function setRole(roleName) {
+      state.role = roleName;
+      const custBtn = document.getElementById('role-cust-btn');
+      const adminBtn = document.getElementById('role-admin-btn');
+
+      if (roleName === 'customer') {
+        custBtn.className = "px-2 py-0.5 rounded font-semibold bg-emerald-500 text-slate-900 transition";
+        adminBtn.className = "px-2 py-0.5 rounded font-medium text-slate-300 hover:text-white transition";
+        switchView('landing');
+      } else {
+        adminBtn.className = "px-2 py-0.5 rounded font-semibold bg-emerald-500 text-slate-900 transition";
+        custBtn.className = "px-2 py-0.5 rounded font-medium text-slate-300 hover:text-white transition";
+        switchView('admin');
+      }
+    }
+
+    // Admin Tab Navigation
+    function setAdminTab(tabName) {
+      state.adminTab = tabName;
+      const tabs = ['rentals', 'phones', 'profile'];
+      tabs.forEach(t => {
+        const btn = document.getElementById(`admin-tab-${t}`);
+        const content = document.getElementById(`admin-content-${t}`);
+        if (t === tabName) {
+          btn.className = "px-3.5 py-1.5 rounded-lg bg-white text-slate-900 shadow-sm transition";
+          content.classList.remove('hidden');
+        } else {
+          btn.className = "px-3.5 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition";
+          content.classList.add('hidden');
+        }
+      });
+    }
+
+    // Filter Kategori (Single listbox All / Laptop / Gadget Lainnya)
+    function filterCategory(cat) {
+      const cards = document.querySelectorAll('.gadget-card');
+      cards.forEach(card => {
+        const itemCat = card.getAttribute('data-category');
+        if (cat === 'ALL' || itemCat === cat) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+
+    // Modal Control
+    function openModal(id) {
+      document.getElementById(id).classList.remove('hidden');
+    }
+    function closeModal(id) {
+      document.getElementById(id).classList.add('hidden');
+    }
+
+    // Booking Modal Flow
+    function openBookingModal(unitId) {
+      if (unitId === 'mbp-m3') {
+        state.selectedUnit = {
+          id: 'mbp-m3',
+          model: 'MacBook Pro M3 (2024)',
+          spec: '512GB SSD · 16GB RAM · Space Gray',
+          rate: 220000,
+          category: 'Laptop'
+        };
+      } else if (unitId === 'ip15-pm') {
+        state.selectedUnit = {
+          id: 'ip15-pm',
+          model: 'iPhone 15 Pro Max',
+          spec: '256GB · Natural Titanium',
+          rate: 190000,
+          category: 'Smartphone'
+        };
+      } else if (unitId === 'ipad-m2') {
+        state.selectedUnit = {
+          id: 'ipad-m2',
+          model: 'iPad Pro 11" M2 Chip',
+          spec: '128GB Wi-Fi · Space Gray',
+          rate: 135000,
+          category: 'Tablet'
+        };
+      } else if (unitId === 'rog-g14') {
+        state.selectedUnit = {
+          id: 'rog-g14',
+          model: 'ASUS ROG Zephyrus G14',
+          spec: 'Ryzen 9 · 16GB · RTX 4060 · 1TB',
+          rate: 240000,
+          category: 'Laptop'
+        };
+      }
+
+      document.getElementById('modal-unit-name').innerText = state.selectedUnit.model;
+      document.getElementById('modal-unit-spec').innerText = state.selectedUnit.spec;
+      document.getElementById('modal-unit-rate').innerText = 'Rp ' + state.selectedUnit.rate.toLocaleString('id-ID') + ' /hari';
+
+      calculateBooking();
+      openModal('modal-booking');
+    }
+
+    function calculateBooking() {
+      const start = new Date(document.getElementById('book-start-date').value);
+      const end = new Date(document.getElementById('book-end-date').value);
+      const diffTime = end - start;
+      let days = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      if (days <= 0 || isNaN(days)) days = 1;
+
+      state.booking.days = days;
+      state.booking.totalPrice = days * state.selectedUnit.rate;
+      state.booking.startDate = document.getElementById('book-start-date').value;
+      state.booking.endDate = document.getElementById('book-end-date').value;
+
+      document.getElementById('book-calc-days').innerText = days + ' Hari Sewa';
+      document.getElementById('book-calc-total').innerText = 'Rp ' + state.booking.totalPrice.toLocaleString('id-ID');
+    }
+
+    function togglePaymentNote(method) {
+      state.booking.paymentMethod = method;
+      const note = document.getElementById('cash-guide-note');
+      if (method === 'CASH') {
+        note.classList.remove('hidden');
+        state.booking.status = 'PENDING';
+      } else {
+        note.classList.add('hidden');
+        state.booking.status = 'PAID';
+      }
+    }
+
+    function proceedToTerms() {
+      closeModal('modal-booking');
+      openModal('modal-terms');
+    }
+
+    function openTermsModal() {
+      openModal('modal-terms');
+    }
+
+    function openKycModal() {
+      openModal('modal-kyc');
+    }
+
+    function saveKycData() {
+      const name = document.getElementById('kyc-input-name').value;
+      state.customer.name = name;
+      document.getElementById('nav-cust-name').innerText = name;
+      closeModal('modal-kyc');
+      alert('Data profil dan e-KTP berhasil disimpan dan terverifikasi!');
+    }
+
+    function confirmOrderAndShowInvoice() {
+      const agreed = document.getElementById('check-agree-terms').checked;
+      if (!agreed) {
+        alert('Anda wajib mencentang persetujuan Syarat, Ketentuan, dan Kebijakan Denda untuk melanjutkan pemesanan.');
+        return;
+      }
+      closeModal('modal-terms');
+      switchView('invoice');
+    }
+
+    function updateInvoiceView() {
+      document.getElementById('inv-cust-name').innerText = state.customer.name;
+      document.getElementById('inv-cust-phone').innerText = state.customer.phone;
+      document.getElementById('inv-cust-email').innerText = state.customer.email;
+      document.getElementById('inv-cust-address').innerText = state.customer.address;
+
+      document.getElementById('inv-unit-model').innerText = state.selectedUnit.model;
+      document.getElementById('inv-unit-spec').innerText = state.selectedUnit.spec;
+      document.getElementById('inv-duration').innerText = state.booking.days + ' Hari Sewa';
+      document.getElementById('inv-table-duration').innerText = state.booking.days + ' Hari';
+      document.getElementById('inv-table-rate').innerText = 'Rp ' + state.selectedUnit.rate.toLocaleString('id-ID');
+      document.getElementById('inv-table-subtotal').innerText = 'Rp ' + state.booking.totalPrice.toLocaleString('id-ID');
+      document.getElementById('inv-total-price').innerText = 'Rp ' + state.booking.totalPrice.toLocaleString('id-ID');
+
+      if (state.booking.paymentMethod === 'CASH') {
+        document.getElementById('inv-pay-method').innerText = 'Cash (Bayar Tunai Kepada Petugas Toko)';
+        if (state.booking.status === 'PAID') {
+          document.getElementById('inv-status-badge').innerText = 'LUNAS (DIKONFIRMASI ADMIN)';
+          document.getElementById('inv-status-badge').className = 'mt-2 inline-block px-3 py-1 text-xs font-bold rounded-full bg-emerald-100 text-emerald-800';
+        } else {
+          document.getElementById('inv-status-badge').innerText = 'MENUNGGU PEMBAYARAN DI TOKO';
+          document.getElementById('inv-status-badge').className = 'mt-2 inline-block px-3 py-1 text-xs font-bold rounded-full bg-amber-100 text-amber-800';
+        }
+      } else {
+        document.getElementById('inv-pay-method').innerText = 'QRIS Statis (Terverifikasi Otomatis)';
+        document.getElementById('inv-status-badge').innerText = 'LUNAS / SIAP AMBIL';
+        document.getElementById('inv-status-badge').className = 'mt-2 inline-block px-3 py-1 text-xs font-bold rounded-full bg-emerald-100 text-emerald-800';
+      }
+    }
+
+    // Admin konfirmasi pembayaran cash
+    function adminConfirmCash() {
+      state.booking.status = 'PAID';
+      document.getElementById('row-status-badge').innerText = 'Lunas / Disetujui';
+      document.getElementById('row-status-badge').className = 'px-2.5 py-1 rounded-full font-bold text-[10px] bg-emerald-100 text-emerald-800';
+      document.getElementById('btn-admin-confirm').innerText = 'Sudah Dikonfirmasi';
+      document.getElementById('btn-admin-confirm').className = 'px-3 py-1.5 bg-slate-200 text-slate-500 font-bold rounded-lg text-[11px] cursor-not-allowed';
+      document.getElementById('btn-admin-confirm').disabled = true;
+      document.getElementById('admin-pending-count').innerText = '0 Pesanan';
+      alert('Pembayaran Cash Rp 660.000 berhasil dikonfirmasi oleh Admin! Status pesanan otomatis menjadi LUNAS dan unit dapat diserahkan kepada pelanggan.');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200" width="900" height="1200" fill="none">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&amp;display=swap');
+      text { font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    </style>
+    <filter id="shadow-sheet" x="-5%" y="-3%" width="110%" height="106%" filterUnits="objectBoundingBox">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#0f172a" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <!-- Canvas Background -->
+  <rect width="900" height="1200" fill="#F1F5F9"/>
+
+  <!-- Top Action Bar for PDF Print (Figma Frame Annotation) -->
+  <g transform="translate(60, 30)">
+    <rect width="780" height="46" rx="10" fill="#FFFFFF" stroke="#E2E8F0"/>
+    <text x="20" y="28" fill="#475569" font-size="12" font-weight="600">&larr; Kembali ke Beranda</text>
+
+    <rect x="580" y="7" width="186" height="32" rx="8" fill="#059669"/>
+    <text x="673" y="27" fill="#FFFFFF" font-size="11" font-weight="700" text-anchor="middle">Opsi Simpan PDF / Cetak</text>
+  </g>
+
+  <!-- ================= INVOICE PAPER SHEET (1 HALAMAN RESMI) ================= -->
+  <g transform="translate(60, 96)" filter="url(#shadow-sheet)">
+    <rect width="780" height="1050" rx="16" fill="#FFFFFF"/>
+
+    <!-- HEADER INVOICE -->
+    <g transform="translate(48, 48)">
+      <!-- Brand Logo -->
+      <g transform="translate(0, 0)">
+        <rect width="36" height="36" rx="10" fill="#0F172A"/>
+        <text x="18" y="25" fill="#34D399" font-size="18" font-weight="900" text-anchor="middle">G</text>
+        <text x="46" y="26" fill="#0F172A" font-size="24" font-weight="900" letter-spacing="-0.5">Grent</text>
+        <rect x="120" y="6" width="62" height="22" rx="6" fill="#D1FAE5"/>
+        <text x="151" y="21" fill="#065F46" font-size="11" font-weight="700" text-anchor="middle">Gadget</text>
+      </g>
+      <text x="0" y="56" fill="#64748B" font-size="11">Layanan Penyewaan Gadget Resmi &amp; Terpercaya</text>
+      <text x="0" y="72" fill="#64748B" font-size="11">Cabang Margonda Raya No. 525, Depok · Hotline: 0895-6229-96629</text>
+
+      <!-- Invoice Title & Code -->
+      <g transform="translate(684, 0)">
+        <text x="0" y="10" fill="#94A3B8" font-size="10" font-weight="700" text-anchor="end" letter-spacing="1">LEMBAR INVOICE RESMI</text>
+        <text x="0" y="34" fill="#0F172A" font-size="18" font-weight="900" text-anchor="end">INV-20261027-GR889</text>
+        <text x="0" y="52" fill="#64748B" font-size="11" text-anchor="end">Tanggal: 27 Oktober 2026</text>
+
+        <!-- Status Badge -->
+        <rect x="-160" y="62" width="160" height="26" rx="13" fill="#D1FAE5"/>
+        <text x="-80" y="79" fill="#065F46" font-size="11" font-weight="800" text-anchor="middle">LUNAS / SIAP AMBIL</text>
+      </g>
+    </g>
+
+    <line x1="48" y1="170" x2="732" y2="170" stroke="#E2E8F0" stroke-width="1.5"/>
+
+    <!-- SECTION DATA PENYEWA & METODE -->
+    <g transform="translate(48, 200)">
+      <!-- Left: Data Pelanggan -->
+      <g transform="translate(0, 0)">
+        <text x="0" y="0" fill="#94A3B8" font-size="10" font-weight="700" letter-spacing="0.8">PENYEWA (CUSTOMER)</text>
+        <text x="0" y="24" fill="#0F172A" font-size="15" font-weight="800">Budi Santoso</text>
+        <text x="0" y="44" fill="#475569" font-size="12">Telepon: <tspan fill="#0F172A" font-weight="600">0812-9876-5432</tspan></text>
+        <text x="0" y="62" fill="#475569" font-size="12">Email: <tspan fill="#0F172A" font-weight="600">budi.santoso@gmail.com</tspan></text>
+        <text x="0" y="80" fill="#475569" font-size="12">Alamat: <tspan fill="#0F172A" font-weight="600">Jl. Margonda Raya No. 12, Kota Depok</tspan></text>
+      </g>
+
+      <!-- Right: Periode & Metode -->
+      <g transform="translate(684, 0)">
+        <text x="0" y="0" fill="#94A3B8" font-size="10" font-weight="700" text-anchor="end" letter-spacing="0.8">METODE &amp; PERIODE SEWA</text>
+        <text x="0" y="24" fill="#0F172A" font-size="15" font-weight="800" text-anchor="end">Ambil di Toko (Pickup)</text>
+        <text x="0" y="44" fill="#475569" font-size="12" text-anchor="end">Mulai: <tspan fill="#0F172A" font-weight="600">27 Oktober 2026</tspan></text>
+        <text x="0" y="62" fill="#475569" font-size="12" text-anchor="end">Selesai: <tspan fill="#0F172A" font-weight="600">30 Oktober 2026</tspan></text>
+        <text x="0" y="80" fill="#059669" font-size="12" font-weight="700" text-anchor="end">Durasi: 3 Hari Sewa Penuh</text>
+      </g>
+    </g>
+
+    <line x1="48" y1="310" x2="732" y2="310" stroke="#E2E8F0" stroke-width="1.5"/>
+
+    <!-- TABEL RINCIAN UNIT & TARIF -->
+    <g transform="translate(48, 340)">
+      <!-- Table Header -->
+      <rect x="0" y="0" width="684" height="34" rx="6" fill="#F8FAFC"/>
+      <text x="16" y="22" fill="#64748B" font-size="11" font-weight="700">RINCIAN UNIT GADGET</text>
+      <text x="360" y="22" fill="#64748B" font-size="11" font-weight="700" text-anchor="middle">DURASI</text>
+      <text x="510" y="22" fill="#64748B" font-size="11" font-weight="700" text-anchor="end">TARIF HARIAN</text>
+      <text x="668" y="22" fill="#64748B" font-size="11" font-weight="700" text-anchor="end">SUBTOTAL</text>
+
+      <!-- Row 1 -->
+      <g transform="translate(0, 56)">
+        <text x="16" y="0" fill="#0F172A" font-size="14" font-weight="800">MacBook Pro M3 (2024)</text>
+        <text x="16" y="18" fill="#64748B" font-size="11">512GB SSD · 16GB RAM · Space Gray · Serial: C02X889M3</text>
+
+        <text x="360" y="8" fill="#0F172A" font-size="13" font-weight="600" text-anchor="middle">3 Hari</text>
+        <text x="510" y="8" fill="#475569" font-size="13" text-anchor="end">Rp 220.000</text>
+        <text x="668" y="8" fill="#0F172A" font-size="15" font-weight="800" text-anchor="end">Rp 660.000</text>
+      </g>
+    </g>
+
+    <line x1="48" y1="460" x2="732" y2="460" stroke="#E2E8F0" stroke-width="1.5"/>
+
+    <!-- SUMMARY SECTION -->
+    <g transform="translate(48, 490)">
+      <!-- Left: Metode Bayar & Instruksi -->
+      <g transform="translate(0, 0)">
+        <text x="0" y="0" fill="#94A3B8" font-size="10" font-weight="700" letter-spacing="0.8">METODE PEMBAYARAN</text>
+        <text x="0" y="22" fill="#0F172A" font-size="14" font-weight="800">QRIS Statis (Terverifikasi Otomatis)</text>
+        <text x="0" y="44" fill="#64748B" font-size="11">Tunjukkan lembar invoice ini beserta fisik asli e-KTP kepada petugas</text>
+        <text x="0" y="60" fill="#64748B" font-size="11">saat serah terima dan pemeriksaan kondisi fisik unit gadget di toko.</text>
+      </g>
+
+      <!-- Right: Total Nominal -->
+      <g transform="translate(684, 0)">
+        <text x="0" y="0" fill="#64748B" font-size="12" text-anchor="end">Total Tagihan Sewa:</text>
+        <text x="0" y="34" fill="#0F172A" font-size="30" font-weight="900" text-anchor="end">Rp 660.000</text>
+        <text x="0" y="56" fill="#059669" font-size="11" font-weight="700" text-anchor="end">Sudah Termasuk Biaya Pembersihan &amp; QC</text>
+      </g>
+    </g>
+
+    <!-- BOX PENTING: JAMINAN & KETENTUAN SERAH TERIMA -->
+    <g transform="translate(48, 600)">
+      <rect width="684" height="150" rx="12" fill="#F8FAFC" stroke="#E2E8F0"/>
+      <text x="20" y="28" fill="#0F172A" font-size="12" font-weight="800">Syarat &amp; Tata Cara Pengambilan Unit di Grent Store:</text>
+      <text x="20" y="54" fill="#475569" font-size="11">1. Penyewa wajib membawa e-KTP asli milik nama yang terdaftar di akun.</text>
+      <text x="20" y="74" fill="#475569" font-size="11">2. Petugas dan penyewa akan melakukan pengecekan fungsi fisik (layar, keyboard, baterai, kamera, charger).</text>
+      <text x="20" y="94" fill="#475569" font-size="11">3. Pengembalian unit wajib tepat waktu sesuai batas tanggal yang tercantum pada lembar invoice ini.</text>
+      <text x="20" y="114" fill="#475569" font-size="11">4. Keterlambatan tanpa konfirmasi dikenakan denda keterlambatan sebesar Rp 50.000 per hari.</text>
+    </g>
+
+    <!-- FOOTER SIGNATURE & QR CODE VALIDASI -->
+    <g transform="translate(48, 800)">
+      <line x1="0" y1="0" x2="684" y2="0" stroke="#E2E8F0" stroke-width="1"/>
+
+      <!-- Left: Signature Toko -->
+      <g transform="translate(0, 30)">
+        <text x="0" y="0" fill="#64748B" font-size="11">Petugas Operasional Cabang,</text>
+        <text x="0" y="80" fill="#0F172A" font-size="13" font-weight="800">Admin Grent Depok</text>
+        <text x="0" y="96" fill="#64748B" font-size="10">Super Admin Operasional Store</text>
+      </g>
+
+      <!-- Center: Signature Penyewa -->
+      <g transform="translate(280, 30)">
+        <text x="0" y="0" fill="#64748B" font-size="11">Penyewa Gadget,</text>
+        <text x="0" y="80" fill="#0F172A" font-size="13" font-weight="800">Budi Santoso</text>
+        <text x="0" y="96" fill="#64748B" font-size="10">Penyewa Terverifikasi e-KTP</text>
+      </g>
+
+      <!-- Right: QR Code Validasi -->
+      <g transform="translate(584, 15)">
+        <rect width="100" height="100" rx="8" fill="#FFFFFF" stroke="#CBD5E1"/>
+        <rect x="10" y="10" width="80" height="80" rx="4" fill="#F1F5F9"/>
+        <text x="50" y="48" fill="#64748B" font-size="10" font-weight="800" text-anchor="middle">QR VALID</text>
+        <text x="50" y="62" fill="#94A3B8" font-size="8" text-anchor="middle">GRENT-SEC-889</text>
+        <text x="50" y="114" fill="#64748B" font-size="9" font-weight="600" text-anchor="middle">Kode Verifikasi</text>
+      </g>
+    </g>
+  </g>
+</svg>
