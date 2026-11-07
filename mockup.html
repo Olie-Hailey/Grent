@@ -95,10 +95,13 @@
 
       <!-- Active Mode Switcher -->
       <div class="flex items-center gap-2">
-        <span class="text-slate-400 text-[11px]">Peran:</span>
+        <span class="text-slate-400 text-[11px]">Peran / Sesi:</span>
         <div class="bg-slate-800 p-0.5 rounded-lg border border-slate-700 flex text-[11px]">
+          <button onclick="setRole('guest')" id="role-guest-btn" class="px-2 py-0.5 rounded font-medium text-slate-300 hover:text-white transition">
+            Guest (Belum Masuk)
+          </button>
           <button onclick="setRole('customer')" id="role-cust-btn" class="px-2 py-0.5 rounded font-semibold bg-emerald-500 text-slate-900 transition">
-            Customer
+            Customer (Budi)
           </button>
           <button onclick="setRole('admin')" id="role-admin-btn" class="px-2 py-0.5 rounded font-medium text-slate-300 hover:text-white transition">
             Admin
@@ -131,12 +134,23 @@
         <a href="#katalog-section" onclick="switchView('landing')" class="hover:text-emerald-600 transition">Katalog Gadget</a>
         <a href="#solusi-section" onclick="switchView('landing')" class="hover:text-emerald-600 transition">Solusi Fleksibel</a>
         <a href="javascript:void(0)" onclick="openTermsModal()" class="hover:text-emerald-600 transition">Ketentuan & Denda</a>
-        <a href="javascript:void(0)" onclick="openKycModal()" class="hover:text-emerald-600 transition">Data Diri (KTP)</a>
+        <a href="javascript:void(0)" id="nav-link-ktp" onclick="openKycModal()" class="hover:text-emerald-600 transition">Data Diri (KTP)</a>
       </div>
 
       <!-- Auth State Menu -->
       <div class="flex items-center gap-3">
-        <!-- Customer Profile Summary Pill -->
+        <!-- Guest Auth State (Belum Masuk) -->
+        <div id="guest-auth-container" class="hidden items-center gap-2">
+          <button onclick="openLoginModal('customer')" class="text-xs font-bold px-3 py-1.5 rounded-lg border border-slate-300 text-slate-800 hover:bg-slate-100 transition">
+            Masuk
+          </button>
+          <button onclick="openGoogleModal()" class="text-xs font-bold px-3 py-1.5 rounded-lg bg-emerald-600 text-white hover:bg-emerald-700 transition flex items-center gap-1.5 shadow-xs">
+            <span class="w-4 h-4 rounded-full bg-white text-emerald-700 text-[10px] font-black flex items-center justify-center">G</span>
+            Login Google
+          </button>
+        </div>
+
+        <!-- Customer Profile Summary Pill (Sudah Masuk) -->
         <div id="customer-profile-pill" class="flex items-center gap-2 bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-full cursor-pointer hover:bg-slate-200 transition" onclick="openKycModal()">
           <div class="w-6 h-6 rounded-full bg-emerald-600 text-white font-bold text-xs flex items-center justify-center">
             B
@@ -936,6 +950,139 @@
     </div>
   </div>
 
+  <!-- MODAL: HALAMAN LOGIN LENGKAP (Customer Google vs Staff Admin) -->
+  <div id="modal-login" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl w-full max-w-xl shadow-2xl border border-slate-200 overflow-hidden animate-in fade-in zoom-in-95">
+      <!-- Header Modal -->
+      <div class="p-6 border-b border-slate-100 flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <div class="h-9 w-9 rounded-xl bg-slate-900 flex items-center justify-center text-emerald-400 font-black text-lg">
+            G
+          </div>
+          <div>
+            <h3 class="font-extrabold text-slate-900 text-base">Masuk ke Layanan Grent</h3>
+            <p class="text-xs text-slate-500">Pilih peran akun Anda untuk sewa gadget atau operasional</p>
+          </div>
+        </div>
+        <button onclick="closeModal('modal-login')" class="text-slate-400 hover:text-slate-600 p-1 rounded-lg">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <!-- Tab Switcher -->
+      <div class="px-6 pt-4">
+        <div class="bg-slate-100 p-1 rounded-xl flex text-xs font-bold">
+          <button id="tab-login-cust-btn" onclick="switchLoginTab('customer')" class="flex-1 py-2 rounded-lg bg-white text-slate-900 shadow-sm transition">
+            Pelanggan (Sewa Gadget)
+          </button>
+          <button id="tab-login-admin-btn" onclick="switchLoginTab('admin')" class="flex-1 py-2 rounded-lg text-slate-500 hover:text-slate-900 transition">
+            Petugas Toko (Staff Admin)
+          </button>
+        </div>
+      </div>
+
+      <!-- Konten Tab 1: Pelanggan (Google OAuth) -->
+      <div id="tab-login-cust-content" class="p-6 space-y-4">
+        <div class="text-center py-2">
+          <p class="text-sm font-bold text-slate-900">Login Pelanggan Lebih Cepat</p>
+          <p class="text-xs text-slate-500 mt-0.5">Satu klik dengan akun Google tanpa perlu menghafal sandi baru</p>
+        </div>
+
+        <button onclick="openGoogleModal()" class="w-full flex items-center justify-center gap-3 py-3 px-4 border border-slate-300 rounded-xl hover:bg-slate-50 font-bold text-sm text-slate-800 transition shadow-xs">
+          <svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+          </svg>
+          Lanjutkan dengan Akun Google
+        </button>
+
+        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5 text-xs space-y-2">
+          <p class="font-bold text-slate-800">Keuntungan Pelanggan Terdaftar:</p>
+          <ul class="space-y-1 text-slate-600 text-[11px]">
+            <li class="flex items-center gap-1.5"><span class="text-emerald-600 font-bold">✓</span> Data e-KTP tersimpan otomatis untuk sewa unit berikutnya</li>
+            <li class="flex items-center gap-1.5"><span class="text-emerald-600 font-bold">✓</span> Akses invoice resmi digital kapan saja di menu Pesanan Saya</li>
+            <li class="flex items-center gap-1.5"><span class="text-emerald-600 font-bold">✓</span> Lacak countdown sisa hari pemakaian secara realtime</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Konten Tab 2: Petugas Toko (Staff Admin) -->
+      <div id="tab-login-admin-content" class="hidden p-6 space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Email Petugas Admin</label>
+          <input type="email" id="login-admin-email" value="admin@staffadmin.id" class="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-300 font-medium outline-none focus:border-emerald-500" />
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Password</label>
+          <input type="password" id="login-admin-pass" value="admin123" class="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-300 font-medium outline-none focus:border-emerald-500" />
+        </div>
+        <button onclick="submitAdminLogin()" class="w-full py-2.5 bg-slate-900 text-white rounded-xl text-xs font-bold hover:bg-slate-800 transition shadow-sm">
+          Masuk ke Dashboard Admin →
+        </button>
+
+        <!-- Kredensial Demo -->
+        <div class="p-3 bg-amber-50 border border-amber-200 rounded-xl text-[11px] text-amber-900">
+          <span class="font-bold">🔑 Kredensial Demo Sidang:</span> Email: <code class="font-mono bg-white px-1 py-0.5 rounded border border-amber-200">admin@staffadmin.id</code> / Password: <code class="font-mono bg-white px-1 py-0.5 rounded border border-amber-200">admin123</code>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: GOOGLE OAUTH SIMULASI (PILIH AKUN GOOGLE) -->
+  <div id="modal-google-oauth" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl w-full max-w-md shadow-2xl border border-slate-200 overflow-hidden animate-in fade-in zoom-in-95">
+      <div class="p-6 text-center border-b border-slate-100">
+        <svg class="h-8 w-8 mx-auto mb-2" viewBox="0 0 24 24">
+          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+        </svg>
+        <h3 class="font-extrabold text-slate-900 text-lg">Pilih Akun Google</h3>
+        <p class="text-xs text-slate-500 mt-0.5">untuk melanjutkan ke <span class="font-bold text-slate-800">Grent Gadget Rental</span></p>
+      </div>
+
+      <div class="p-6 space-y-2.5">
+        <!-- Akun 1: Budi Santoso -->
+        <button onclick="loginAsGoogleUser('Budi Santoso', 'budisantoso@gmail.com', 'BS')" class="w-full flex items-center justify-between p-3 rounded-xl border border-emerald-500/40 bg-emerald-50/40 hover:bg-emerald-100/50 transition text-left">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-emerald-600 text-white font-extrabold text-sm flex items-center justify-center">
+              BS
+            </div>
+            <div>
+              <p class="font-bold text-slate-900 text-xs">Budi Santoso</p>
+              <p class="text-[11px] text-slate-500">budisantoso@gmail.com</p>
+            </div>
+          </div>
+          <span class="text-[10px] font-bold px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded-full">Akun Utama</span>
+        </button>
+
+        <!-- Akun 2: Siti Rahma -->
+        <button onclick="loginAsGoogleUser('Siti Rahma', 'sitirahma@gmail.com', 'SR')" class="w-full flex items-center gap-3 p-3 rounded-xl border border-slate-200 hover:bg-slate-50 transition text-left">
+          <div class="w-10 h-10 rounded-full bg-blue-600 text-white font-extrabold text-sm flex items-center justify-center">
+            SR
+          </div>
+          <div>
+            <p class="font-bold text-slate-900 text-xs">Siti Rahma</p>
+            <p class="text-[11px] text-slate-500">sitirahma@gmail.com</p>
+          </div>
+        </button>
+
+        <p class="text-[10px] text-slate-400 text-center pt-2">
+          🔒 Google akan membagikan nama, email, dan preferensi akun Anda kepada Grent.
+        </p>
+      </div>
+
+      <div class="p-4 bg-slate-50 border-t border-slate-100 flex items-center justify-end">
+        <button onclick="closeModal('modal-google-oauth')" class="px-4 py-2 text-xs font-semibold text-slate-600 hover:text-slate-900">
+          Batal
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- ============================================================ -->
   <!-- JAVASCRIPT LOGIC & REACTIVE STATE                           -->
   <!-- ============================================================ -->
@@ -1004,21 +1151,86 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Ganti Role (Customer vs Admin)
+    // Ganti Role (Guest vs Customer vs Admin)
     function setRole(roleName) {
       state.role = roleName;
+      const guestBtn = document.getElementById('role-guest-btn');
       const custBtn = document.getElementById('role-cust-btn');
       const adminBtn = document.getElementById('role-admin-btn');
+      const guestAuth = document.getElementById('guest-auth-container');
+      const custPill = document.getElementById('customer-profile-pill');
+      const navLinkKtp = document.getElementById('nav-link-ktp');
 
-      if (roleName === 'customer') {
-        custBtn.className = "px-2 py-0.5 rounded font-semibold bg-emerald-500 text-slate-900 transition";
-        adminBtn.className = "px-2 py-0.5 rounded font-medium text-slate-300 hover:text-white transition";
+      // Reset styling
+      [guestBtn, custBtn, adminBtn].forEach(b => {
+        if (b) b.className = "px-2 py-0.5 rounded font-medium text-slate-300 hover:text-white transition";
+      });
+
+      if (roleName === 'guest') {
+        if (guestBtn) guestBtn.className = "px-2 py-0.5 rounded font-semibold bg-emerald-500 text-slate-900 transition";
+        if (guestAuth) guestAuth.classList.replace('hidden', 'flex');
+        if (custPill) custPill.classList.add('hidden');
+        if (navLinkKtp) navLinkKtp.classList.add('hidden');
         switchView('landing');
-      } else {
-        adminBtn.className = "px-2 py-0.5 rounded font-semibold bg-emerald-500 text-slate-900 transition";
-        custBtn.className = "px-2 py-0.5 rounded font-medium text-slate-300 hover:text-white transition";
+      } else if (roleName === 'customer') {
+        if (custBtn) custBtn.className = "px-2 py-0.5 rounded font-semibold bg-emerald-500 text-slate-900 transition";
+        if (guestAuth) guestAuth.classList.replace('flex', 'hidden');
+        if (custPill) custPill.classList.remove('hidden');
+        if (navLinkKtp) navLinkKtp.classList.remove('hidden');
+        switchView('landing');
+      } else if (roleName === 'admin') {
+        if (adminBtn) adminBtn.className = "px-2 py-0.5 rounded font-semibold bg-emerald-500 text-slate-900 transition";
+        if (guestAuth) guestAuth.classList.replace('flex', 'hidden');
+        if (custPill) custPill.classList.remove('hidden');
+        if (navLinkKtp) navLinkKtp.classList.remove('hidden');
         switchView('admin');
       }
+    }
+
+    // Modal Login Handlers
+    function openLoginModal(tab = 'customer') {
+      openModal('modal-login');
+      switchLoginTab(tab);
+    }
+
+    function switchLoginTab(tabName) {
+      const custBtn = document.getElementById('tab-login-cust-btn');
+      const adminBtn = document.getElementById('tab-login-admin-btn');
+      const custContent = document.getElementById('tab-login-cust-content');
+      const adminContent = document.getElementById('tab-login-admin-content');
+
+      if (tabName === 'customer') {
+        custBtn.className = "flex-1 py-2 rounded-lg bg-white text-slate-900 shadow-sm transition";
+        adminBtn.className = "flex-1 py-2 rounded-lg text-slate-500 hover:text-slate-900 transition";
+        custContent.classList.remove('hidden');
+        adminContent.classList.add('hidden');
+      } else {
+        adminBtn.className = "flex-1 py-2 rounded-lg bg-white text-slate-900 shadow-sm transition";
+        custBtn.className = "flex-1 py-2 rounded-lg text-slate-500 hover:text-slate-900 transition";
+        adminContent.classList.remove('hidden');
+        custContent.classList.add('hidden');
+      }
+    }
+
+    function submitAdminLogin() {
+      closeModal('modal-login');
+      setRole('admin');
+    }
+
+    function openGoogleModal() {
+      closeModal('modal-login');
+      openModal('modal-google-oauth');
+    }
+
+    function loginAsGoogleUser(name, email, initials) {
+      state.customer.name = name;
+      state.customer.email = email;
+      const navName = document.getElementById('nav-cust-name');
+      const invName = document.getElementById('inv-cust-name');
+      if (navName) navName.textContent = name;
+      if (invName) invName.textContent = name;
+      closeModal('modal-google-oauth');
+      setRole('customer');
     }
 
     // Admin Tab Navigation

@@ -16,6 +16,43 @@ export type CustomerProfileData = {
 
 let tableEnsured = false;
 
+export const VERIFIED_TESTER_ACCOUNTS: Record<
+  string,
+  {
+    name: string;
+    phone: string;
+    address: string;
+    birthInfo: string;
+    idCardUrl: string;
+    avatarUrl: string;
+  }
+> = {
+  "rafierbakti17@gmail.com": {
+    name: "Rafi Erbakti",
+    phone: "0812-9876-5432",
+    address: "Jl. Margonda Raya No. 100, Beji, Depok, Jawa Barat 16424",
+    birthInfo: "Jakarta, 17 Agustus 2002",
+    idCardUrl: "/ktp-verified-demo.svg",
+    avatarUrl: "https://api.dicebear.com/7.x/avataaars/svg?seed=RafiErbakti&backgroundColor=1a73e8",
+  },
+  "backlegaming17@gmail.com": {
+    name: "Rafi",
+    phone: "0812-3456-7890",
+    address: "Jl. Margonda Raya No. 100, Depok, Jawa Barat",
+    birthInfo: "Jakarta, 17 Agustus 2002",
+    idCardUrl: "/ktp-verified-demo.svg",
+    avatarUrl: "https://api.dicebear.com/7.x/initials/svg?seed=Rafi&backgroundColor=494c50",
+  },
+  "budisantoso@gmail.com": {
+    name: "Budi Santoso",
+    phone: "0812-9876-5432",
+    address: "Jl. Akses UI No. 45, Kelapa Dua, Depok",
+    birthInfo: "Surabaya, 12 Mei 2001",
+    idCardUrl: "/ktp-verified-demo.svg",
+    avatarUrl: "https://api.dicebear.com/7.x/initials/svg?seed=Budi%20Santoso&backgroundColor=0f9f8a",
+  },
+};
+
 export async function ensureCustomerProfileTable() {
   if (tableEnsured) return;
   try {
@@ -42,10 +79,12 @@ export async function ensureCustomerProfileTable() {
 
 export async function getCustomerProfileByEmail(email: string): Promise<CustomerProfileData | null> {
   await ensureCustomerProfileTable();
+  const cleanEmail = email.trim().toLowerCase();
+
   try {
     const rows = (await prisma.$queryRawUnsafe(
       `SELECT * FROM CustomerProfile WHERE email = ? LIMIT 1`,
-      email
+      cleanEmail
     )) as Array<{
       id: string;
       email: string;
@@ -59,6 +98,22 @@ export async function getCustomerProfileByEmail(email: string): Promise<Customer
       createdAt: string;
       updatedAt: string;
     }>;
+
+    // Jika belum ada atau belum lengkap tetapi termasuk akun tester khusus:
+    if (!rows || rows.length === 0 || rows[0].isCompleted === 0) {
+      const preset = VERIFIED_TESTER_ACCOUNTS[cleanEmail];
+      if (preset) {
+        return await upsertCustomerProfile({
+          email: cleanEmail,
+          name: preset.name,
+          phone: preset.phone,
+          address: preset.address,
+          birthInfo: preset.birthInfo,
+          idCardUrl: preset.idCardUrl,
+          avatarUrl: preset.avatarUrl,
+        });
+      }
+    }
 
     if (!rows || rows.length === 0) return null;
     const r = rows[0];
@@ -107,21 +162,33 @@ export async function upsertCustomerProfile({
   avatarUrl?: string;
 }): Promise<CustomerProfileData> {
   await ensureCustomerProfileTable();
+  const cleanEmail = email.trim().toLowerCase();
 
-  const existing = await getCustomerProfileByEmail(email);
+  const existing = await (async () => {
+    try {
+      const r = (await prisma.$queryRawUnsafe(
+        `SELECT * FROM CustomerProfile WHERE email = ? LIMIT 1`,
+        cleanEmail
+      )) as Array<Record<string, unknown>>;
+      return r && r.length > 0 ? r[0] : null;
+    } catch {
+      return null;
+    }
+  })();
+
   const nowStr = new Date().toISOString();
 
-  const finalName = (name || existing?.name || "Customer Grent").trim();
-  const finalPhone = (phone ?? existing?.phone ?? "").trim();
-  const finalAddress = (address ?? existing?.address ?? "").trim();
-  const finalBirthInfo = (birthInfo ?? existing?.birthInfo ?? "").trim();
-  const finalIdCardUrl = (idCardUrl ?? existing?.idCardUrl ?? "").trim();
-  const finalAvatarUrl = (avatarUrl ?? existing?.avatarUrl ?? "").trim();
+  const finalName = (name || (existing?.name as string) || "Customer Grent").trim();
+  const finalPhone = (phone ?? (existing?.phone as string) ?? "").trim();
+  const finalAddress = (address ?? (existing?.address as string) ?? "").trim();
+  const finalBirthInfo = (birthInfo ?? (existing?.birthInfo as string) ?? "").trim();
+  const finalIdCardUrl = (idCardUrl ?? (existing?.idCardUrl as string) ?? "").trim();
+  const finalAvatarUrl = (avatarUrl ?? (existing?.avatarUrl as string) ?? "").trim();
 
   // Wajib isi: Foto KTP, Nama, Alamat, TTL, Email dan nomor telepon
   const isCompleted = Boolean(
     finalName &&
-    email.trim() &&
+    cleanEmail &&
     finalPhone &&
     finalAddress &&
     finalBirthInfo &&
@@ -143,7 +210,7 @@ export async function upsertCustomerProfile({
       finalAvatarUrl,
       isCompletedInt,
       nowStr,
-      email
+      cleanEmail
     );
   } else {
     const id = `cp_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
@@ -151,7 +218,7 @@ export async function upsertCustomerProfile({
       `INSERT INTO CustomerProfile (id, email, name, phone, address, birthInfo, idCardUrl, avatarUrl, isCompleted, createdAt, updatedAt)
        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       id,
-      email,
+      cleanEmail,
       finalName,
       finalPhone,
       finalAddress,
@@ -164,9 +231,39 @@ export async function upsertCustomerProfile({
     );
   }
 
-  const updated = await getCustomerProfileByEmail(email);
-  if (!updated) {
+  const updatedRows = (await prisma.$queryRawUnsafe(
+    `SELECT * FROM CustomerProfile WHERE email = ? LIMIT 1`,
+    cleanEmail
+  )) as Array<{
+    id: string;
+    email: string;
+    name: string;
+    phone: string | null;
+    address: string | null;
+    birthInfo: string | null;
+    idCardUrl: string | null;
+    avatarUrl: string | null;
+    isCompleted: number;
+    createdAt: string;
+    updatedAt: string;
+  }>;
+
+  if (!updatedRows || updatedRows.length === 0) {
     throw new Error("Gagal menyimpan profil customer");
   }
-  return updated;
+
+  const u = updatedRows[0];
+  return {
+    id: u.id,
+    email: u.email,
+    name: u.name,
+    phone: u.phone || "",
+    address: u.address || "",
+    birthInfo: u.birthInfo || "",
+    idCardUrl: u.idCardUrl || "",
+    avatarUrl: u.avatarUrl || "",
+    isCompleted: Boolean(u.isCompleted),
+    createdAt: String(u.createdAt),
+    updatedAt: String(u.updatedAt),
+  };
 }
